@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TOQUE Ритуал
 
-## Getting Started
+PWA-приложение для онбординга клиенток после покупки косметологического
+устройства TOQUE. 30 дней ежедневного сопровождения, персональный протокол,
+точки апсейла на 30/60/90 дни.
 
-First, run the development server:
+Бренд-гайд, архитектурные принципы и структура — в [`docs/CLAUDE.md`](docs/CLAUDE.md).
+
+## Стек
+
+Next.js 14 (App Router) · TypeScript (strict) · Tailwind CSS · shadcn/ui ·
+Framer Motion · Supabase · @ducanh2912/next-pwa · Vercel.
+
+## Запуск
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # заполнить ключи Supabase и пр.
+npm run dev                  # http://localhost:3000 → редирект на /splash
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Скрипты
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run dev      # дев-сервер (PWA/service worker отключён)
+npm run build    # продакшн-сборка
+npm run start    # запуск собранного приложения (PWA активна)
+npm run lint     # ESLint
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+node scripts/gen-icons.mjs   # перегенерировать placeholder-иконки PWA
+```
 
-## Learn More
+## PWA
 
-To learn more about Next.js, take a look at the following resources:
+Service worker генерируется `@ducanh2912/next-pwa` только в продакшн-сборке.
+Чтобы проверить установку на главный экран и оффлайн — `npm run build && npm run start`,
+вкладка **Application** в DevTools.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> Иконки в `public/icon-*.png` — временные плейсхолдеры (olive + монограмма «T»).
+> Заменить на финальные из дизайна.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Структура
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+См. `docs/CLAUDE.md`. Кратко: route-группы `(auth)`, `(onboarding)`, `(main)`,
+`(modals)` в `app/`; UI в `components/`; клиенты и контент в `lib/`;
+миграции и edge-функции в `supabase/`.
