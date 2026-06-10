@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { PhoneFrame } from "@/components/shared/phone-frame";
 import { BackButton } from "@/components/shared/back-button";
 import { OptionTile } from "@/components/shared/option-tile";
 import { ChipGroup } from "@/components/shared/chip-group";
@@ -39,7 +38,7 @@ export default function DesignTestPage() {
   const [time, setTime] = useState("morning");
 
   return (
-    <PhoneFrame>
+    <>
       <header className="relative flex h-12 items-center justify-center border-b border-black/8 px-4">
         <div className="absolute left-4">
           <BackButton href="/splash" />
@@ -170,6 +169,6 @@ export default function DesignTestPage() {
           </div>
         </section>
       </div>
-    </PhoneFrame>
+    </>
   );
 }
