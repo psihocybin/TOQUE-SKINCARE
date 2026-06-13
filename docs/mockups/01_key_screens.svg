@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE Ритуал — 4 ключевых экрана</title>
+
+<style>
+  text { fill: #2C2C2A; }
+  .label { fill: #888780; font-size: 12px; }
+</style>
+
+<text class="label" x="180" y="32" text-anchor="middle">Экран 1 — Welcome</text>
+<text class="label" x="500" y="32" text-anchor="middle">Экран 2 — Главная</text>
+<text class="label" x="180" y="632" text-anchor="middle">Экран 3 — Сегодняшний ритуал</text>
+<text class="label" x="500" y="632" text-anchor="middle">Экран 4 — Прогресс</text>
+
+<!-- PHONE 1: WELCOME -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="180" y="200" text-anchor="middle" font-size="26" letter-spacing="6">TOQUE</text>
+  <text x="180" y="222" text-anchor="middle" font-size="10" letter-spacing="3" fill="#888780">РИТУАЛ</text>
+  <line x1="150" y1="240" x2="210" y2="240" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+
+  <text x="180" y="360" text-anchor="middle" font-size="14">Я — TOQUE Ритуал.</text>
+  <text x="180" y="386" text-anchor="middle" font-size="11" fill="#5F5E5A">Помогу встроить NUO в жизнь</text>
+  <text x="180" y="402" text-anchor="middle" font-size="11" fill="#5F5E5A">за 30 дней.</text>
+
+  <rect x="80" y="510" width="200" height="44" rx="22" fill="#7A8A4F"/>
+  <text x="180" y="538" text-anchor="middle" font-size="13" fill="#FAFAF7">Начать</text>
+</g>
+
+<!-- PHONE 2: DASHBOARD -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="395" y="115" font-size="10" fill="#888780">Доброе утро,</text>
+  <text x="395" y="138" font-size="17">Анна</text>
+
+  <circle cx="500" cy="230" r="50" fill="none" stroke="rgba(0,0,0,0.08)" stroke-width="6"/>
+  <circle cx="500" cy="230" r="50" fill="none" stroke="#7A8A4F" stroke-width="6"
+          stroke-dasharray="73.3 314.2" transform="rotate(-90 500 230)" stroke-linecap="round"/>
+  <text x="500" y="222" text-anchor="middle" font-size="9" letter-spacing="1" fill="#888780">ДЕНЬ</text>
+  <text x="500" y="240" text-anchor="middle" font-size="22">7</text>
+  <text x="500" y="256" text-anchor="middle" font-size="9" fill="#888780">из 30</text>
+
+  <rect x="395" y="305" width="210" height="84" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="325" font-size="9" letter-spacing="1.5" fill="#888780">СЕГОДНЯ</text>
+  <text x="410" y="350" font-size="13">Очищение</text>
+  <text x="410" y="368" font-size="10" fill="#888780">5 минут • режим Cleaning</text>
+  <rect x="513" y="346" width="80" height="28" rx="14" fill="#7A8A4F"/>
+  <text x="553" y="364" text-anchor="middle" font-size="10" fill="#FAFAF7">Начать</text>
+
+  <rect x="395" y="410" width="210" height="68" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="430" font-size="9" letter-spacing="1.5" fill="#888780">СОВЕТ ДНЯ</text>
+  <text x="410" y="452" font-size="11">Ультразвук работает</text>
+  <text x="410" y="468" font-size="11">только на влажной коже.</text>
+
+  <line x1="395" y1="515" x2="605" y2="515" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="420" cy="540" r="3" fill="#7A8A4F"/>
+  <text x="420" y="558" text-anchor="middle" font-size="8" fill="#7A8A4F">Главная</text>
+  <circle cx="475" cy="540" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="475" y="558" text-anchor="middle" font-size="8" fill="#888780">Журнал</text>
+  <circle cx="525" cy="540" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="525" y="558" text-anchor="middle" font-size="8" fill="#888780">Прогресс</text>
+  <circle cx="580" cy="540" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="580" y="558" text-anchor="middle" font-size="8" fill="#888780">Профиль</text>
+</g>
+
+<!-- PHONE 3: TODAY'S RITUAL -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 78 707 L 73 712 L 78 717" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="180" y="714" text-anchor="middle" font-size="13">Очищение</text>
+  <text x="180" y="730" text-anchor="middle" font-size="9" fill="#888780">5 минут</text>
+
+  <rect x="70" y="750" width="220" height="128" rx="8" fill="#2C2C2A"/>
+  <polygon points="172,798 172,830 198,814" fill="#FAFAF7" opacity="0.95"/>
+  <rect x="84" y="864" width="40" height="3" rx="1" fill="rgba(255,255,255,0.4)"/>
+  <text x="282" y="869" text-anchor="end" font-size="8" fill="rgba(255,255,255,0.6)">5:00</text>
+
+  <text x="180" y="918" text-anchor="middle" font-size="26" letter-spacing="2">04:32</text>
+  <text x="180" y="935" text-anchor="middle" font-size="9" fill="#888780">осталось</text>
+
+  <text x="75" y="975" font-size="9" letter-spacing="1.5" fill="#888780">ШАГИ</text>
+  <text x="75" y="1000" font-size="11">1.  Увлажните кожу</text>
+  <text x="75" y="1022" font-size="11">2.  Нанесите гель</text>
+  <text x="75" y="1044" font-size="11">3.  Включите Cleaning</text>
+  <text x="75" y="1066" font-size="11">4.  Движения снизу вверх</text>
+
+  <rect x="70" y="1115" width="220" height="44" rx="22" fill="#7A8A4F"/>
+  <text x="180" y="1142" text-anchor="middle" font-size="13" fill="#FAFAF7">Завершить процедуру</text>
+</g>
+
+<!-- PHONE 4: PROGRESS -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="395" y="718" font-size="17">Прогресс</text>
+
+  <rect x="395" y="745" width="210" height="84" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="765" font-size="9" letter-spacing="1.5" fill="#888780">ПРОЦЕДУР ВЫПОЛНЕНО</text>
+  <text x="410" y="803" font-size="30">14</text>
+  <text x="450" y="803" font-size="13" fill="#888780">/ 21</text>
+  <text x="590" y="803" text-anchor="end" font-size="9" fill="#888780">за 21 день</text>
+
+  <text x="395" y="855" font-size="9" letter-spacing="1.5" fill="#888780">ФОТО-СРАВНЕНИЕ</text>
+  <rect x="395" y="867" width="100" height="115" rx="8" fill="rgba(196,144,138,0.12)" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="445" y="929" text-anchor="middle" font-size="9" fill="#888780">фото</text>
+  <text x="445" y="998" text-anchor="middle" font-size="9" fill="#888780">День 1</text>
+  <rect x="505" y="867" width="100" height="115" rx="8" fill="rgba(196,144,138,0.12)" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="555" y="929" text-anchor="middle" font-size="9" fill="#888780">фото</text>
+  <text x="555" y="998" text-anchor="middle" font-size="9" fill="#888780">День 21</text>
+
+  <text x="395" y="1030" font-size="9" letter-spacing="1.5" fill="#888780">ПО НЕДЕЛЯМ</text>
+  <line x1="395" y1="1090" x2="605" y2="1090" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <rect x="410" y="1060" width="22" height="30" rx="3" fill="#7A8A4F"/>
+  <rect x="455" y="1048" width="22" height="42" rx="3" fill="#7A8A4F"/>
+  <rect x="500" y="1036" width="22" height="54" rx="3" fill="#7A8A4F"/>
+  <rect x="545" y="1070" width="22" height="20" rx="3" fill="#7A8A4F" opacity="0.4"/>
+  <text x="421" y="1105" text-anchor="middle" font-size="8" fill="#888780">Нед.1</text>
+  <text x="466" y="1105" text-anchor="middle" font-size="8" fill="#888780">Нед.2</text>
+  <text x="511" y="1105" text-anchor="middle" font-size="8" fill="#888780">Нед.3</text>
+  <text x="556" y="1105" text-anchor="middle" font-size="8" fill="#888780">Нед.4</text>
+
+  <line x1="395" y1="1140" x2="605" y2="1140" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="420" cy="1162" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="420" y="1178" text-anchor="middle" font-size="8" fill="#888780">Главная</text>
+  <circle cx="475" cy="1162" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="475" y="1178" text-anchor="middle" font-size="8" fill="#888780">Журнал</text>
+  <circle cx="525" cy="1162" r="3" fill="#7A8A4F"/>
+  <text x="525" y="1178" text-anchor="middle" font-size="8" fill="#7A8A4F">Прогресс</text>
+  <circle cx="580" cy="1162" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="580" y="1178" text-anchor="middle" font-size="8" fill="#888780">Профиль</text>
+</g>
+
+</svg>

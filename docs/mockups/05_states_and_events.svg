@@ -1,0 +1,140 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE Ритуал — состояния и события</title>
+
+<style>
+  text { fill: #2C2C2A; }
+  .label { fill: #888780; font-size: 12px; }
+</style>
+
+<text class="label" x="180" y="32" text-anchor="middle">Экран 17 — Завершение процедуры</text>
+<text class="label" x="500" y="32" text-anchor="middle">Экран 18 — Пустой журнал (день 0)</text>
+<text class="label" x="180" y="632" text-anchor="middle">Экран 19 — Съёмка baseline-фото</text>
+<text class="label" x="500" y="632" text-anchor="middle">Экран 20 — Push-уведомление (lock screen)</text>
+
+<!-- PHONE 1: ЗАВЕРШЕНИЕ ПРОЦЕДУРЫ -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <circle cx="180" cy="195" r="44" fill="rgba(122,138,79,0.12)"/>
+  <circle cx="180" cy="195" r="44" fill="none" stroke="#7A8A4F" stroke-width="1" stroke-opacity="0.4"/>
+  <path d="M 161 195 l 13 13 l 24 -24" stroke="#7A8A4F" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="180" y="290" text-anchor="middle" font-size="18">Готово, Анна.</text>
+  <text x="180" y="312" text-anchor="middle" font-size="11" fill="#888780">Это была ваша 14-я процедура.</text>
+
+  <rect x="75" y="340" width="210" height="56" rx="10" fill="rgba(122,138,79,0.06)"/>
+  <text x="120" y="365" text-anchor="middle" font-size="20">14</text>
+  <text x="120" y="383" text-anchor="middle" font-size="9" fill="#888780">процедур</text>
+  <line x1="180" y1="350" x2="180" y2="386" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="240" y="365" text-anchor="middle" font-size="20">21</text>
+  <text x="240" y="383" text-anchor="middle" font-size="9" fill="#888780">день</text>
+
+  <text x="75" y="425" font-size="9" letter-spacing="1.5" fill="#888780">КАК ПРОШЛО?</text>
+
+  <rect x="75" y="438" width="210" height="38" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="180" y="462" text-anchor="middle" font-size="12">Отлично</text>
+
+  <rect x="75" y="482" width="210" height="38" rx="10" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1.2"/>
+  <text x="180" y="506" text-anchor="middle" font-size="12">Нормально, есть мысли</text>
+
+  <rect x="75" y="526" width="210" height="38" rx="10" fill="white" stroke="rgba(196,144,138,0.5)" stroke-width="0.8"/>
+  <text x="180" y="550" text-anchor="middle" font-size="12">Были вопросы — нужна помощь</text>
+</g>
+
+<!-- PHONE 2: EMPTY JOURNAL -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="395" y="118" font-size="17">Журнал</text>
+  <text x="395" y="138" font-size="11" fill="#888780">пока пусто</text>
+
+  <circle cx="500" cy="280" r="62" fill="rgba(122,138,79,0.05)"/>
+  <rect x="475" y="248" width="50" height="62" rx="4" fill="none" stroke="#888780" stroke-width="1.2" stroke-opacity="0.6"/>
+  <line x1="500" y1="248" x2="500" y2="310" stroke="#888780" stroke-width="1" stroke-opacity="0.6"/>
+  <line x1="482" y1="263" x2="495" y2="263" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+  <line x1="482" y1="273" x2="495" y2="273" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+  <line x1="482" y1="283" x2="495" y2="283" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+  <line x1="482" y1="293" x2="491" y2="293" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+  <line x1="505" y1="263" x2="518" y2="263" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+  <line x1="505" y1="273" x2="518" y2="273" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+  <line x1="505" y1="283" x2="518" y2="283" stroke="#888780" stroke-width="0.8" stroke-opacity="0.5"/>
+
+  <text x="500" y="395" text-anchor="middle" font-size="14">Здесь появятся ваши процедуры</text>
+  <text x="500" y="418" text-anchor="middle" font-size="11" fill="#888780">С датой, режимом и заметками.</text>
+  <text x="500" y="434" text-anchor="middle" font-size="11" fill="#888780">Первая запись — после первой</text>
+  <text x="500" y="450" text-anchor="middle" font-size="11" fill="#888780">процедуры.</text>
+
+  <rect x="395" y="480" width="210" height="44" rx="22" fill="#7A8A4F"/>
+  <text x="500" y="508" text-anchor="middle" font-size="13" fill="#FAFAF7">Сделать первую процедуру</text>
+
+  <line x1="395" y1="540" x2="605" y2="540" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="420" cy="558" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="420" y="575" text-anchor="middle" font-size="8" fill="#888780">Главная</text>
+  <circle cx="475" cy="558" r="3" fill="#7A8A4F"/>
+  <text x="475" y="575" text-anchor="middle" font-size="8" fill="#7A8A4F">Журнал</text>
+  <circle cx="525" cy="558" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="525" y="575" text-anchor="middle" font-size="8" fill="#888780">Прогресс</text>
+  <circle cx="580" cy="558" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="580" y="575" text-anchor="middle" font-size="8" fill="#888780">Профиль</text>
+</g>
+
+<!-- PHONE 3: СЪЁМКА BASELINE-ФОТО -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#2A2A28"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+
+  <text x="75" y="717" font-size="18" fill="rgba(255,255,255,0.9)">×</text>
+  <text x="180" y="713" text-anchor="middle" font-size="11" fill="rgba(255,255,255,0.9)">Baseline-фото</text>
+  <text x="180" y="730" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.5)">для прогресса · один раз</text>
+
+  <text x="180" y="770" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.7)">Без макияжа · дневной свет · фронтально</text>
+
+  <ellipse cx="180" cy="920" rx="68" ry="98" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+  <path d="M 80 800 L 80 815 L 95 815" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 280 800 L 280 815 L 265 815" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 80 1040 L 80 1025 L 95 1025" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <path d="M 280 1040 L 280 1025 L 265 1025" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+  <circle cx="105" cy="1115" r="18" fill="rgba(255,255,255,0.12)"/>
+  <rect x="97" y="1108" width="16" height="14" rx="2" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
+  <circle cx="105" cy="1117" r="3" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="1"/>
+
+  <circle cx="180" cy="1115" r="28" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2.5"/>
+  <circle cx="180" cy="1115" r="22" fill="#FAFAF7"/>
+
+  <circle cx="255" cy="1115" r="18" fill="rgba(255,255,255,0.12)"/>
+  <path d="M 250 1107 L 255 1115 L 252 1115 L 257 1123 L 252 1115 L 255 1115 Z" fill="rgba(255,255,255,0.7)" stroke="rgba(255,255,255,0.7)" stroke-width="0.5"/>
+
+  <text x="180" y="1170" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.6)" text-decoration="underline">Пропустить — сделаю позже</text>
+</g>
+
+<!-- PHONE 4: PUSH NOTIFICATION (LOCK SCREEN) -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#1A1A26"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+
+  <text x="500" y="730" text-anchor="middle" font-size="11" letter-spacing="1" fill="rgba(255,255,255,0.6)">5 НОЯБРЯ · СРЕДА</text>
+  <text x="500" y="790" text-anchor="middle" font-size="44" font-weight="300" fill="#FAFAF7">09:00</text>
+
+  <rect x="395" y="900" width="210" height="92" rx="14" fill="rgba(241,239,232,0.96)"/>
+
+  <rect x="410" y="915" width="32" height="32" rx="8" fill="#7A8A4F"/>
+  <text x="426" y="938" text-anchor="middle" font-size="16" fill="#FAFAF7">T</text>
+
+  <text x="455" y="926" font-size="10" fill="#2C2C2A">TOQUE Ритуал</text>
+  <text x="592" y="926" text-anchor="end" font-size="9" fill="#888780">сейчас</text>
+  <text x="455" y="948" font-size="11" fill="#2C2C2A">Время процедуры.</text>
+  <text x="410" y="975" font-size="10" fill="#5F5E5A">Сегодня 5 минут — режим Cleaning.</text>
+
+  <line x1="475" y1="1140" x2="525" y2="1140" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round"/>
+  <text x="500" y="1165" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.4)">Свайп вверх для разблокировки</text>
+</g>
+
+</svg>

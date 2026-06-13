@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE Ритуал — внутренние экраны</title>
+
+<style>
+  text { fill: #2C2C2A; }
+  .label { fill: #888780; font-size: 12px; }
+</style>
+
+<text class="label" x="180" y="32" text-anchor="middle">Экран 13 — Видеоплеер</text>
+<text class="label" x="500" y="32" text-anchor="middle">Экран 14 — Журнал процедур</text>
+<text class="label" x="180" y="632" text-anchor="middle">Экран 15 — Профиль</text>
+<text class="label" x="500" y="632" text-anchor="middle">Экран 16 — Настройки</text>
+
+<!-- PHONE 1: ВИДЕОПЛЕЕР (полный экран, тёмная тема) -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#1A1A18"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(255,255,255,0.3)"/>
+
+  <path d="M 73 108 L 83 99 M 73 108 L 83 117" stroke="rgba(255,255,255,0.9)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="180" y="113" text-anchor="middle" font-size="10" fill="rgba(255,255,255,0.7)">Очищение • Шаг 2 из 4</text>
+  <circle cx="278" cy="111" r="1.5" fill="rgba(255,255,255,0.9)"/>
+  <circle cx="278" cy="106" r="1.5" fill="rgba(255,255,255,0.9)"/>
+  <circle cx="278" cy="116" r="1.5" fill="rgba(255,255,255,0.9)"/>
+
+  <polygon points="170,300 170,340 200,320" fill="rgba(255,255,255,0.92)"/>
+
+  <rect x="75" y="480" width="210" height="3" rx="1.5" fill="rgba(255,255,255,0.15)"/>
+  <rect x="75" y="480" width="78" height="3" rx="1.5" fill="#FAFAF7"/>
+  <circle cx="153" cy="481.5" r="5" fill="#FAFAF7"/>
+
+  <text x="75" y="500" font-size="10" fill="rgba(255,255,255,0.7)">01:52</text>
+  <text x="285" y="500" text-anchor="end" font-size="10" fill="rgba(255,255,255,0.7)">05:00</text>
+
+  <circle cx="115" cy="540" r="14" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+  <text x="115" y="544" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.9)">−10</text>
+
+  <circle cx="180" cy="540" r="20" fill="rgba(255,255,255,0.95)"/>
+  <rect x="174" y="531" width="3" height="18" rx="1" fill="#1A1A18"/>
+  <rect x="183" y="531" width="3" height="18" rx="1" fill="#1A1A18"/>
+
+  <circle cx="245" cy="540" r="14" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+  <text x="245" y="544" text-anchor="middle" font-size="9" fill="rgba(255,255,255,0.9)">+10</text>
+</g>
+
+<!-- PHONE 2: ЖУРНАЛ -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="395" y="118" font-size="17">Журнал</text>
+  <text x="395" y="138" font-size="11" fill="#888780">14 процедур за 21 день</text>
+
+  <circle cx="595" cy="120" r="12" fill="rgba(122,138,79,0.1)"/>
+  <line x1="590" y1="120" x2="600" y2="120" stroke="#7A8A4F" stroke-width="1.4"/>
+  <line x1="595" y1="115" x2="595" y2="125" stroke="#7A8A4F" stroke-width="1.4"/>
+
+  <text x="395" y="170" font-size="9" letter-spacing="1" fill="#888780">ЭТА НЕДЕЛЯ</text>
+
+  <rect x="395" y="180" width="210" height="58" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="200" font-size="9" fill="#7A8A4F">СЕГОДНЯ, 09:14</text>
+  <text x="410" y="218" font-size="12">Очищение • Cleaning</text>
+  <text x="410" y="231" font-size="10" fill="#888780">5 минут • без замечаний</text>
+
+  <rect x="395" y="246" width="210" height="58" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="266" font-size="9" fill="#888780">ВЧЕРА, 20:30</text>
+  <text x="410" y="284" font-size="12">Лифтинг</text>
+  <text x="410" y="297" font-size="10" fill="#888780">8 минут • «Кожа стала упругой»</text>
+
+  <rect x="395" y="312" width="210" height="58" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="332" font-size="9" fill="#888780">28 ОКТ, 09:00</text>
+  <text x="410" y="350" font-size="12">Очищение • Cleaning</text>
+  <text x="410" y="363" font-size="10" fill="#888780">5 минут</text>
+
+  <text x="395" y="395" font-size="9" letter-spacing="1" fill="#888780">ПРОШЛАЯ НЕДЕЛЯ</text>
+
+  <rect x="395" y="405" width="210" height="58" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="425" font-size="9" fill="#888780">26 ОКТ, 21:00</text>
+  <text x="410" y="443" font-size="12">Глубокая чистка (комбо)</text>
+  <text x="410" y="456" font-size="10" fill="#888780">10 минут • «Поры заметно чище»</text>
+
+  <rect x="395" y="471" width="210" height="38" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <text x="500" y="495" text-anchor="middle" font-size="11" fill="#5F5E5A">Показать все 14 записей</text>
+
+  <line x1="395" y1="520" x2="605" y2="520" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="420" cy="543" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="420" y="560" text-anchor="middle" font-size="8" fill="#888780">Главная</text>
+  <circle cx="475" cy="543" r="3" fill="#7A8A4F"/>
+  <text x="475" y="560" text-anchor="middle" font-size="8" fill="#7A8A4F">Журнал</text>
+  <circle cx="525" cy="543" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="525" y="560" text-anchor="middle" font-size="8" fill="#888780">Прогресс</text>
+  <circle cx="580" cy="543" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="580" y="560" text-anchor="middle" font-size="8" fill="#888780">Профиль</text>
+</g>
+
+<!-- PHONE 3: ПРОФИЛЬ -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <circle cx="180" cy="745" r="32" fill="rgba(122,138,79,0.15)"/>
+  <text x="180" y="755" text-anchor="middle" font-size="20" letter-spacing="2" fill="#7A8A4F">А</text>
+
+  <text x="180" y="800" text-anchor="middle" font-size="16">Анна</text>
+  <text x="180" y="818" text-anchor="middle" font-size="10" fill="#888780">35–44 • жирная кожа</text>
+
+  <rect x="75" y="850" width="210" height="60" rx="10" fill="rgba(122,138,79,0.06)"/>
+  <text x="105" y="876" font-size="20">21</text>
+  <text x="105" y="894" font-size="9" fill="#888780">день с TOQUE</text>
+  <line x1="180" y1="858" x2="180" y2="902" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="240" y="876" text-anchor="middle" font-size="20">14</text>
+  <text x="240" y="894" text-anchor="middle" font-size="9" fill="#888780">процедур</text>
+
+  <text x="75" y="940" font-size="9" letter-spacing="1" fill="#888780">МЕНЮ</text>
+
+  <line x1="75" y1="952" x2="285" y2="952" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="75" y="975" font-size="13">Моя программа</text>
+  <text x="285" y="975" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <line x1="75" y1="990" x2="285" y2="990" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="75" y="1013" font-size="13">Настройки</text>
+  <text x="285" y="1013" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <line x1="75" y1="1028" x2="285" y2="1028" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="75" y="1051" font-size="13">Поддержка</text>
+  <text x="285" y="1051" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <line x1="75" y1="1066" x2="285" y2="1066" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="75" y="1089" font-size="13">О TOQUE</text>
+  <text x="285" y="1089" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <line x1="75" y1="1104" x2="285" y2="1104" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+
+  <line x1="56" y1="1140" x2="304" y2="1140" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="100" cy="1162" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="100" y="1178" text-anchor="middle" font-size="8" fill="#888780">Главная</text>
+  <circle cx="155" cy="1162" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="155" y="1178" text-anchor="middle" font-size="8" fill="#888780">Журнал</text>
+  <circle cx="205" cy="1162" r="3" fill="rgba(0,0,0,0.3)"/>
+  <text x="205" y="1178" text-anchor="middle" font-size="8" fill="#888780">Прогресс</text>
+  <circle cx="260" cy="1162" r="3" fill="#7A8A4F"/>
+  <text x="260" y="1178" text-anchor="middle" font-size="8" fill="#7A8A4F">Профиль</text>
+</g>
+
+<!-- PHONE 4: НАСТРОЙКИ -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 398 712 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="720" text-anchor="middle" font-size="14">Настройки</text>
+
+  <text x="395" y="760" font-size="9" letter-spacing="1" fill="#888780">УВЕДОМЛЕНИЯ</text>
+
+  <rect x="395" y="775" width="210" height="46" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="798" font-size="12">Напоминания</text>
+  <text x="410" y="813" font-size="9" fill="#888780">Каждый день в 09:00</text>
+  <rect x="565" y="789" width="30" height="18" rx="9" fill="#7A8A4F"/>
+  <circle cx="588" cy="798" r="7" fill="#FAFAF7"/>
+
+  <rect x="395" y="826" width="210" height="46" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="849" font-size="12">Совет дня</text>
+  <text x="410" y="864" font-size="9" fill="#888780">Утром после процедуры</text>
+  <rect x="565" y="840" width="30" height="18" rx="9" fill="#7A8A4F"/>
+  <circle cx="588" cy="849" r="7" fill="#FAFAF7"/>
+
+  <rect x="395" y="877" width="210" height="46" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="900" font-size="12">Еженедельный отчёт</text>
+  <text x="410" y="915" font-size="9" fill="#888780">По воскресеньям</text>
+  <rect x="565" y="891" width="30" height="18" rx="9" fill="rgba(0,0,0,0.12)"/>
+  <circle cx="572" cy="900" r="7" fill="#FAFAF7"/>
+
+  <text x="395" y="955" font-size="9" letter-spacing="1" fill="#888780">ПРОГРАММА</text>
+
+  <rect x="395" y="970" width="210" height="44" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="996" font-size="12">Время процедур</text>
+  <text x="600" y="996" text-anchor="end" font-size="11" fill="#888780">09:00 ›</text>
+
+  <rect x="395" y="1019" width="210" height="44" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="1045" font-size="12">Частота</text>
+  <text x="600" y="1045" text-anchor="end" font-size="11" fill="#888780">4–5 в неделю ›</text>
+
+  <rect x="395" y="1068" width="210" height="44" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="410" y="1094" font-size="12">Пауза программы</text>
+  <text x="600" y="1094" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <text x="500" y="1140" text-anchor="middle" font-size="11" fill="rgba(0,0,0,0.4)">Выйти из аккаунта</text>
+</g>
+
+</svg>

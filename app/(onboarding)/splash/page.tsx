@@ -1,29 +1,33 @@
+"use client";
+
+import { motion } from "framer-motion";
 import { FadeIn } from "@/components/shared/fade-in";
 import { TimedRedirect } from "@/components/shared/timed-redirect";
 
 export default function SplashPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    <main className="relative flex min-h-screen flex-col items-center justify-center px-6 text-center">
       <TimedRedirect to="/welcome" delayMs={2000} />
 
-      <FadeIn>
-        <p className="font-mono text-xs uppercase tracking-[0.4em] text-text-muted">
-          Ритуал
-        </p>
-        <h1 className="mt-5 text-5xl font-semibold tracking-[0.18em] text-olive-dark">
+      <FadeIn duration={0.4} y={0}>
+        <h1 className="text-[32px] font-bold tracking-[8px] text-olive">
           TOQUE
         </h1>
-        <p className="mt-5 text-base leading-relaxed text-text-muted">
-          Спокойный ритуал ухода — каждый день видимое улучшение.
+        <p className="mt-1 text-[9px] uppercase tracking-[4px] text-text-muted">
+          Ритуал
         </p>
       </FadeIn>
 
-      <FadeIn delay={0.4}>
-        <span
-          className="mt-12 block h-1.5 w-1.5 animate-pulse rounded-pill bg-olive"
-          aria-hidden
-        />
-      </FadeIn>
+      <div className="absolute left-1/2 top-[85%] -translate-x-1/2">
+        <div className="h-[2px] w-[100px] overflow-hidden rounded-pill bg-black/10">
+          <motion.div
+            className="h-full rounded-pill bg-olive"
+            initial={{ width: 0 }}
+            animate={{ width: "100%" }}
+            transition={{ duration: 1.8, ease: "easeInOut" }}
+          />
+        </div>
+      </div>
     </main>
   );
 }

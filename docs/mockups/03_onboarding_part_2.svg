@@ -1,0 +1,169 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE Ритуал — квиз 4-6 + финал</title>
+
+<style>
+  text { fill: #2C2C2A; }
+  .label { fill: #888780; font-size: 12px; }
+</style>
+
+<text class="label" x="180" y="32" text-anchor="middle">Экран 9 — Квиз 4 из 6 (тип кожи)</text>
+<text class="label" x="500" y="32" text-anchor="middle">Экран 10 — Квиз 5 из 6 (опыт)</text>
+<text class="label" x="180" y="632" text-anchor="middle">Экран 11 — Квиз 6 из 6 (время и ритм)</text>
+<text class="label" x="500" y="632" text-anchor="middle">Экран 12 — Финал «Программа готова»</text>
+
+<!-- PHONE 1: Q4 КОЖА -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <rect x="75" y="110" width="210" height="3" rx="1.5" fill="rgba(0,0,0,0.08)"/>
+  <rect x="75" y="110" width="140" height="3" rx="1.5" fill="#7A8A4F"/>
+  <text x="75" y="127" font-size="9" letter-spacing="1" fill="#888780">ШАГ 4 ИЗ 6</text>
+
+  <path d="M 78 158 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="75" y="215" font-size="17">Какой у вас тип кожи?</text>
+  <text x="75" y="237" font-size="11" fill="#888780">Это определит интенсивность процедур</text>
+
+  <rect x="75" y="270" width="100" height="80" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <circle cx="125" cy="298" r="9" fill="rgba(0,0,0,0.06)"/>
+  <text x="125" y="335" text-anchor="middle" font-size="11">Нормальная</text>
+
+  <rect x="185" y="270" width="100" height="80" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <circle cx="235" cy="298" r="9" fill="rgba(0,0,0,0.06)"/>
+  <text x="235" y="335" text-anchor="middle" font-size="11">Сухая</text>
+
+  <rect x="75" y="360" width="100" height="80" rx="10" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1.2"/>
+  <circle cx="125" cy="388" r="9" fill="#7A8A4F"/>
+  <text x="125" y="425" text-anchor="middle" font-size="11">Жирная</text>
+
+  <rect x="185" y="360" width="100" height="80" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <circle cx="235" cy="388" r="9" fill="rgba(0,0,0,0.06)"/>
+  <text x="235" y="425" text-anchor="middle" font-size="11">Комбини-</text>
+  <text x="235" y="438" text-anchor="middle" font-size="11">рованная</text>
+
+  <rect x="75" y="450" width="210" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="180" y="481" text-anchor="middle" font-size="11">Чувствительная</text>
+
+  <text x="180" y="525" text-anchor="middle" font-size="10" fill="#7A8A4F" text-decoration="underline">Не знаю — помогите определить</text>
+
+  <rect x="75" y="540" width="210" height="40" rx="20" fill="#7A8A4F"/>
+  <text x="180" y="565" text-anchor="middle" font-size="12" fill="#FAFAF7">Далее</text>
+</g>
+
+<!-- PHONE 2: Q5 ОПЫТ -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <rect x="395" y="110" width="210" height="3" rx="1.5" fill="rgba(0,0,0,0.08)"/>
+  <rect x="395" y="110" width="175" height="3" rx="1.5" fill="#7A8A4F"/>
+  <text x="395" y="127" font-size="9" letter-spacing="1" fill="#888780">ШАГ 5 ИЗ 6</text>
+
+  <path d="M 398 158 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="395" y="215" font-size="17">Насколько вы знакомы</text>
+  <text x="395" y="236" font-size="17">с аппаратным уходом?</text>
+  <text x="395" y="262" font-size="11" fill="#888780">От этого зависит глубина объяснений</text>
+
+  <rect x="395" y="290" width="210" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="410" y="312" font-size="12">Новичок</text>
+  <text x="410" y="329" font-size="9" fill="#888780">Никогда не пробовала</text>
+
+  <rect x="395" y="354" width="210" height="54" rx="10" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1.2"/>
+  <text x="410" y="376" font-size="12">Знакомая тема</text>
+  <text x="410" y="393" font-size="9" fill="#888780">Делала в салоне</text>
+  <circle cx="585" cy="380" r="6" fill="#7A8A4F"/>
+  <path d="M 582 380 l 2 2 l 4 -4" stroke="#FAFAF7" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="395" y="418" width="210" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="410" y="440" font-size="12">Опытный пользователь</text>
+  <text x="410" y="457" font-size="9" fill="#888780">Уже пользуюсь дома</text>
+
+  <rect x="395" y="482" width="210" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="410" y="504" font-size="12">Эксперт</text>
+  <text x="410" y="521" font-size="9" fill="#888780">Знаю всё про процедуры</text>
+
+  <rect x="395" y="546" width="210" height="36" rx="18" fill="#7A8A4F"/>
+  <text x="500" y="569" text-anchor="middle" font-size="12" fill="#FAFAF7">Далее</text>
+</g>
+
+<!-- PHONE 3: Q6 ВРЕМЯ + РИТМ -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <rect x="75" y="710" width="210" height="3" rx="1.5" fill="rgba(0,0,0,0.08)"/>
+  <rect x="75" y="710" width="210" height="3" rx="1.5" fill="#7A8A4F"/>
+  <text x="75" y="727" font-size="9" letter-spacing="1" fill="#888780">ШАГ 6 ИЗ 6</text>
+
+  <path d="M 78 758 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="75" y="815" font-size="16">Когда вам удобно?</text>
+  <rect x="75" y="830" width="60" height="30" rx="15" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1"/>
+  <text x="105" y="850" text-anchor="middle" font-size="11">Утром</text>
+  <rect x="142" y="830" width="68" height="30" rx="15" fill="white" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+  <text x="176" y="850" text-anchor="middle" font-size="11">Вечером</text>
+  <rect x="217" y="830" width="65" height="30" rx="15" fill="white" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+  <text x="250" y="850" text-anchor="middle" font-size="11">Гибко</text>
+
+  <text x="75" y="900" font-size="16">Как часто готовы?</text>
+  <rect x="75" y="915" width="210" height="46" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="90" y="943" font-size="12">2–3 раза в неделю</text>
+
+  <rect x="75" y="969" width="210" height="46" rx="10" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1.2"/>
+  <text x="90" y="997" font-size="12">4–5 раз в неделю</text>
+  <circle cx="265" cy="992" r="6" fill="#7A8A4F"/>
+  <path d="M 262 992 l 2 2 l 4 -4" stroke="#FAFAF7" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="75" y="1023" width="210" height="46" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="90" y="1051" font-size="12">Каждый день</text>
+
+  <rect x="75" y="1083" width="210" height="2" rx="1" fill="rgba(0,0,0,0.06)"/>
+  <text x="75" y="1108" font-size="10" fill="#888780">Опционально:</text>
+  <rect x="75" y="1118" width="210" height="38" rx="10" fill="rgba(196,144,138,0.12)" stroke="rgba(196,144,138,0.5)" stroke-width="0.8"/>
+  <circle cx="100" cy="1137" r="9" fill="none" stroke="rgba(196,144,138,0.7)" stroke-width="1"/>
+  <circle cx="100" cy="1137" r="3" fill="rgba(196,144,138,0.7)"/>
+  <text x="118" y="1142" font-size="11">Сделать baseline-фото</text>
+</g>
+
+<!-- PHONE 4: ФИНАЛ -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <circle cx="500" cy="765" r="32" fill="none" stroke="#7A8A4F" stroke-width="1.5"/>
+  <path d="M 488 765 l 8 8 l 16 -16" stroke="#7A8A4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="500" y="830" text-anchor="middle" font-size="16">Анна, ваша программа</text>
+  <text x="500" y="850" text-anchor="middle" font-size="16">готова.</text>
+
+  <line x1="450" y1="876" x2="550" y2="876" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+
+  <text x="395" y="908" font-size="10" letter-spacing="1" fill="#888780">ЧТО ВНУТРИ</text>
+
+  <circle cx="402" cy="935" r="2" fill="#7A8A4F"/>
+  <text x="415" y="939" font-size="11">30 дней ритуала по 5–10 минут</text>
+
+  <circle cx="402" cy="965" r="2" fill="#7A8A4F"/>
+  <text x="415" y="969" font-size="11">Видео-гид к каждой процедуре</text>
+
+  <circle cx="402" cy="995" r="2" fill="#7A8A4F"/>
+  <text x="415" y="999" font-size="11">Журнал и фото-прогресс</text>
+
+  <circle cx="402" cy="1025" r="2" fill="#7A8A4F"/>
+  <text x="415" y="1029" font-size="11">Совет косметолога раз в неделю</text>
+
+  <rect x="395" y="1060" width="210" height="50" rx="10" fill="rgba(122,138,79,0.06)"/>
+  <text x="410" y="1080" font-size="9" letter-spacing="1" fill="#888780">ПЕРВОЕ ЗАНЯТИЕ</text>
+  <text x="410" y="1098" font-size="12">Завтра в 09:00</text>
+
+  <rect x="395" y="1125" width="210" height="44" rx="22" fill="#7A8A4F"/>
+  <text x="500" y="1153" text-anchor="middle" font-size="13" fill="#FAFAF7">Начать</text>
+</g>
+
+</svg>

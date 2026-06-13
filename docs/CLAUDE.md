@@ -100,9 +100,9 @@ PWA-приложение для онбординга клиенток после
 ```
 app/
 ├── (auth)/           # активация, login (activation, login, callback)
-├── (onboarding)/     # splash, welcome, gift-welcome, quiz/*
+├── (onboarding)/     # splash, welcome, quiz/* (device, name, age, ...)
 ├── (main)/           # home, ritual, journal, progress, profile, settings,
-│                     # support, ecosystem/[device], referrals, stories,
+│                     # support, ecosystem/[device], referrals,
 │                     # warranty, my-program (с нижней навигацией)
 ├── (modals)/         # nps, jcs, review-request
 └── layout.tsx        # root layout (шрифты, metadata, viewport)
@@ -141,9 +141,6 @@ surveys (id, profile_id, survey_type, score, answer, comment, created_at)
 photos (id, profile_id, storage_path, day_number, taken_at)
 
 push_subscriptions (id, profile_id, endpoint, p256dh, auth, created_at)
-
-stories (id, profile_id, quote, device, duration, before_photo, after_photo,
-  is_published, created_at)
 ```
 
 **Row Level Security включена для всех таблиц** — пользователь видит и

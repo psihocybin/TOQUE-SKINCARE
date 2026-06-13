@@ -1,0 +1,193 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE Ритуал — апсейл, рефералы и UGC</title>
+
+<style>
+  text { fill: #2C2C2A; }
+  .label { fill: #888780; font-size: 12px; }
+</style>
+
+<text class="label" x="180" y="32" text-anchor="middle">Экран 29 — Карточка устройства (ELARA)</text>
+<text class="label" x="500" y="32" text-anchor="middle">Экран 30 — Реферальная программа</text>
+<text class="label" x="180" y="632" text-anchor="middle">Экран 31 — Истории клиентов (UGC)</text>
+<text class="label" x="500" y="632" text-anchor="middle">Экран 32 — Запрос отзыва на МП (день 90)</text>
+
+<!-- PHONE 1: КАРТОЧКА ELARA -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 78 114 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="180" y="122" text-anchor="middle" font-size="14">ELARA</text>
+  <text x="282" y="118" text-anchor="end" font-size="14" fill="#888780">♡</text>
+
+  <!-- Hero image placeholder -->
+  <rect x="75" y="145" width="210" height="140" rx="10" fill="rgba(122,138,79,0.05)" stroke="rgba(122,138,79,0.15)" stroke-width="0.8"/>
+  <rect x="155" y="180" width="50" height="80" rx="6" fill="rgba(122,138,79,0.2)"/>
+  <circle cx="180" cy="200" r="14" fill="rgba(122,138,79,0.4)"/>
+  <text x="180" y="305" text-anchor="middle" font-size="8" fill="#888780">ФОТО УСТРОЙСТВА</text>
+
+  <text x="75" y="335" font-size="20">ELARA</text>
+  <text x="75" y="355" font-size="11" fill="#888780">Микротоковый массажёр</text>
+
+  <!-- Tabs -->
+  <rect x="75" y="375" width="68" height="28" rx="14" fill="rgba(122,138,79,0.1)" stroke="#7A8A4F" stroke-width="1"/>
+  <text x="109" y="393" text-anchor="middle" font-size="10">Описание</text>
+  <text x="166" y="393" text-anchor="middle" font-size="10" fill="#888780">С NUO</text>
+  <text x="227" y="393" text-anchor="middle" font-size="10" fill="#888780">Отзывы</text>
+
+  <text x="75" y="426" font-size="10" fill="#2C2C2A">Тонизирует мышцы лица за 5–8 минут</text>
+  <text x="75" y="441" font-size="10" fill="#2C2C2A">в день. Логично продолжает NUO:</text>
+  <text x="75" y="456" font-size="10" fill="#2C2C2A">УЗ-чистка готовит, микротоки</text>
+  <text x="75" y="471" font-size="10" fill="#2C2C2A">поддерживают.</text>
+
+  <!-- Price block -->
+  <rect x="75" y="490" width="210" height="48" rx="10" fill="rgba(122,138,79,0.06)"/>
+  <text x="90" y="510" font-size="9" letter-spacing="1" fill="#888780">ПО ПРОМОКОДУ RITUAL30</text>
+  <text x="90" y="530" font-size="16">10 900 ₽</text>
+  <text x="180" y="530" font-size="11" fill="#888780" text-decoration="line-through">12 900 ₽</text>
+  <text x="275" y="530" text-anchor="end" font-size="9" fill="#7A8A4F">−15%</text>
+
+  <rect x="75" y="548" width="210" height="36" rx="18" fill="#7A8A4F"/>
+  <text x="180" y="571" text-anchor="middle" font-size="12" fill="#FAFAF7">Перейти к покупке</text>
+</g>
+
+<!-- PHONE 2: РЕФЕРАЛЬНАЯ ПРОГРАММА -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 398 114 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="122" text-anchor="middle" font-size="14">Пригласить подругу</text>
+
+  <!-- Decoration: two circles overlapping -->
+  <circle cx="478" cy="180" r="22" fill="rgba(196,144,138,0.2)" stroke="rgba(196,144,138,0.5)" stroke-width="1"/>
+  <circle cx="522" cy="180" r="22" fill="rgba(122,138,79,0.2)" stroke="rgba(122,138,79,0.5)" stroke-width="1"/>
+
+  <text x="500" y="240" text-anchor="middle" font-size="15">Поделитесь TOQUE —</text>
+  <text x="500" y="260" text-anchor="middle" font-size="15">обе получите подарок</text>
+
+  <text x="500" y="290" text-anchor="middle" font-size="11" fill="#888780">Подруга: скидка 15% на первое устройство</text>
+  <text x="500" y="306" text-anchor="middle" font-size="11" fill="#888780">Вы: 1 000 ₽ кешбэка на следующую покупку</text>
+
+  <!-- Code block -->
+  <rect x="395" y="330" width="210" height="64" rx="10" fill="rgba(122,138,79,0.06)" stroke="rgba(122,138,79,0.3)" stroke-width="0.8"/>
+  <text x="410" y="350" font-size="9" letter-spacing="1" fill="#888780">ВАШ КОД</text>
+  <text x="410" y="375" font-size="15" letter-spacing="2">ANNA-2025-N7</text>
+  <rect x="540" y="345" width="50" height="24" rx="12" fill="#7A8A4F"/>
+  <text x="565" y="361" text-anchor="middle" font-size="10" fill="#FAFAF7">Копи</text>
+
+  <rect x="395" y="410" width="210" height="40" rx="20" fill="#7A8A4F"/>
+  <text x="500" y="435" text-anchor="middle" font-size="12" fill="#FAFAF7">Поделиться ссылкой</text>
+
+  <!-- Stats -->
+  <text x="395" y="475" font-size="9" letter-spacing="1" fill="#888780">СТАТУС</text>
+
+  <rect x="395" y="485" width="100" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="445" y="507" text-anchor="middle" font-size="18">1</text>
+  <text x="445" y="524" text-anchor="middle" font-size="9" fill="#888780">приглашена</text>
+
+  <rect x="505" y="485" width="100" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="555" y="507" text-anchor="middle" font-size="18">0</text>
+  <text x="555" y="524" text-anchor="middle" font-size="9" fill="#888780">купили</text>
+
+  <!-- Invited friend -->
+  <rect x="395" y="545" width="210" height="32" rx="8" fill="white" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <circle cx="412" cy="561" r="8" fill="rgba(196,144,138,0.3)"/>
+  <text x="412" y="565" text-anchor="middle" font-size="8" fill="#5F5E5A">Е</text>
+  <text x="428" y="565" font-size="10">Елена</text>
+  <text x="595" y="565" text-anchor="end" font-size="9" fill="#888780">в раздумьях</text>
+</g>
+
+<!-- PHONE 3: ИСТОРИИ КЛИЕНТОВ -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="75" y="720" font-size="17">Истории</text>
+  <text x="75" y="738" font-size="11" fill="#888780">Реальные клиентки TOQUE</text>
+
+  <!-- Filter chips -->
+  <rect x="75" y="755" width="50" height="26" rx="13" fill="rgba(122,138,79,0.1)" stroke="#7A8A4F" stroke-width="1"/>
+  <text x="100" y="773" text-anchor="middle" font-size="10">Все</text>
+  <rect x="132" y="755" width="55" height="26" rx="13" fill="white" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+  <text x="159" y="773" text-anchor="middle" font-size="10" fill="#5F5E5A">NUO</text>
+  <rect x="194" y="755" width="60" height="26" rx="13" fill="white" stroke="rgba(0,0,0,0.15)" stroke-width="0.5"/>
+  <text x="224" y="773" text-anchor="middle" font-size="10" fill="#5F5E5A">ELARA</text>
+
+  <!-- Story 1 -->
+  <rect x="75" y="800" width="210" height="120" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="93" cy="820" r="12" fill="rgba(196,144,138,0.25)"/>
+  <text x="93" y="824" text-anchor="middle" font-size="10" fill="#5F5E5A">М</text>
+  <text x="112" y="817" font-size="11">Марина, 41</text>
+  <text x="112" y="831" font-size="9" fill="#888780">NUO · 3 месяца с TOQUE</text>
+  <text x="90" y="858" font-size="11" font-style="italic">«Через 30 дней увидела</text>
+  <text x="90" y="873" font-size="11" font-style="italic">разницу — и сама не</text>
+  <text x="90" y="888" font-size="11" font-style="italic">поверила.»</text>
+  <rect x="90" y="900" width="38" height="12" rx="6" fill="rgba(122,138,79,0.1)"/>
+  <text x="109" y="909" text-anchor="middle" font-size="8" fill="#7A8A4F">до/после</text>
+
+  <!-- Story 2 -->
+  <rect x="75" y="930" width="210" height="100" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="93" cy="950" r="12" fill="rgba(122,138,79,0.25)"/>
+  <text x="93" y="954" text-anchor="middle" font-size="10" fill="#5F5E5A">Т</text>
+  <text x="112" y="947" font-size="11">Татьяна, 38</text>
+  <text x="112" y="961" font-size="9" fill="#888780">NUO + ELARA · 6 месяцев</text>
+  <text x="90" y="988" font-size="11" font-style="italic">«Соединила два устройства</text>
+  <text x="90" y="1003" font-size="11" font-style="italic">в одну систему. Контур</text>
+  <text x="90" y="1018" font-size="11" font-style="italic">стал заметно чётче.»</text>
+
+  <!-- Story 3 -->
+  <rect x="75" y="1040" width="210" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="93" cy="1060" r="12" fill="rgba(122,138,79,0.25)"/>
+  <text x="93" y="1064" text-anchor="middle" font-size="10" fill="#5F5E5A">О</text>
+  <text x="112" y="1057" font-size="11">Ольга, 52</text>
+  <text x="112" y="1071" font-size="9" fill="#888780">ANIMA · 4 месяца</text>
+  <text x="90" y="1090" font-size="10" font-style="italic">«LED-маска для меня...»</text>
+
+  <!-- CTA share own -->
+  <rect x="75" y="1115" width="210" height="40" rx="20" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1"/>
+  <text x="180" y="1140" text-anchor="middle" font-size="11" fill="#7A8A4F">Поделиться своей историей</text>
+</g>
+
+<!-- PHONE 4: ЗАПРОС ОТЗЫВА НА МП -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="395" y="717" font-size="18" fill="rgba(0,0,0,0.3)">×</text>
+
+  <!-- Heart icon -->
+  <path d="M 500 800 C 500 790 510 780 520 780 C 525 780 500 800 500 800 C 500 800 475 780 480 780 C 490 780 500 790 500 800 Z M 500 800 L 478 778 Q 472 770 480 762 Q 488 754 500 768 Q 512 754 520 762 Q 528 770 522 778 Z"
+        fill="rgba(196,144,138,0.4)" stroke="#C4908A" stroke-width="1.5" stroke-linejoin="round"/>
+
+  <text x="500" y="855" text-anchor="middle" font-size="17">Анна, помогите нам</text>
+  <text x="500" y="876" text-anchor="middle" font-size="17">стать заметнее.</text>
+
+  <text x="500" y="905" text-anchor="middle" font-size="11" fill="#5F5E5A">Расскажите про TOQUE там,</text>
+  <text x="500" y="920" text-anchor="middle" font-size="11" fill="#5F5E5A">где купили устройство.</text>
+  <text x="500" y="942" text-anchor="middle" font-size="11" fill="#5F5E5A">Это занимает 2 минуты —</text>
+  <text x="500" y="957" text-anchor="middle" font-size="11" fill="#5F5E5A">и очень помогает другим женщинам.</text>
+
+  <!-- Marketplace cards -->
+  <rect x="395" y="985" width="210" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.8"/>
+  <rect x="410" y="1000" width="20" height="20" rx="4" fill="#CB11AB"/>
+  <text x="420" y="1014" text-anchor="middle" font-size="11" fill="#FAFAF7">W</text>
+  <text x="440" y="1009" font-size="12">Wildberries</text>
+  <text x="440" y="1024" font-size="9" fill="#888780">оставить отзыв</text>
+  <text x="595" y="1014" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <rect x="395" y="1045" width="210" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.8"/>
+  <rect x="410" y="1060" width="20" height="20" rx="4" fill="#005BFF"/>
+  <text x="420" y="1074" text-anchor="middle" font-size="11" fill="#FAFAF7">O</text>
+  <text x="440" y="1069" font-size="12">Ozon</text>
+  <text x="440" y="1084" font-size="9" fill="#888780">оставить отзыв</text>
+  <text x="595" y="1074" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <text x="500" y="1145" text-anchor="middle" font-size="10" fill="#888780" text-decoration="underline">Я не буду оставлять отзыв</text>
+</g>
+
+</svg>

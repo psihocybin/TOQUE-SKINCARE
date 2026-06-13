@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE Ритуал — опросы и сервис в программе</title>
+
+<style>
+  text { fill: #2C2C2A; }
+  .label { fill: #888780; font-size: 12px; }
+</style>
+
+<text class="label" x="180" y="32" text-anchor="middle">Экран 25 — Регистрация гарантии</text>
+<text class="label" x="500" y="32" text-anchor="middle">Экран 26 — NPS-опрос (день 30)</text>
+<text class="label" x="180" y="632" text-anchor="middle">Экран 27 — JCS-опрос (день 60)</text>
+<text class="label" x="500" y="632" text-anchor="middle">Экран 28 — Экосистема TOQUE</text>
+
+<!-- PHONE 1: РЕГИСТРАЦИЯ ГАРАНТИИ -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 78 114 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="180" y="122" text-anchor="middle" font-size="14">Гарантия</text>
+
+  <!-- Shield icon -->
+  <path d="M 180 175 L 156 187 L 156 215 Q 156 240 180 252 Q 204 240 204 215 L 204 187 Z"
+        fill="rgba(122,138,79,0.1)" stroke="#7A8A4F" stroke-width="1.5"/>
+  <path d="M 170 215 l 7 7 l 14 -14" stroke="#7A8A4F" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <text x="180" y="285" text-anchor="middle" font-size="15">2 года защиты устройства</text>
+  <text x="180" y="307" text-anchor="middle" font-size="11" fill="#888780">Минута сейчас — спокойствие потом.</text>
+
+  <text x="75" y="350" font-size="9" letter-spacing="1" fill="#888780">СЕРИЙНЫЙ НОМЕР</text>
+  <text x="75" y="378" font-size="14">TQ-NUO-04823</text>
+  <line x1="75" y1="388" x2="285" y2="388" stroke="#7A8A4F" stroke-width="1.5"/>
+  <text x="75" y="405" font-size="9" fill="#888780">На дне устройства, 8 символов</text>
+
+  <text x="75" y="445" font-size="9" letter-spacing="1" fill="#888780">ЧЕК ИЛИ СКРИНШОТ ЗАКАЗА</text>
+  <rect x="75" y="455" width="210" height="58" rx="10" fill="rgba(0,0,0,0.03)" stroke="rgba(0,0,0,0.1)" stroke-width="0.8" stroke-dasharray="4,3"/>
+  <line x1="170" y1="478" x2="190" y2="478" stroke="#7A8A4F" stroke-width="1.5"/>
+  <line x1="180" y1="468" x2="180" y2="488" stroke="#7A8A4F" stroke-width="1.5"/>
+  <text x="180" y="505" text-anchor="middle" font-size="10" fill="#5F5E5A">Загрузить (опционально)</text>
+
+  <rect x="75" y="530" width="210" height="40" rx="20" fill="#7A8A4F"/>
+  <text x="180" y="555" text-anchor="middle" font-size="12" fill="#FAFAF7">Зарегистрировать</text>
+</g>
+
+<!-- PHONE 2: NPS-ОПРОС -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="395" y="117" font-size="18" fill="rgba(0,0,0,0.3)">×</text>
+  <text x="500" y="115" text-anchor="middle" font-size="11" fill="#888780">Месяц с TOQUE</text>
+
+  <circle cx="500" cy="195" r="40" fill="rgba(122,138,79,0.1)"/>
+  <text x="500" y="195" text-anchor="middle" font-size="9" letter-spacing="1" fill="#888780">ДЕНЬ</text>
+  <text x="500" y="210" text-anchor="middle" font-size="24">30</text>
+
+  <text x="500" y="278" text-anchor="middle" font-size="15">Анна, подведём итог.</text>
+  <text x="500" y="303" text-anchor="middle" font-size="11" fill="#5F5E5A">Насколько вероятно, что вы порекомендуете</text>
+  <text x="500" y="319" text-anchor="middle" font-size="11" fill="#5F5E5A">TOQUE подруге?</text>
+
+  <!-- NPS scale 0-10, 11 circles -->
+  <circle cx="414" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="414" y="374" text-anchor="middle" font-size="10" fill="#888780">0</text>
+  <circle cx="430" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="430" y="374" text-anchor="middle" font-size="10" fill="#888780">1</text>
+  <circle cx="446" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="446" y="374" text-anchor="middle" font-size="10" fill="#888780">2</text>
+  <circle cx="462" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="462" y="374" text-anchor="middle" font-size="10" fill="#888780">3</text>
+  <circle cx="478" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="478" y="374" text-anchor="middle" font-size="10" fill="#888780">4</text>
+  <circle cx="494" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="494" y="374" text-anchor="middle" font-size="10" fill="#888780">5</text>
+  <circle cx="510" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="510" y="374" text-anchor="middle" font-size="10" fill="#888780">6</text>
+  <circle cx="526" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="526" y="374" text-anchor="middle" font-size="10" fill="#888780">7</text>
+  <circle cx="542" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="542" y="374" text-anchor="middle" font-size="10" fill="#888780">8</text>
+  <circle cx="558" cy="370" r="13" fill="#7A8A4F" stroke="#7A8A4F" stroke-width="1.5"/>
+  <text x="558" y="374" text-anchor="middle" font-size="11" fill="#FAFAF7">9</text>
+  <circle cx="575" cy="370" r="11" fill="#EFECE2" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="575" y="374" text-anchor="middle" font-size="10" fill="#888780">10</text>
+
+  <text x="414" y="398" font-size="8" fill="#888780">Точно нет</text>
+  <text x="575" y="398" text-anchor="end" font-size="8" fill="#888780">Точно да</text>
+
+  <text x="395" y="435" font-size="9" letter-spacing="1" fill="#888780">ЧТО БЫЛО ВАЖНЫМ? (НЕ ОБЯЗАТЕЛЬНО)</text>
+  <rect x="395" y="445" width="210" height="62" rx="10" fill="white" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <text x="408" y="465" font-size="10" fill="#888780">Расскажите, что больше всего</text>
+  <text x="408" y="481" font-size="10" fill="#888780">понравилось — или мешало…</text>
+
+  <rect x="395" y="525" width="210" height="40" rx="20" fill="#7A8A4F"/>
+  <text x="500" y="550" text-anchor="middle" font-size="12" fill="#FAFAF7">Отправить</text>
+</g>
+
+<!-- PHONE 3: JCS-ОПРОС -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="75" y="717" font-size="18" fill="rgba(0,0,0,0.3)">×</text>
+  <text x="180" y="715" text-anchor="middle" font-size="11" fill="#888780">День 60 · контрольная точка</text>
+
+  <text x="75" y="775" font-size="17">60 дней назад вы</text>
+  <text x="75" y="796" font-size="17">пришли к нам.</text>
+
+  <rect x="75" y="820" width="210" height="48" rx="10" fill="rgba(196,144,138,0.08)"/>
+  <text x="90" y="840" font-size="9" letter-spacing="1" fill="#888780">ВАША ЦЕЛЬ БЫЛА</text>
+  <text x="90" y="858" font-size="12">Очищение и работа с порами</text>
+
+  <text x="75" y="900" font-size="13">Удалось ли решить эту задачу?</text>
+
+  <rect x="75" y="918" width="210" height="42" rx="10" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="1.2"/>
+  <text x="90" y="943" font-size="12">Да, кожа явно лучше</text>
+  <circle cx="265" cy="938" r="6" fill="#7A8A4F"/>
+  <path d="M 262 938 l 2 2 l 4 -4" stroke="#FAFAF7" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="75" y="970" width="210" height="42" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="90" y="995" font-size="12">Частично — есть улучшения</text>
+
+  <rect x="75" y="1022" width="210" height="42" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="90" y="1047" font-size="12">Пока не вижу разницы</text>
+
+  <rect x="75" y="1074" width="210" height="42" rx="10" fill="white" stroke="rgba(196,144,138,0.4)" stroke-width="0.8"/>
+  <text x="90" y="1099" font-size="12">Стало хуже</text>
+
+  <rect x="75" y="1130" width="210" height="36" rx="18" fill="#7A8A4F"/>
+  <text x="180" y="1153" text-anchor="middle" font-size="12" fill="#FAFAF7">Отправить</text>
+</g>
+
+<!-- PHONE 4: ЭКОСИСТЕМА -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 398 714 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="500" y="722" text-anchor="middle" font-size="14">Экосистема TOQUE</text>
+
+  <text x="500" y="745" text-anchor="middle" font-size="10" fill="#888780">11 устройств для системного ухода</text>
+
+  <!-- Section 1: У вас есть -->
+  <text x="395" y="780" font-size="9" letter-spacing="1" fill="#7A8A4F">У ВАС УЖЕ ЕСТЬ</text>
+
+  <rect x="395" y="790" width="210" height="50" rx="10" fill="rgba(122,138,79,0.06)" stroke="rgba(122,138,79,0.3)" stroke-width="0.8"/>
+  <circle cx="418" cy="815" r="13" fill="rgba(122,138,79,0.2)"/>
+  <text x="418" y="819" text-anchor="middle" font-size="11" fill="#7A8A4F">N</text>
+  <text x="440" y="811" font-size="12">NUO</text>
+  <text x="440" y="826" font-size="9" fill="#888780">Ультразвуковая чистка</text>
+  <circle cx="588" cy="815" r="8" fill="#7A8A4F"/>
+  <path d="M 585 815 l 2 2 l 4 -4" stroke="#FAFAF7" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Section 2: Логично продолжить -->
+  <text x="395" y="868" font-size="9" letter-spacing="1" fill="#888780">ЛОГИЧНО ПРОДОЛЖИТЬ</text>
+
+  <rect x="395" y="878" width="210" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <circle cx="418" cy="903" r="13" fill="rgba(0,0,0,0.04)"/>
+  <text x="418" y="907" text-anchor="middle" font-size="11">E</text>
+  <text x="440" y="899" font-size="12">ELARA</text>
+  <text x="440" y="914" font-size="9" fill="#888780">Микротоки · тонус</text>
+  <text x="595" y="907" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <rect x="395" y="932" width="210" height="50" rx="10" fill="white" stroke="rgba(0,0,0,0.1)" stroke-width="0.5"/>
+  <circle cx="418" cy="957" r="13" fill="rgba(0,0,0,0.04)"/>
+  <text x="418" y="961" text-anchor="middle" font-size="11">L</text>
+  <text x="440" y="953" font-size="12">LUMERA</text>
+  <text x="440" y="968" font-size="9" fill="#888780">УЗ + LED · продвинутый</text>
+  <text x="595" y="961" text-anchor="end" font-size="14" fill="#888780">›</text>
+
+  <!-- Section 3: Другие категории -->
+  <text x="395" y="1010" font-size="9" letter-spacing="1" fill="#888780">ДРУГИЕ КАТЕГОРИИ</text>
+
+  <rect x="395" y="1020" width="210" height="42" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="418" cy="1041" r="11" fill="rgba(0,0,0,0.04)"/>
+  <text x="418" y="1045" text-anchor="middle" font-size="10">A</text>
+  <text x="440" y="1037" font-size="11">ANIMA</text>
+  <text x="440" y="1050" font-size="9" fill="#888780">LED-маска</text>
+  <text x="595" y="1045" text-anchor="end" font-size="13" fill="#888780">›</text>
+
+  <rect x="395" y="1066" width="210" height="42" rx="10" fill="white" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <circle cx="418" cy="1087" r="11" fill="rgba(0,0,0,0.04)"/>
+  <text x="418" y="1091" text-anchor="middle" font-size="10">N</text>
+  <text x="440" y="1083" font-size="11">NOVA</text>
+  <text x="440" y="1096" font-size="9" fill="#888780">Для области глаз</text>
+  <text x="595" y="1091" text-anchor="end" font-size="13" fill="#888780">›</text>
+
+  <text x="500" y="1140" text-anchor="middle" font-size="10" fill="#7A8A4F" text-decoration="underline">Показать ещё 5 устройств</text>
+</g>
+
+</svg>
