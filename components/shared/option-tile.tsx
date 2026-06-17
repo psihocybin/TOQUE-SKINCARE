@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -21,21 +22,19 @@ export function OptionTile({
   icon,
   variant = "default",
 }: OptionTileProps) {
-  return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
-      aria-pressed={selected}
-      className={cn(
-        "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-colors",
-        variant === "default" ? "min-h-[46px]" : "min-h-[40px]",
-        selected
-          ? "border-[1.2px] border-olive bg-olive/8"
-          : "border border-black/12 bg-white",
-      )}
-    >
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  const className = cn(
+    "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-colors",
+    variant === "default" ? "min-h-[46px]" : "min-h-[40px]",
+    selected
+      ? "border-[1.2px] border-olive bg-olive/8"
+      : "border border-black/12 bg-white",
+  );
+
+  const inner = (
+    <>
       {icon ? (
         <span className="flex shrink-0 items-center justify-center text-text-muted">
           {icon}
@@ -61,6 +60,27 @@ export function OptionTile({
           <Check className="h-3 w-3 text-white" strokeWidth={3} />
         </span>
       ) : null}
+    </>
+  );
+
+  if (!mounted) {
+    return (
+      <button type="button" onClick={onClick} aria-pressed={selected} className={className}>
+        {inner}
+      </button>
+    );
+  }
+
+  return (
+    <motion.button
+      type="button"
+      onClick={onClick}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.2, ease: "easeOut" }}
+      aria-pressed={selected}
+      className={className}
+    >
+      {inner}
     </motion.button>
   );
 }
