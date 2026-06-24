@@ -1,12 +1,21 @@
-import { StubScreen } from "@/components/shared/stub-screen";
+import { redirect } from "next/navigation";
+import { getProfileWithStats } from "@/lib/queries/profile";
+import { getTodayProgramItem } from "@/lib/program/utils";
+import { VideoPlayerClient } from "./video-player-client";
 
-export default function Page() {
+export default async function VideoPage() {
+  const { profile } = await getProfileWithStats();
+  const today = getTodayProgramItem(profile.activated_at);
+
+  if (today.type !== "procedure" || !today.procedure) {
+    redirect("/home");
+  }
+
   return (
-    <StubScreen
-      title="Экран 13 — Видеоплеер"
-      backHref="/ritual"
-      links={[{ href: "/ritual", label: "← /ritual" }]}
-      note="Заглушка. Реализация на ступени 7."
+    <VideoPlayerClient
+      title={today.procedure.title}
+      durationSeconds={today.procedure.durationMinutes * 60}
+      stepLabels={today.procedure.steps}
     />
   );
 }

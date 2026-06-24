@@ -42,7 +42,7 @@ export type QuizAnswers = {
   wantsBaselinePhoto: boolean;
 };
 
-const STORAGE_KEY = "toque_quiz_answers";
+export const STORAGE_KEY = "toque_quiz_answers";
 export const QUIZ_TOTAL_STEPS = 7;
 
 const defaultAnswers: QuizAnswers = {

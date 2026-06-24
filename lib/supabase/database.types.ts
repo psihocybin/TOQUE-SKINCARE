@@ -1,0 +1,196 @@
+export type Json =
+  | string
+  | number
+  | boolean
+  | null
+  | { [key: string]: Json | undefined }
+  | Json[];
+
+export type Database = {
+  public: {
+    Tables: {
+      profiles: {
+        Row: {
+          id: string;
+          name: string;
+          device:
+            | "NUO"
+            | "NUO_PRO"
+            | "LUMERA"
+            | "ELARA"
+            | "PULSAR"
+            | "ANIMA"
+            | "NOVA"
+            | "AERIS"
+            | "AURA"
+            | "VIBE"
+            | "QUANTUM"
+            | null;
+          age_group: "25-34" | "35-44" | "45-54" | "55+" | null;
+          goal: "cleansing" | "tone" | "glow" | "puffiness" | "all" | null;
+          is_gift: boolean;
+          skin_type:
+            | "normal"
+            | "dry"
+            | "oily"
+            | "combo"
+            | "sensitive"
+            | null;
+          experience:
+            | "beginner"
+            | "familiar"
+            | "experienced"
+            | "expert"
+            | null;
+          preferred_time: "morning" | "evening" | "flexible" | null;
+          frequency: "low" | "medium" | "daily" | null;
+          warranty_serial: string | null;
+          referral_code: string | null;
+          referred_by: string | null;
+          activated_at: string;
+          created_at: string;
+        };
+        Insert: {
+          id: string;
+          name?: string;
+          device?: Database["public"]["Tables"]["profiles"]["Row"]["device"];
+          age_group?: Database["public"]["Tables"]["profiles"]["Row"]["age_group"];
+          goal?: Database["public"]["Tables"]["profiles"]["Row"]["goal"];
+          is_gift?: boolean;
+          skin_type?: Database["public"]["Tables"]["profiles"]["Row"]["skin_type"];
+          experience?: Database["public"]["Tables"]["profiles"]["Row"]["experience"];
+          preferred_time?: Database["public"]["Tables"]["profiles"]["Row"]["preferred_time"];
+          frequency?: Database["public"]["Tables"]["profiles"]["Row"]["frequency"];
+          warranty_serial?: string | null;
+          referral_code?: string | null;
+          referred_by?: string | null;
+          activated_at?: string;
+          created_at?: string;
+        };
+        Update: Partial<
+          Omit<Database["public"]["Tables"]["profiles"]["Insert"], "id">
+        >;
+        Relationships: [];
+      };
+
+      procedures: {
+        Row: {
+          id: string;
+          profile_id: string;
+          day_number: number;
+          mode: string;
+          duration_seconds: number;
+          feedback: "great" | "normal" | "questions" | null;
+          note: string | null;
+          completed_at: string;
+        };
+        Insert: {
+          id?: string;
+          profile_id: string;
+          day_number: number;
+          mode: string;
+          duration_seconds: number;
+          feedback?: "great" | "normal" | "questions" | null;
+          note?: string | null;
+          completed_at?: string;
+        };
+        Update: Partial<
+          Omit<Database["public"]["Tables"]["procedures"]["Insert"], "id">
+        >;
+        Relationships: [];
+      };
+
+      surveys: {
+        Row: {
+          id: string;
+          profile_id: string;
+          survey_type: "nps_d30" | "jcs_d60" | "week1" | "first_procedure";
+          score: number | null;
+          answer: string | null;
+          comment: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          profile_id: string;
+          survey_type: "nps_d30" | "jcs_d60" | "week1" | "first_procedure";
+          score?: number | null;
+          answer?: string | null;
+          comment?: string | null;
+          created_at?: string;
+        };
+        Update: Partial<
+          Omit<Database["public"]["Tables"]["surveys"]["Insert"], "id">
+        >;
+        Relationships: [];
+      };
+
+      photos: {
+        Row: {
+          id: string;
+          profile_id: string;
+          storage_path: string;
+          day_number: number;
+          taken_at: string;
+        };
+        Insert: {
+          id?: string;
+          profile_id: string;
+          storage_path: string;
+          day_number: number;
+          taken_at?: string;
+        };
+        Update: Partial<
+          Omit<Database["public"]["Tables"]["photos"]["Insert"], "id">
+        >;
+        Relationships: [];
+      };
+
+      push_subscriptions: {
+        Row: {
+          id: string;
+          profile_id: string;
+          endpoint: string;
+          p256dh: string;
+          auth: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          profile_id: string;
+          endpoint: string;
+          p256dh: string;
+          auth: string;
+          created_at?: string;
+        };
+        Update: Partial<
+          Omit<Database["public"]["Tables"]["push_subscriptions"]["Insert"], "id">
+        >;
+        Relationships: [];
+      };
+    };
+    Views: Record<string, never>;
+    Functions: Record<string, never>;
+    Enums: Record<string, never>;
+    CompositeTypes: Record<string, never>;
+  };
+};
+
+// Convenience aliases
+export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
+export type ProfileInsert = Database["public"]["Tables"]["profiles"]["Insert"];
+export type ProfileUpdate = Database["public"]["Tables"]["profiles"]["Update"];
+
+export type Procedure = Database["public"]["Tables"]["procedures"]["Row"];
+export type ProcedureInsert = Database["public"]["Tables"]["procedures"]["Insert"];
+
+export type Survey = Database["public"]["Tables"]["surveys"]["Row"];
+export type SurveyInsert = Database["public"]["Tables"]["surveys"]["Insert"];
+
+export type Photo = Database["public"]["Tables"]["photos"]["Row"];
+export type PhotoInsert = Database["public"]["Tables"]["photos"]["Insert"];
+
+export type PushSubscription =
+  Database["public"]["Tables"]["push_subscriptions"]["Row"];
+export type PushSubscriptionInsert =
+  Database["public"]["Tables"]["push_subscriptions"]["Insert"];

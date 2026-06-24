@@ -21,6 +21,11 @@ const items: NavItem[] = [
 export function BottomNav() {
   const pathname = usePathname();
 
+  // На экранах ритуала навигация мешает кнопке «Завершить процедуру».
+  if (pathname === "/ritual" || pathname.startsWith("/ritual/")) {
+    return null;
+  }
+
   return (
     <nav
       aria-label="Основная навигация"

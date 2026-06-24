@@ -82,7 +82,7 @@ export default function QuizDonePage() {
 
       <FadeIn delay={0.5} className="mt-auto flex w-full justify-center pt-10">
         <Button
-          onClick={() => router.push("/home")}
+          onClick={() => router.push("/login")}
           className="h-12 w-full max-w-[210px]"
         >
           Начать
