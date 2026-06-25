@@ -1,12 +1,23 @@
-import { StubScreen } from "@/components/shared/stub-screen";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { NpsForm } from "@/components/surveys/nps-form";
 
-export default function Page() {
+export default async function NpsPage() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("name")
+    .eq("id", user.id)
+    .maybeSingle();
+
   return (
-    <StubScreen
-      title="Экран 26 — NPS-опрос (день 30)"
-      backHref="/home"
-      links={[{ href: "/home", label: "→ /home" }]}
-      note="Заглушка. Реализация на ступени 9."
-    />
+    <main className="flex min-h-screen flex-col pt-10">
+      <NpsForm greetingName={profile?.name ?? ""} />
+    </main>
   );
 }

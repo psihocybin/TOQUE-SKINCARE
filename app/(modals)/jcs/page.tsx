@@ -1,12 +1,17 @@
-import { StubScreen } from "@/components/shared/stub-screen";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { JcsForm } from "@/components/surveys/jcs-form";
 
-export default function Page() {
+export default async function JcsPage() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
   return (
-    <StubScreen
-      title="Экран 27 — JCS-опрос (день 60)"
-      backHref="/home"
-      links={[{ href: "/home", label: "→ /home" }]}
-      note="Заглушка. Реализация на ступени 9."
-    />
+    <main className="flex min-h-screen flex-col pt-8">
+      <JcsForm />
+    </main>
   );
 }

@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "framer-motion";
 import { Check } from "lucide-react";
 import { FadeIn } from "@/components/shared/fade-in";
 import { Button } from "@/components/ui/button";
+import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 import { createClient } from "@/lib/supabase/client";
 
@@ -37,6 +39,7 @@ export function DoneClient({
 }: Props) {
   const router = useRouter();
   const [selected, setSelected] = useState<Feedback | null>(null);
+  const [note, setNote] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -55,12 +58,15 @@ export function DoneClient({
         return;
       }
 
+      const trimmedNote = note.trim();
+
       const { error: insertError } = await supabase.from("procedures").insert({
         profile_id: user.id,
         day_number: dayNumber,
         mode,
         duration_seconds: durationSeconds,
         feedback: selected,
+        note: trimmedNote ? trimmedNote : null,
       });
 
       if (insertError) {
@@ -69,7 +75,9 @@ export function DoneClient({
         return;
       }
 
-      router.push("/home");
+      // «Были вопросы» → ведём в поддержку, остальные кнопки — на главную.
+      const next = selected === "questions" ? "/support" : "/home";
+      router.push(next);
       router.refresh();
     } catch {
       setError("Не удалось сохранить. Проверьте соединение.");
@@ -142,6 +150,26 @@ export function DoneClient({
             );
           })}
         </div>
+
+        <AnimatePresence initial={false}>
+          {selected === "normal" ? (
+            <motion.div
+              key="note"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+              className="overflow-hidden"
+            >
+              <Textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Что на уме? Напишите — только для вас"
+                className="mt-2 h-20 rounded-lg border-black/12 bg-white p-3 text-sm text-text placeholder:text-text-muted/70 focus-visible:border-olive focus-visible:ring-0"
+              />
+            </motion.div>
+          ) : null}
+        </AnimatePresence>
 
         {error ? (
           <p className="mt-3 text-center text-[11px] text-rose">{error}</p>

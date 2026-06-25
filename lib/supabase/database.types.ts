@@ -6,6 +6,18 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
+export type NotificationSettings = {
+  reminders: boolean;
+  tips: boolean;
+  weekly_report: boolean;
+};
+
+export const DEFAULT_NOTIFICATION_SETTINGS: NotificationSettings = {
+  reminders: true,
+  tips: true,
+  weekly_report: false,
+};
+
 export type Database = {
   public: {
     Tables: {
@@ -45,6 +57,10 @@ export type Database = {
           preferred_time: "morning" | "evening" | "flexible" | null;
           frequency: "low" | "medium" | "daily" | null;
           warranty_serial: string | null;
+          warranty_receipt_url: string | null;
+          warranty_registered_at: string | null;
+          activation_date: string | null;
+          notification_settings: NotificationSettings | null;
           referral_code: string | null;
           referred_by: string | null;
           activated_at: string;
@@ -62,6 +78,10 @@ export type Database = {
           preferred_time?: Database["public"]["Tables"]["profiles"]["Row"]["preferred_time"];
           frequency?: Database["public"]["Tables"]["profiles"]["Row"]["frequency"];
           warranty_serial?: string | null;
+          warranty_receipt_url?: string | null;
+          warranty_registered_at?: string | null;
+          activation_date?: string | null;
+          notification_settings?: NotificationSettings | null;
           referral_code?: string | null;
           referred_by?: string | null;
           activated_at?: string;
@@ -104,7 +124,12 @@ export type Database = {
         Row: {
           id: string;
           profile_id: string;
-          survey_type: "nps_d30" | "jcs_d60" | "week1" | "first_procedure";
+          survey_type:
+            | "nps_d30"
+            | "nps_d30_postponed"
+            | "jcs_d60"
+            | "week1"
+            | "first_procedure";
           score: number | null;
           answer: string | null;
           comment: string | null;
@@ -113,7 +138,12 @@ export type Database = {
         Insert: {
           id?: string;
           profile_id: string;
-          survey_type: "nps_d30" | "jcs_d60" | "week1" | "first_procedure";
+          survey_type:
+            | "nps_d30"
+            | "nps_d30_postponed"
+            | "jcs_d60"
+            | "week1"
+            | "first_procedure";
           score?: number | null;
           answer?: string | null;
           comment?: string | null;
