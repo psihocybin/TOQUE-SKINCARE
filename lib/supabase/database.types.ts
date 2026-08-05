@@ -37,6 +37,8 @@ export type Database = {
             | "AURA"
             | "VIBE"
             | "QUANTUM"
+            | "LYRA"
+            | "SYLVA"
             | null;
           age_group: "25-34" | "35-44" | "45-54" | "55+" | null;
           goal: "cleansing" | "tone" | "glow" | "puffiness" | "all" | null;
@@ -61,6 +63,16 @@ export type Database = {
           warranty_registered_at: string | null;
           activation_date: string | null;
           notification_settings: NotificationSettings | null;
+          // Массив slug устройств (lib/content/devices.ts), для поддержки
+          // нескольких приборов у одного пользователя. `device` выше
+          // остаётся primary-устройством для обратной совместимости.
+          devices: string[] | null;
+          // Конструктор ритуала (app/(main)/ritual-builder) — см.
+          // lib/ritual-builder/types.ts CustomSchedule.
+          custom_schedule: Json | null;
+          // Кэш серии дней подряд — на практике не поддерживается отдельным
+          // триггером, streak считается на лету в lib/queries/attendance.ts.
+          current_streak: number;
           referral_code: string | null;
           referred_by: string | null;
           activated_at: string;
@@ -82,6 +94,9 @@ export type Database = {
           warranty_registered_at?: string | null;
           activation_date?: string | null;
           notification_settings?: NotificationSettings | null;
+          devices?: string[] | null;
+          custom_schedule?: Json | null;
+          current_streak?: number;
           referral_code?: string | null;
           referred_by?: string | null;
           activated_at?: string;
@@ -102,6 +117,7 @@ export type Database = {
           duration_seconds: number;
           feedback: "great" | "normal" | "questions" | null;
           note: string | null;
+          is_extra: boolean;
           completed_at: string;
         };
         Insert: {
@@ -112,6 +128,7 @@ export type Database = {
           duration_seconds: number;
           feedback?: "great" | "normal" | "questions" | null;
           note?: string | null;
+          is_extra?: boolean;
           completed_at?: string;
         };
         Update: Partial<

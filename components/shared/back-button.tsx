@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type BackButtonProps = {
@@ -7,6 +7,8 @@ type BackButtonProps = {
   onClick?: () => void;
   className?: string;
   label?: string;
+  // Показать рядом маленькую ссылку «На главную» → /home.
+  showHome?: boolean;
 };
 
 const baseClass =
@@ -17,18 +19,15 @@ export function BackButton({
   onClick,
   className,
   label = "Назад",
+  showHome = false,
 }: BackButtonProps) {
   const icon = <ChevronLeft className="h-5 w-5" aria-hidden />;
 
-  if (href) {
-    return (
-      <Link href={href} aria-label={label} className={cn(baseClass, className)}>
-        {icon}
-      </Link>
-    );
-  }
-
-  return (
+  const backNode = href ? (
+    <Link href={href} aria-label={label} className={cn(baseClass, className)}>
+      {icon}
+    </Link>
+  ) : (
     <button
       type="button"
       onClick={onClick}
@@ -37,5 +36,20 @@ export function BackButton({
     >
       {icon}
     </button>
+  );
+
+  if (!showHome) return backNode;
+
+  return (
+    <div className="flex items-center gap-1">
+      {backNode}
+      <Link
+        href="/home"
+        className="inline-flex items-center gap-1 text-[11px] text-text-muted transition-colors hover:text-text"
+      >
+        <Home className="h-3.5 w-3.5" strokeWidth={1.5} aria-hidden />
+        <span>На главную</span>
+      </Link>
+    </div>
   );
 }

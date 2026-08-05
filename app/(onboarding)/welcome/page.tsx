@@ -1,44 +1,80 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FadeIn } from "@/components/shared/fade-in";
 import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/client";
 
 export default function WelcomePage() {
   const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+
+  // Залогиненному незачем снова видеть Welcome — сразу в приложение.
+  useEffect(() => {
+    let cancelled = false;
+    createClient()
+      .auth.getUser()
+      .then(({ data }) => {
+        if (cancelled) return;
+        if (data.user) {
+          router.replace("/home");
+          return;
+        }
+        setCheckingAuth(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
+
+  if (checkingAuth) return null;
 
   return (
-    <main className="relative flex min-h-screen flex-col items-center px-6">
-      <FadeIn
-        delay={0.2}
-        duration={0.5}
-        className="flex w-full flex-1 flex-col items-center"
+    <div className="flex min-h-screen flex-col">
+      <div
+        className="flex flex-1 items-center justify-center"
+        style={{
+          background:
+            "radial-gradient(circle at 50% 30%, #F1EFE8 0%, #FAFAF7 100%)",
+        }}
       >
-        <div className="mt-[24vh] flex flex-col items-center">
-          <p className="text-[26px] tracking-[6px] text-text">TOQUE</p>
-          <p className="mt-1 text-[10px] uppercase tracking-[3px] text-text-muted">
-            Ритуал
-          </p>
-          <span className="mt-4 block h-px w-[60px] bg-black/15" aria-hidden />
-        </div>
+        <FadeIn duration={0.5}>
+          <div className="flex h-[240px] w-[240px] items-center justify-center rounded-full bg-cream-dark/60">
+            {/* Плейсхолдер — в будущем <Image src="/devices/nuo.jpg" .../> */}
+            <span className="text-[32px] font-bold text-olive">TOQUE</span>
+          </div>
+        </FadeIn>
+      </div>
 
-        <div className="mt-[16vh] flex flex-col items-center text-center">
-          <p className="text-sm text-text">Я — TOQUE Ритуал.</p>
-          <p className="mt-6 text-[11px] leading-relaxed text-[#5F5E5A]">
-            Помогу встроить ваше устройство
-            <br />в ежедневный ритуал за 30 дней.
-          </p>
-        </div>
-      </FadeIn>
-
-      <FadeIn delay={0.6} className="flex w-full justify-center pb-12">
+      <FadeIn delay={0.15} duration={0.5} className="flex flex-col items-center px-6 pb-8 pt-10 text-center">
+        <p className="text-[28px] font-bold leading-tight text-text">
+          Ваш персональный
+        </p>
+        <p className="text-[28px] font-bold leading-tight text-text">
+          ритуал ухода
+        </p>
+        <p className="mt-3 px-8 text-sm text-text-muted">
+          Пройдите квиз — получите 30-дневную программу под ваше устройство и
+          тип кожи.
+        </p>
         <Button
           onClick={() => router.push("/quiz/device")}
-          className="h-12 w-[200px]"
+          className="mt-8 h-[52px] w-[200px] rounded-full text-[15px]"
         >
           Начать
         </Button>
       </FadeIn>
-    </main>
+
+      <FadeIn delay={0.3} className="sticky bottom-0 bg-cream pb-[max(env(safe-area-inset-bottom),16px)] pt-2 text-center">
+        <button
+          type="button"
+          onClick={() => {}}
+          className="text-[13px] text-text-muted"
+        >
+          Не сейчас
+        </button>
+      </FadeIn>
+    </div>
   );
 }

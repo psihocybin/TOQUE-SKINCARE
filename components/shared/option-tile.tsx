@@ -12,6 +12,9 @@ type OptionTileProps = {
   onClick: () => void;
   icon?: React.ReactNode;
   variant?: "default" | "compact";
+  // Номер порядка выбора для мультиселекта (1, 2, 3…) — маленький бейдж
+  // в правом верхнем углу плитки. Не показывается, если undefined.
+  orderBadge?: number;
 };
 
 export function OptionTile({
@@ -21,12 +24,13 @@ export function OptionTile({
   onClick,
   icon,
   variant = "default",
+  orderBadge,
 }: OptionTileProps) {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
   const className = cn(
-    "flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-colors",
+    "relative flex w-full items-center gap-3 rounded-lg px-4 py-3 text-left transition-colors",
     variant === "default" ? "min-h-[46px]" : "min-h-[40px]",
     selected
       ? "border-[1.2px] border-olive bg-olive/8"
@@ -58,6 +62,15 @@ export function OptionTile({
           aria-hidden
         >
           <Check className="h-3 w-3 text-white" strokeWidth={3} />
+        </span>
+      ) : null}
+
+      {orderBadge !== undefined ? (
+        <span
+          className="absolute -right-1.5 -top-1.5 flex h-[18px] w-[18px] items-center justify-center rounded-pill bg-olive text-[9px] text-white"
+          aria-hidden
+        >
+          {orderBadge}
         </span>
       ) : null}
     </>

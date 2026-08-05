@@ -1,0 +1,276 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 1230" font-family="-apple-system, system-ui, sans-serif">
+<title>TOQUE — Туториалы</title>
+<style>text { fill: #2C2C2A; } .lb { fill: #888780; font-size: 12px; }</style>
+
+<text class="lb" x="180" y="32" text-anchor="middle">Туториалы — список</text>
+<text class="lb" x="500" y="32" text-anchor="middle">Туториал — детальная страница</text>
+<text class="lb" x="180" y="632" text-anchor="middle">Туториал — шаги (carousel)</text>
+<text class="lb" x="500" y="632" text-anchor="middle">Туториал — видео-главы</text>
+
+<!-- ═══ PHONE 1 — СПИСОК ТУТОРИАЛОВ ═══ -->
+<g>
+  <rect x="50" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <text x="75" y="110" font-size="17" font-weight="700">Туториалы</text>
+  <!-- Search -->
+  <rect x="68" y="120" width="224" height="30" rx="10" fill="rgba(0,0,0,0.04)"/>
+  <text x="90" y="140" font-size="10" fill="#888780">🔍 Поиск туториала…</text>
+
+  <!-- Filters -->
+  <rect x="68" y="160" width="32" height="20" rx="10" fill="#7A8A4F"/>
+  <text x="84" y="174" text-anchor="middle" font-size="7" fill="white">Все</text>
+  <rect x="106" y="160" width="36" height="20" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="124" y="174" text-anchor="middle" font-size="7" fill="#888780">NUO</text>
+  <rect x="148" y="160" width="40" height="20" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="168" y="174" text-anchor="middle" font-size="7" fill="#888780">ELARA</text>
+  <rect x="194" y="160" width="40" height="20" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="214" y="174" text-anchor="middle" font-size="7" fill="#888780">LYRA</text>
+  <rect x="240" y="160" width="48" height="20" rx="10" fill="white" stroke="rgba(0,0,0,0.12)" stroke-width="0.5"/>
+  <text x="264" y="174" text-anchor="middle" font-size="7" fill="#888780">ANIMA</text>
+
+  <!-- Favorites section -->
+  <text x="68" y="197" font-size="8" letter-spacing="1" fill="#7A8A4F">ИЗБРАННОЕ</text>
+  <rect x="68" y="202" width="80" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="68" y="202" width="80" height="32" rx="10" fill="#F1EFE8"/>
+  <rect x="68" y="222" width="80" height="12" fill="#F1EFE8"/>
+  <text x="108" y="218" text-anchor="middle" font-size="8" fill="#7A8A4F" font-weight="700">ELARA</text>
+  <text x="80" y="246" font-size="7" font-weight="600">Лифтинг RED</text>
+  <text x="138" y="255" text-anchor="end" font-size="10" fill="#C4908A">♥</text>
+
+  <rect x="156" y="202" width="80" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="156" y="202" width="80" height="32" rx="10" fill="#F1EFE8"/>
+  <rect x="156" y="222" width="80" height="12" fill="#F1EFE8"/>
+  <text x="196" y="218" text-anchor="middle" font-size="8" fill="#7A8A4F" font-weight="700">NUO</text>
+  <text x="168" y="246" font-size="7" font-weight="600">Очищение</text>
+  <text x="226" y="255" text-anchor="end" font-size="10" fill="#C4908A">♥</text>
+
+  <!-- Tutorial cards list -->
+  <text x="68" y="278" font-size="11" font-weight="700">Все туториалы</text>
+
+  <!-- Card 1 -->
+  <rect x="68" y="286" width="224" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="68" y="286" width="72" height="54" rx="10" fill="#F1EFE8"/>
+  <rect x="68" y="304" width="72" height="36" fill="#F1EFE8"/>
+  <text x="104" y="317" text-anchor="middle" font-size="10" fill="#7A8A4F" font-weight="700">NUO</text>
+  <text x="150" y="300" font-size="6" fill="#888780">NUO · Очищение</text>
+  <text x="150" y="312" font-size="11" font-weight="600">Ультразвуковое очищение</text>
+  <text x="150" y="325" font-size="9" fill="#888780">Глубокая чистка пор за 5 минут</text>
+  <text x="150" y="338" font-size="8" fill="#888780">🕐 5:00</text>
+  <text x="282" y="338" text-anchor="end" font-size="10" fill="#888780">♡</text>
+
+  <!-- Card 2 -->
+  <rect x="68" y="346" width="224" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="68" y="346" width="72" height="54" rx="10" fill="#F1EFE8"/>
+  <rect x="68" y="364" width="72" height="36" fill="#F1EFE8"/>
+  <text x="104" y="377" text-anchor="middle" font-size="10" fill="#7A8A4F" font-weight="700">NUO</text>
+  <text x="150" y="360" font-size="6" fill="#888780">NUO · Микротоки</text>
+  <text x="150" y="372" font-size="11" font-weight="600">Микротоковый лифтинг</text>
+  <text x="150" y="385" font-size="9" fill="#888780">Тонус и контур лица</text>
+  <text x="150" y="398" font-size="8" fill="#888780">🕐 8:00</text>
+  <text x="282" y="398" text-anchor="end" font-size="10" fill="#C4908A">♥</text>
+
+  <!-- Card 3 -->
+  <rect x="68" y="406" width="224" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="68" y="406" width="72" height="54" rx="10" fill="#F1EFE8"/>
+  <rect x="68" y="424" width="72" height="36" fill="#F1EFE8"/>
+  <text x="104" y="437" text-anchor="middle" font-size="10" fill="#7A8A4F" font-weight="700">LYRA</text>
+  <text x="150" y="420" font-size="6" fill="#888780">LYRA · DualCare</text>
+  <text x="150" y="432" font-size="11" font-weight="600">ActiveTone: утренний тонус</text>
+  <text x="150" y="445" font-size="9" fill="#888780">Микротоки + LED 5 спектров</text>
+  <text x="150" y="458" font-size="8" fill="#888780">🕐 10:00</text>
+  <text x="282" y="458" text-anchor="end" font-size="10" fill="#888780">♡</text>
+
+  <!-- Card 4 -->
+  <rect x="68" y="466" width="224" height="54" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="68" y="466" width="72" height="54" rx="10" fill="#F1EFE8"/>
+  <rect x="68" y="484" width="72" height="36" fill="#F1EFE8"/>
+  <text x="104" y="497" text-anchor="middle" font-size="10" fill="#7A8A4F" font-weight="700">ANIMA</text>
+  <text x="150" y="480" font-size="6" fill="#888780">ANIMA · LED-маска</text>
+  <text x="150" y="492" font-size="11" font-weight="600">Световая терапия</text>
+  <text x="150" y="505" font-size="9" fill="#888780">Выбор спектра под задачу</text>
+  <text x="150" y="518" font-size="8" fill="#888780">🕐 15:00</text>
+  <text x="282" y="518" text-anchor="end" font-size="10" fill="#888780">♡</text>
+
+  <line x1="56" y1="543" x2="304" y2="543" stroke="rgba(0,0,0,0.08)" stroke-width="0.5"/>
+  <text x="90" y="560" text-anchor="middle" font-size="7" fill="#888780">Главная</text>
+  <text x="155" y="560" text-anchor="middle" font-size="7" fill="#888780">Ритуал</text>
+  <text x="215" y="560" text-anchor="middle" font-size="7" fill="#7A8A4F" font-weight="600">Туториалы</text>
+  <text x="270" y="560" text-anchor="middle" font-size="7" fill="#888780">Профиль</text>
+</g>
+
+<!-- ═══ PHONE 2 — ДЕТАЛЬНАЯ СТРАНИЦА ═══ -->
+<g>
+  <rect x="370" y="50" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="56" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="72" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 390 108 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <text x="500" y="115" text-anchor="middle" font-size="13" font-weight="600">Туториал</text>
+  <text x="600" y="113" text-anchor="end" font-size="10" fill="#888780">♡</text>
+  <text x="610" y="113" font-size="10" fill="#888780">⬆</text>
+
+  <!-- Video placeholder -->
+  <rect x="383" y="126" width="234" height="124" rx="10" fill="#1A1A18"/>
+  <polygon points="492,178 492,202 512,190" fill="rgba(255,255,255,0.9)"/>
+  <rect x="476" y="238" width="48" height="3" rx="1" fill="rgba(255,255,255,0.3)"/>
+  <text x="500" y="244" text-anchor="middle" font-size="7" fill="rgba(255,255,255,0.5)">Видео будет добавлено</text>
+
+  <!-- Dot chapters -->
+  <circle cx="489" cy="254" r="3" fill="#7A8A4F"/>
+  <circle cx="500" cy="254" r="2" fill="rgba(0,0,0,0.2)"/>
+  <circle cx="510" cy="254" r="2" fill="rgba(0,0,0,0.2)"/>
+  <circle cx="520" cy="254" r="2" fill="rgba(0,0,0,0.2)"/>
+
+  <!-- Device + info -->
+  <text x="390" y="275" font-size="7" fill="#888780">NUO · Микротоки</text>
+  <text x="390" y="290" font-size="15" font-weight="700">Микротоковый лифтинг</text>
+  <text x="390" y="305" font-size="11" fill="#888780">Тонус и контур лица за 8 минут</text>
+  <text x="390" y="320" font-size="10" fill="#888780">🕐 8 мин</text>
+
+  <!-- Important notice -->
+  <rect x="383" y="330" width="234" height="34" rx="8" fill="rgba(196,144,138,0.1)" stroke="rgba(196,144,138,0.4)" stroke-width="0.8"/>
+  <text x="395" y="344" font-size="9" fill="#C4908A" font-weight="600">⚠ Что нанести:</text>
+  <text x="395" y="357" font-size="9" fill="#888780">Сыворотка или гель на водной основе</text>
+
+  <!-- Steps preview -->
+  <text x="390" y="382" font-size="11" font-weight="700">КАК ИСПОЛЬЗОВАТЬ</text>
+  <!-- Step card preview -->
+  <rect x="383" y="390" width="130" height="90" rx="10" fill="#F1EFE8"/>
+  <rect x="383" y="390" width="130" height="56" rx="10" fill="rgba(122,138,79,0.08)"/>
+  <rect x="383" y="432" width="130" height="14" fill="rgba(122,138,79,0.08)"/>
+  <rect x="389" y="394" width="40" height="14" rx="7" fill="white"/>
+  <text x="409" y="404" text-anchor="middle" font-size="6" font-weight="600">ШАГ 1</text>
+  <text x="448" y="462" text-anchor="middle" font-size="9" font-weight="600">Нанесите</text>
+  <text x="448" y="474" text-anchor="middle" font-size="9" font-weight="600">средство</text>
+
+  <rect x="521" y="390" width="96" height="90" rx="10" fill="#F1EFE8"/>
+  <text x="530" y="408" font-size="7" fill="#888780">ШАГ 2 →</text>
+
+  <!-- Подходящие устройства -->
+  <text x="390" y="494" font-size="11" font-weight="700">Подходящие устройства</text>
+  <rect x="383" y="502" width="234" height="44" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="393" y="512" width="24" height="24" rx="6" fill="rgba(122,138,79,0.12)"/>
+  <text x="405" y="528" text-anchor="middle" font-size="7" fill="#7A8A4F" font-weight="700">N</text>
+  <text x="426" y="522" font-size="10" font-weight="600">NUO</text>
+  <text x="426" y="536" font-size="8" fill="#888780">У вас есть ✓</text>
+  <rect x="510" y="514" width="96" height="22" rx="11" fill="#7A8A4F"/>
+  <text x="558" y="529" text-anchor="middle" font-size="8" fill="white">Начать ритуал</text>
+</g>
+
+<!-- ═══ PHONE 3 — ШАГИ CAROUSEL ═══ -->
+<g>
+  <rect x="50" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="56" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="170" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 78 712 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <text x="180" y="718" text-anchor="middle" font-size="12" font-weight="600">Как использовать</text>
+
+  <!-- Big step card -->
+  <rect x="68" y="732" width="224" height="180" rx="14" fill="#F1EFE8"/>
+  <!-- image area -->
+  <rect x="68" y="732" width="224" height="120" rx="14" fill="rgba(122,138,79,0.08)"/>
+  <rect x="68" y="820" width="224" height="32" fill="rgba(122,138,79,0.08)"/>
+  <!-- Step badge -->
+  <rect x="80" y="744" width="44" height="16" rx="8" fill="white"/>
+  <text x="102" y="755" text-anchor="middle" font-size="7" font-weight="700">ШАГ 2</text>
+  <!-- Device illustration placeholder -->
+  <rect x="140" y="760" width="60" height="70" rx="8" fill="rgba(122,138,79,0.2)"/>
+  <text x="170" y="800" text-anchor="middle" font-size="10" fill="#7A8A4F" font-weight="700">NUO</text>
+  <!-- Text area -->
+  <text x="80" y="860" font-size="13" font-weight="700">Включите режим Lifting</text>
+  <text x="80" y="878" font-size="10" fill="#888780">Лопатка под углом 45° к коже,</text>
+  <text x="80" y="891" font-size="10" fill="#888780">выпуклой стороной вниз.</text>
+  <text x="80" y="904" font-size="10" fill="#888780">Двигайтесь от центра к периферии.</text>
+
+  <!-- Dots nav -->
+  <circle cx="145" cy="928" r="4" fill="rgba(0,0,0,0.1)"/>
+  <circle cx="158" cy="928" r="4" fill="#7A8A4F"/>
+  <circle cx="171" cy="928" r="4" fill="rgba(0,0,0,0.1)"/>
+  <circle cx="184" cy="928" r="4" fill="rgba(0,0,0,0.1)"/>
+  <circle cx="197" cy="928" r="4" fill="rgba(0,0,0,0.1)"/>
+  <circle cx="210" cy="928" r="4" fill="rgba(0,0,0,0.1)"/>
+
+  <!-- Note -->
+  <rect x="68" y="944" width="224" height="36" rx="8" fill="rgba(122,138,79,0.06)" stroke="rgba(122,138,79,0.3)" stroke-width="0.8"/>
+  <text x="80" y="958" font-size="9" fill="#888780">💡 Пальцы на боковых электродах</text>
+  <text x="80" y="971" font-size="9" fill="#888780">держать НЕ нужно в режиме Lifting</text>
+
+  <!-- Progress indicator -->
+  <text x="68" y="1002" font-size="9" fill="#888780">Шаг 2 из 6</text>
+  <rect x="68" y="1008" width="224" height="3" rx="1.5" fill="rgba(0,0,0,0.08)"/>
+  <rect x="68" y="1008" width="74" height="3" rx="1.5" fill="#7A8A4F"/>
+
+  <!-- Navigation -->
+  <rect x="68" y="1150" width="105" height="36" rx="18" fill="rgba(0,0,0,0.06)"/>
+  <text x="120" y="1173" text-anchor="middle" font-size="11" fill="#2C2C2A">← Назад</text>
+  <rect x="179" y="1150" width="113" height="36" rx="18" fill="#7A8A4F"/>
+  <text x="235" y="1173" text-anchor="middle" font-size="11" fill="white">Далее →</text>
+</g>
+
+<!-- ═══ PHONE 4 — ВИДЕО ГЛАВЫ ═══ -->
+<g>
+  <rect x="370" y="650" width="260" height="540" rx="28" fill="#F1EFE8" stroke="#D3D1C7" stroke-width="0.5"/>
+  <rect x="376" y="656" width="248" height="528" rx="22" fill="#FAFAF7" stroke="rgba(0,0,0,0.06)" stroke-width="0.5"/>
+  <rect x="490" y="672" width="20" height="4" rx="2" fill="rgba(0,0,0,0.25)"/>
+
+  <path d="M 390 710 l -5 5 l 5 5" stroke="#2C2C2A" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+  <text x="500" y="718" text-anchor="middle" font-size="12" font-weight="600">Видео-разделы</text>
+
+  <text x="390" y="744" font-size="9" letter-spacing="1" fill="#888780">РАЗДЕЛЫ ТУТОРИАЛА</text>
+
+  <!-- Chapter cards -->
+  <rect x="383" y="752" width="234" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="383" y="752" width="72" height="60" rx="10" fill="#F1EFE8"/>
+  <rect x="383" y="780" width="72" height="32" fill="#F1EFE8"/>
+  <text x="419" y="787" text-anchor="middle" font-size="8" fill="#7A8A4F">NUO</text>
+  <rect x="565" y="758" width="40" height="14" rx="4" fill="rgba(122,138,79,0.1)"/>
+  <text x="585" y="768" text-anchor="middle" font-size="6" fill="#7A8A4F">INFO</text>
+  <text x="464" y="770" font-size="11" font-weight="600">Управление устройством</text>
+  <text x="464" y="784" font-size="8" fill="#888780">Как держать, включать, уровни</text>
+  <text x="464" y="800" font-size="8" fill="#888780">🕐 1:30</text>
+  <text x="608" y="800" text-anchor="end" font-size="10" fill="#C4908A">♥</text>
+
+  <rect x="383" y="820" width="234" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="383" y="820" width="72" height="60" rx="10" fill="#F1EFE8"/>
+  <rect x="383" y="848" width="72" height="32" fill="#F1EFE8"/>
+  <text x="419" y="855" text-anchor="middle" font-size="8" fill="#7A8A4F">NUO</text>
+  <text x="464" y="838" font-size="11" font-weight="600">Техника движений</text>
+  <text x="464" y="852" font-size="8" fill="#888780">Массажные линии, угол, давление</text>
+  <text x="464" y="868" font-size="8" fill="#888780">🕐 2:45</text>
+  <text x="608" y="868" text-anchor="end" font-size="10" fill="#888780">♡</text>
+
+  <rect x="383" y="888" width="234" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="383" y="888" width="72" height="60" rx="10" fill="#F1EFE8"/>
+  <rect x="383" y="916" width="72" height="32" fill="#F1EFE8"/>
+  <text x="419" y="923" text-anchor="middle" font-size="8" fill="#7A8A4F">NUO</text>
+  <rect x="565" y="894" width="40" height="14" rx="4" fill="rgba(196,144,138,0.15)"/>
+  <text x="585" y="904" text-anchor="middle" font-size="6" fill="#C4908A">ВАЖНО</text>
+  <text x="464" y="906" font-size="11" font-weight="600">Какое средство наносить</text>
+  <text x="464" y="920" font-size="8" fill="#888780">Гель vs масло vs сыворотка</text>
+  <text x="464" y="936" font-size="8" fill="#888780">🕐 1:15</text>
+  <text x="608" y="936" text-anchor="end" font-size="10" fill="#888780">♡</text>
+
+  <rect x="383" y="956" width="234" height="60" rx="10" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="383" y="956" width="72" height="60" rx="10" fill="#F1EFE8"/>
+  <rect x="383" y="984" width="72" height="32" fill="#F1EFE8"/>
+  <text x="419" y="991" text-anchor="middle" font-size="8" fill="#7A8A4F">NUO</text>
+  <text x="464" y="974" font-size="11" font-weight="600">Уход за устройством</text>
+  <text x="464" y="988" font-size="8" fill="#888780">Чистка после процедуры</text>
+  <text x="464" y="1004" font-size="8" fill="#888780">🕐 0:45</text>
+  <text x="608" y="1004" text-anchor="end" font-size="10" fill="#888780">♡</text>
+
+  <!-- Related products -->
+  <text x="390" y="1032" font-size="11" font-weight="700">Подойдёт также к</text>
+  <rect x="383" y="1040" width="110" height="36" rx="8" fill="white" stroke="rgba(0,0,0,0.07)" stroke-width="0.5"/>
+  <rect x="393" y="1048" width="24" height="20" rx="6" fill="rgba(122,138,79,0.1)"/>
+  <text x="405" y="1062" text-anchor="middle" font-size="7" fill="#7A8A4F" font-weight="700">L</text>
+  <text x="425" y="1055" font-size="9" font-weight="600">LUMERA</text>
+  <text x="425" y="1068" font-size="7" fill="#888780">→ магазин</text>
+
+  <rect x="499" y="1040" width="118" height="36" rx="8" fill="rgba(122,138,79,0.08)" stroke="#7A8A4F" stroke-width="0.8"/>
+  <text x="558" y="1062" text-anchor="middle" font-size="9" fill="#7A8A4F" font-weight="600">Перейти к покупке</text>
+</g>
+</svg>

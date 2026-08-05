@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { FadeIn } from "@/components/shared/fade-in";
 import { SignOutButton } from "@/components/profile/sign-out-button";
+import { TestPushButton } from "@/components/pwa/test-push-button";
 import { getProfileWithStats } from "@/lib/queries/profile";
 import {
   PLURAL_DAYS,
@@ -21,6 +22,8 @@ type MenuItem = { href: string; label: string };
 
 const MENU_ITEMS: ReadonlyArray<MenuItem> = [
   { href: "/my-program", label: "Моя программа" },
+  { href: "/achievements", label: "Достижения" },
+  { href: "/my-devices", label: "Мои устройства" },
   { href: "/settings", label: "Настройки" },
   { href: "/support", label: "Поддержка" },
   { href: "/warranty", label: "Гарантия" },
@@ -98,7 +101,11 @@ export default async function ProfilePage() {
         </ul>
       </FadeIn>
 
-      <div className="mt-6 text-center">
+      <div className="mt-6">
+        <TestPushButton />
+      </div>
+
+      <div className="mt-4 text-center">
         <SignOutButton />
       </div>
     </main>

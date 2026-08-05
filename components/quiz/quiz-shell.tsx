@@ -1,9 +1,12 @@
 "use client";
 
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { BackButton } from "@/components/shared/back-button";
 import { ProgressBar } from "@/components/quiz/progress-bar";
 import { Button } from "@/components/ui/button";
 import { QUIZ_TOTAL_STEPS } from "@/lib/quiz/quiz-context";
+import { createClient } from "@/lib/supabase/client";
 
 type QuizShellProps = {
   step: number;
@@ -26,12 +29,36 @@ export function QuizShell({
   nextLabel = "Далее",
   children,
 }: QuizShellProps) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    createClient()
+      .auth.getUser()
+      .then(({ data }) => {
+        if (!cancelled) setIsLoggedIn(Boolean(data.user));
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col px-5 pt-6">
       <ProgressBar currentStep={step} totalSteps={QUIZ_TOTAL_STEPS} />
 
-      <div className="mt-2 -ml-2.5">
-        <BackButton href={backHref} />
+      <div className="mt-2 flex items-center justify-between">
+        <div className="-ml-2.5">
+          <BackButton href={backHref} />
+        </div>
+        {isLoggedIn ? (
+          <Link
+            href="/home"
+            className="text-[11px] text-text-muted underline underline-offset-4"
+          >
+            На главную
+          </Link>
+        ) : null}
       </div>
 
       <h1 className="mt-6 text-[17px] leading-snug text-text">{title}</h1>

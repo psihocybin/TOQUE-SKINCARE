@@ -4,8 +4,7 @@ import { BackButton } from "@/components/shared/back-button";
 import { FadeIn } from "@/components/shared/fade-in";
 import { Button } from "@/components/ui/button";
 
-// Замени на реальный username канала/чата поддержки, когда он появится.
-const SUPPORT_TG_URL = "https://t.me/toque_support";
+const SUPPORT_TG_URL = "https://t.me/Toque_team";
 
 export default function SupportPage() {
   function openTelegram() {

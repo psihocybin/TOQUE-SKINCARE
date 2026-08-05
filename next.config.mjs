@@ -1,18 +1,15 @@
-import withPWAInit from "@ducanh2912/next-pwa";
+import withPWA from "next-pwa";
 
-const withPWA = withPWAInit({
+const isDev = process.env.NODE_ENV === "development";
+
+const pwaWrapper = withPWA({
   dest: "public",
-  disable: process.env.NODE_ENV === "development",
   register: true,
-  cacheOnFrontEndNav: true,
-  aggressiveFrontEndNavCaching: true,
-  reloadOnOnline: true,
-  workboxOptions: {
-    disableDevLogs: true,
-  },
+  skipWaiting: true,
+  disable: isDev,
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {};
 
-export default withPWA(nextConfig);
+export default pwaWrapper(nextConfig);

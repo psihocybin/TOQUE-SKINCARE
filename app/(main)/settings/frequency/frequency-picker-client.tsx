@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { OptionTile } from "@/components/shared/option-tile";
 import { updateProgramSettings } from "@/lib/actions/settings";
 
@@ -30,7 +29,6 @@ const OPTIONS: ReadonlyArray<{
 ];
 
 export function FrequencyPickerClient({ initial }: Props) {
-  const router = useRouter();
   const [selected, setSelected] = useState<Frequency | null>(initial);
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -45,8 +43,9 @@ export function FrequencyPickerClient({ initial }: Props) {
         setError(res.error ?? "Не удалось сохранить");
         return;
       }
-      router.back();
-      router.refresh();
+      // Полная перезагрузка вместо router.back()+refresh — та же гонка
+      // с Router Cache, что и в time-picker.
+      window.location.href = "/settings";
     });
   }
 

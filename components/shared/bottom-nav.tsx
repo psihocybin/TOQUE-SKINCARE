@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, Home, TrendingUp, User, type LucideIcon } from "lucide-react";
+import { Calendar, Home, Play, User, type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 type NavItem = {
@@ -13,15 +13,15 @@ type NavItem = {
 
 const items: NavItem[] = [
   { href: "/home", label: "Главная", icon: Home },
-  { href: "/journal", label: "Журнал", icon: BookOpen },
-  { href: "/progress", label: "Прогресс", icon: TrendingUp },
+  { href: "/ritual-home", label: "Ритуал", icon: Calendar },
+  { href: "/tutorials", label: "Туториалы", icon: Play },
   { href: "/profile", label: "Профиль", icon: User },
 ];
 
 export function BottomNav() {
   const pathname = usePathname();
 
-  // На экранах ритуала навигация мешает кнопке «Завершить процедуру».
+  // На экране самой процедуры навигация мешает кнопке «Завершить процедуру».
   if (pathname === "/ritual" || pathname.startsWith("/ritual/")) {
     return null;
   }
@@ -29,7 +29,7 @@ export function BottomNav() {
   return (
     <nav
       aria-label="Основная навигация"
-      className="fixed inset-x-0 bottom-0 z-40 border-t border-black/8 bg-cream pb-[env(safe-area-inset-bottom)]"
+      className="fixed inset-x-0 bottom-0 z-40 border-t border-black/6 bg-white pb-[env(safe-area-inset-bottom)]"
     >
       <ul className="mx-auto flex h-14 w-full max-w-app items-stretch">
         {items.map(({ href, label, icon: Icon }) => {

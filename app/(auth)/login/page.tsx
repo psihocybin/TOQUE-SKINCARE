@@ -1,18 +1,132 @@
 "use client";
 
-import { useState } from "react";
-import { Mail } from "lucide-react";
-import { FadeIn } from "@/components/shared/fade-in";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { Apple, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
+import { STORAGE_KEY, type QuizAnswers } from "@/lib/quiz/quiz-context";
+import { isQuizStarted, syncQuizToProfile } from "@/lib/quiz/sync";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
+function isIOS(): boolean {
+  if (typeof navigator === "undefined") return false;
+  return /iPad|iPhone|iPod/.test(navigator.userAgent);
+}
+
+function readQuizFromStorage(): QuizAnswers | null {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as QuizAnswers;
+  } catch {
+    return null;
+  }
+}
+
+function GoogleIcon({ className }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 18 18" aria-hidden>
+      <path
+        fill="#4285F4"
+        d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.68-3.87 2.68-6.62Z"
+      />
+      <path
+        fill="#34A853"
+        d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.94v2.33A9 9 0 0 0 9 18Z"
+      />
+      <path
+        fill="#FBBC05"
+        d="M3.95 10.7A5.4 5.4 0 0 1 3.66 9c0-.59.1-1.17.29-1.7V4.97H.94A9 9 0 0 0 0 9c0 1.45.35 2.83.94 4.03l3.01-2.33Z"
+      />
+      <path
+        fill="#EA4335"
+        d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .94 4.97l3.01 2.33C4.66 5.17 6.65 3.58 9 3.58Z"
+      />
+    </svg>
+  );
+}
+
 export default function LoginPage() {
+  const router = useRouter();
+  const [checkingAuth, setCheckingAuth] = useState(true);
+  const [emailExpanded, setEmailExpanded] = useState(false);
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [showIOS, setShowIOS] = useState(false);
+
+  useEffect(() => {
+    setShowIOS(isIOS());
+  }, []);
+
+  // Уже авторизован (перепрохождение квиза, повторный визит на /login) —
+  // досохраняем ответы квиза из localStorage, если они там есть, и уходим
+  // в приложение вместо показа формы входа.
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      const supabase = createClient();
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (cancelled) return;
+      if (!user) {
+        setCheckingAuth(false);
+        return;
+      }
+
+      const answers = readQuizFromStorage();
+      if (answers && isQuizStarted(answers)) {
+        await syncQuizToProfile(supabase, user.id, answers);
+        try {
+          window.localStorage.removeItem(STORAGE_KEY);
+        } catch {
+          // ignore
+        }
+      }
+      router.replace("/home");
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [router]);
+
+  async function handleOAuth(provider: "google" | "apple") {
+    setErrorMessage(null);
+    const supabase = createClient();
+    const origin = window.location.origin;
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider,
+      options: { redirectTo: `${origin}/auth/callback?next=/home` },
+    });
+    if (error) setErrorMessage(`Не удалось войти: ${error.message}`);
+  }
+
+  async function handleDevLogin() {
+    setStatus("sending");
+    setErrorMessage(null);
+    try {
+      const supabase = createClient();
+      const { error } = await supabase.auth.signInWithPassword({
+        email: "test@toque.dev",
+        password: "toque-test-2024",
+      });
+      if (error) {
+        setStatus("error");
+        setErrorMessage(
+          `Тест-логин не сработал: ${error.message}. Убедитесь, что пользователь создан в Supabase Dashboard.`,
+        );
+        return;
+      }
+      window.location.href = "/home";
+    } catch (e) {
+      setStatus("error");
+      setErrorMessage(e instanceof Error ? e.message : "Что-то пошло не так.");
+    }
+  }
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -35,17 +149,19 @@ export default function LoginPage() {
 
       if (error) {
         setStatus("error");
+        const isRateLimit = /rate limit|only request this after/i.test(
+          error.message,
+        );
         setErrorMessage(
-          error.message === "Email rate limit exceeded"
-            ? "Слишком много попыток. Попробуйте через минуту."
-            : "Не удалось отправить письмо. Проверьте адрес и попробуйте ещё раз.",
+          isRateLimit
+            ? `Слишком много попыток. Подождите и попробуйте снова. (${error.message})`
+            : `Не удалось отправить письмо: ${error.message}`,
         );
         return;
       }
 
       setStatus("sent");
     } catch (e) {
-      // Самая частая причина — не настроен .env.local. Показываем подсказку.
       const message =
         e instanceof Error && e.message.includes("URL and API key")
           ? "Supabase не настроен: добавьте ключи в .env.local и перезапустите сервер. См. docs/AUTH_SETUP.md"
@@ -55,112 +171,157 @@ export default function LoginPage() {
     }
   }
 
+  if (checkingAuth) return null;
+
   if (status === "sent") {
     return (
       <main className="flex min-h-screen flex-col items-center px-6 pb-12 pt-[20vh] text-center">
-        <FadeIn duration={0.5}>
-          <div
-            className="mx-auto flex h-16 w-16 items-center justify-center rounded-pill border-[1.5px] border-olive"
-            aria-hidden
-          >
-            <Mail className="h-7 w-7 text-olive" strokeWidth={1.5} />
-          </div>
+        <div
+          className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-olive"
+          aria-hidden
+        >
+          <Mail className="h-7 w-7 text-olive" strokeWidth={1.5} />
+        </div>
 
-          <h1 className="mt-8 text-[16px] leading-snug text-text">
-            Письмо отправлено
-          </h1>
+        <h1 className="mt-8 text-[16px] leading-snug text-text">
+          Письмо отправлено
+        </h1>
 
-          <span
-            className="mx-auto mt-5 block h-px w-[60px] bg-black/15"
-            aria-hidden
-          />
+        <p className="mt-6 text-[12px] leading-relaxed text-text-muted">
+          Откройте письмо на&nbsp;
+          <span className="text-text">{email.trim()}</span>
+          <br />и перейдите по ссылке, чтобы войти.
+        </p>
 
-          <p className="mt-6 text-[12px] leading-relaxed text-text-muted">
-            Откройте письмо на&nbsp;
-            <span className="text-text">{email.trim()}</span>
-            <br />и перейдите по ссылке, чтобы войти.
-          </p>
+        <p className="mt-10 text-[10px] text-text-muted">
+          Не пришло письмо? Проверьте папку «Спам».
+        </p>
 
-          <p className="mt-10 text-[10px] text-text-muted">
-            Не пришло письмо? Проверьте папку «Спам».
-          </p>
-        </FadeIn>
-
-        <FadeIn delay={0.4} className="mt-auto w-full text-center">
-          <button
-            type="button"
-            onClick={() => {
-              setStatus("idle");
-              setErrorMessage(null);
-            }}
-            className="text-[11px] uppercase tracking-[1.5px] text-text-muted underline-offset-4 hover:underline"
-          >
-            Изменить адрес
-          </button>
-        </FadeIn>
+        <button
+          type="button"
+          onClick={() => {
+            setStatus("idle");
+            setErrorMessage(null);
+          }}
+          className="mt-auto text-[11px] uppercase tracking-[1.5px] text-text-muted underline-offset-4 hover:underline"
+        >
+          Изменить адрес
+        </button>
       </main>
     );
   }
 
   return (
-    <main className="flex min-h-screen flex-col px-6 pb-12 pt-[18vh]">
-      <FadeIn duration={0.5}>
-        <div className="text-center">
-          <p className="text-[10px] uppercase tracking-[3px] text-text-muted">
-            Вход
-          </p>
-          <h1 className="mt-3 text-[18px] leading-snug text-text">
-            Войдите по email
-          </h1>
-          <span
-            className="mx-auto mt-5 block h-px w-[60px] bg-black/15"
-            aria-hidden
-          />
-          <p className="mt-6 text-[11px] leading-relaxed text-text-muted">
-            Мы пришлём ссылку для входа.
-            <br />
-            Пароль не нужен.
-          </p>
-        </div>
-      </FadeIn>
+    <div className="flex min-h-screen flex-col">
+      <div
+        className="flex h-[45vh] items-center justify-center bg-cream-dark"
+        aria-hidden
+      >
+        {/* Плейсхолдер — в будущем lifestyle-фото клиентки с устройством */}
+        <span className="text-[28px] tracking-[4px] text-olive">TOQUE</span>
+      </div>
 
-      <FadeIn delay={0.25} duration={0.5} className="mt-10">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          <label className="flex flex-col gap-2">
-            <span className="text-[10px] uppercase tracking-[1.5px] text-text-muted">
-              Email
-            </span>
-            <Input
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              required
-              value={email}
-              onChange={(e) => {
-                setEmail(e.target.value);
-                if (status === "error") setStatus("idle");
-              }}
-              placeholder="вы@example.com"
-              className="h-12 rounded-md border-text/15 bg-cream-dark/40 text-[14px] text-text placeholder:text-text-muted/60 focus-visible:border-olive focus-visible:ring-0"
-              disabled={status === "sending"}
-            />
-          </label>
+      <div className="-mt-6 flex-1 rounded-t-[28px] bg-cream px-6 pb-8 pt-7">
+        <h1 className="text-[22px] font-bold text-text">Создайте аккаунт</h1>
+        <p className="mt-1.5 text-[13px] text-text-muted">
+          Программа сохранится и будет доступна с любого устройства
+        </p>
 
-          {errorMessage ? (
-            <p className="text-[11px] leading-relaxed text-rose">
-              {errorMessage}
-            </p>
+        <div className="mt-7 flex flex-col gap-3">
+          {!emailExpanded ? (
+            <button
+              type="button"
+              onClick={() => setEmailExpanded(true)}
+              className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-olive text-[15px] text-cream"
+            >
+              <Mail className="h-[18px] w-[18px]" strokeWidth={1.75} />
+              Продолжить с email
+            </button>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <Input
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                autoFocus
+                required
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                placeholder="вы@example.com"
+                className="h-12 rounded-md border-text/15 bg-white text-[14px] text-text placeholder:text-text-muted/60 focus-visible:border-olive focus-visible:ring-0"
+                disabled={status === "sending"}
+              />
+              <Button
+                type="submit"
+                disabled={status === "sending" || email.trim() === ""}
+                className="h-[52px] rounded-full text-[15px]"
+              >
+                {status === "sending" ? "Отправляем…" : "Отправить ссылку"}
+              </Button>
+            </form>
+          )}
+
+          {showIOS ? (
+            <button
+              type="button"
+              onClick={() => handleOAuth("apple")}
+              className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-black text-[15px] text-white"
+            >
+              <Apple className="h-[18px] w-[18px]" strokeWidth={1.75} />
+              Войти с Apple
+            </button>
           ) : null}
 
-          <Button
-            type="submit"
-            disabled={status === "sending" || email.trim() === ""}
-            className="mt-2 h-12"
+          <button
+            type="button"
+            onClick={() => handleOAuth("google")}
+            className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full border border-black/12 bg-white text-[15px] text-text"
           >
-            {status === "sending" ? "Отправляем…" : "Отправить ссылку"}
-          </Button>
-        </form>
-      </FadeIn>
-    </main>
+            <GoogleIcon className="h-[18px] w-[18px]" />
+            Войти с Google
+          </button>
+        </div>
+
+        {errorMessage ? (
+          <p className="mt-4 text-[11px] leading-relaxed text-rose">
+            {errorMessage}
+          </p>
+        ) : null}
+
+        <p className="mt-6 text-center text-[11px] leading-relaxed text-text-muted">
+          Нажимая «Продолжить», вы соглашаетесь с
+          <br />
+          <a href="/privacy" className="underline underline-offset-4">
+            Политикой конфиденциальности
+          </a>{" "}
+          ·{" "}
+          <a href="/terms" className="underline underline-offset-4">
+            Условиями использования
+          </a>
+        </p>
+
+        {process.env.NODE_ENV === "development" ? (
+          <div className="mt-8 border-t border-black/8 pt-6 text-center">
+            <p className="text-[9px] uppercase tracking-[1px] text-text-muted">
+              Режим разработки
+            </p>
+            <button
+              type="button"
+              onClick={handleDevLogin}
+              disabled={status === "sending"}
+              className="mt-3 text-[11px] text-text-muted underline underline-offset-4 disabled:opacity-50"
+            >
+              Войти как тестовый пользователь
+            </button>
+            <p className="mt-2 text-[9px] text-text-muted opacity-70">
+              test@toque.dev — должен быть создан в Supabase → Auth → Users
+            </p>
+          </div>
+        ) : null}
+      </div>
+    </div>
   );
 }

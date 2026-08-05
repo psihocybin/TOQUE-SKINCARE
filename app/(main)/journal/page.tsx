@@ -86,14 +86,21 @@ export default async function JournalPage() {
                     key={proc.id}
                     className="rounded-lg border border-black/8 bg-white px-3 py-3"
                   >
-                    <p
-                      className={cn(
-                        "text-[9px] tracking-wide",
-                        isToday ? "text-olive" : "text-text-muted",
-                      )}
-                    >
-                      {dateLabel}
-                    </p>
+                    <div className="flex items-center gap-2">
+                      <p
+                        className={cn(
+                          "text-[9px] tracking-wide",
+                          isToday ? "text-olive" : "text-text-muted",
+                        )}
+                      >
+                        {dateLabel}
+                      </p>
+                      {proc.is_extra ? (
+                        <span className="rounded-pill bg-olive/10 px-1.5 py-0.5 text-[9px] text-olive">
+                          Доп.
+                        </span>
+                      ) : null}
+                    </div>
                     <p className="mt-1.5 text-[12px] text-text">{proc.mode}</p>
                     <p className="mt-0.5 text-[10px] text-text-muted">
                       {minutes} минут · {proc.note?.trim() || "без замечаний"}

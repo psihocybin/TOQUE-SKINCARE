@@ -6,6 +6,10 @@ import type { Database } from "./database.types";
 const PROTECTED_PREFIXES = [
   "/home",
   "/ritual",
+  "/ritual-home",
+  "/ritual-builder",
+  "/tutorials",
+  "/achievements",
   "/journal",
   "/progress",
   "/profile",
@@ -15,10 +19,9 @@ const PROTECTED_PREFIXES = [
   "/referrals",
   "/warranty",
   "/my-program",
+  "/my-devices",
+  "/about",
 ];
-
-// Авторизованного пользователя с этих экранов отправляем на /home.
-const GUEST_ONLY_PREFIXES = ["/login"];
 
 function matches(pathname: string, prefixes: string[]): boolean {
   return prefixes.some(
@@ -64,16 +67,13 @@ export async function updateSession(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
+  // Единственная защита: незалогиненный не может попасть в (main)/*.
+  // /login, /welcome, /splash, /quiz/* — открыты для всех, включая залогиненных
+  // (чтобы можно было перепройти квиз без петли). Куда идти после логина —
+  // определяют /auth/callback и /home сами.
   if (!user && matches(pathname, PROTECTED_PREFIXES)) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
-    url.search = "";
-    return NextResponse.redirect(url);
-  }
-
-  if (user && matches(pathname, GUEST_ONLY_PREFIXES)) {
-    const url = request.nextUrl.clone();
-    url.pathname = "/home";
     url.search = "";
     return NextResponse.redirect(url);
   }

@@ -1,0 +1,51 @@
+import Link from "next/link";
+import { DeviceImage } from "@/components/shared/device-image";
+import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
+import { cn } from "@/lib/utils";
+import type { Tutorial } from "@/lib/content/tutorials";
+
+type Props = { items: Tutorial[] };
+
+// Длительность у нас — реальное время процедуры из протокола устройства
+// (минуты), а не длина видеоролика (видео ещё не снято) — поэтому формат
+// "N мин", а не таймкод "5:30" как в референсе GESKE.
+export function TutorialsScroll({ items }: Props) {
+  if (items.length === 0) return null;
+
+  return (
+    <div className="flex gap-3 overflow-x-auto pb-1">
+      {items.map((t) => (
+        <Link
+          key={t.id}
+          href={`/tutorials/${t.id}`}
+          className="flex h-[200px] w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl bg-white shadow-sm"
+        >
+          <div
+            className={cn(
+              "flex h-[120px] shrink-0 items-center justify-center",
+              t.thumbnailPlaceholder,
+            )}
+          >
+            <DeviceImage slug={t.deviceSlug} size={40} />
+          </div>
+          <div className="relative flex-1 p-3">
+            <div className="flex items-center gap-1.5 pr-5">
+              <DeviceImage slug={t.deviceSlug} size={20} className="shrink-0" />
+              <p className="min-w-0 truncate text-[12px] font-semibold text-text">
+                {t.title}
+              </p>
+            </div>
+            <p className="mt-1.5 text-[10px] text-text-muted">
+              {t.durationMinutes} мин
+            </p>
+            <FavoriteHeart
+              tutorialId={t.id}
+              size={16}
+              className="absolute bottom-3 right-3"
+            />
+          </div>
+        </Link>
+      ))}
+    </div>
+  );
+}

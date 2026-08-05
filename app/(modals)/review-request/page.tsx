@@ -1,12 +1,19 @@
-import { StubScreen } from "@/components/shared/stub-screen";
+import { redirect } from "next/navigation";
+import { createClient } from "@/lib/supabase/server";
+import { ReviewRequestScreen } from "@/components/reviews/review-request-screen";
 
-export default function Page() {
-  return (
-    <StubScreen
-      title="Экран 32 — Запрос отзыва на МП (день 90)"
-      backHref="/home"
-      links={[{ href: "/home", label: "→ /home" }]}
-      note="Заглушка. Реализация на ступени 11."
-    />
-  );
+export default async function ReviewRequestPage() {
+  const supabase = createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("name")
+    .eq("id", user.id)
+    .maybeSingle();
+
+  return <ReviewRequestScreen greetingName={profile?.name ?? ""} />;
 }

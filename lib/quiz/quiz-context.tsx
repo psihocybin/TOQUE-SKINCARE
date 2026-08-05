@@ -20,7 +20,9 @@ export type DeviceId =
   | "AERIS"
   | "AURA"
   | "VIBE"
-  | "QUANTUM";
+  | "QUANTUM"
+  | "LYRA"
+  | "SYLVA";
 
 export type AgeGroup = "25-34" | "35-44" | "45-54" | "55+";
 export type Goal = "cleansing" | "tone" | "glow" | "puffiness" | "all";
@@ -30,7 +32,11 @@ export type PreferredTime = "morning" | "evening" | "flexible";
 export type Frequency = "low" | "medium" | "daily";
 
 export type QuizAnswers = {
-  device: DeviceId | null;
+  // Все выбранные устройства (порядок = порядок выбора).
+  devices: DeviceId[];
+  // Первое выбранное — главное устройство, пишется в profiles.device
+  // (legacy-поле, используется всеми существующими одиночными экранами).
+  primaryDevice: DeviceId | null;
   name: string;
   ageGroup: AgeGroup | null;
   goal: Goal | null;
@@ -46,7 +52,8 @@ export const STORAGE_KEY = "toque_quiz_answers";
 export const QUIZ_TOTAL_STEPS = 7;
 
 const defaultAnswers: QuizAnswers = {
-  device: null,
+  devices: [],
+  primaryDevice: null,
   name: "",
   ageGroup: null,
   goal: null,
@@ -62,6 +69,9 @@ type QuizContextValue = {
   answers: QuizAnswers;
   setAnswer: <K extends keyof QuizAnswers>(key: K, value: QuizAnswers[K]) => void;
   getAnswer: <K extends keyof QuizAnswers>(key: K) => QuizAnswers[K];
+  // Добавляет/убирает устройство из мультиселекта шага 1. primaryDevice
+  // всегда равен первому выбранному (порядок = порядок клика).
+  toggleDevice: (id: DeviceId) => void;
   resetQuiz: () => void;
   isStepComplete: (step: number) => boolean;
   getCurrentStep: () => number;
@@ -75,20 +85,23 @@ function isAnswered<K extends keyof QuizAnswers>(
 ): boolean {
   if (value === null || value === undefined) return false;
   if (typeof value === "string") return value.trim().length > 0;
+  if (Array.isArray(value)) return value.length > 0;
   // booleans (isGift, wantsBaselinePhoto) — заполнены по факту значения
   return true;
 }
 
 // Сопоставление шагов 1–7 с ключами, по которым шаг считается заполненным.
-// Шаг 4 — это goal (+ isGift — опциональный чекбокс), шаг 7 — preferredTime+frequency
-// (baseline-фото опционально). Запись об опциональных полях оставлена в комментарии.
+// Порядок шагов (редизайн квиза): устройство → имя → цель → тип кожи →
+// опыт → возраст → время и ритм. Шаг 1 — devices (мультиселект, минимум
+// одно устройство). Шаг 3 — goal (+ isGift — опциональный чекбокс), шаг 7 —
+// preferredTime+frequency (baseline-фото опционально).
 const STEP_REQUIRED_KEYS: Record<number, ReadonlyArray<keyof QuizAnswers>> = {
-  1: ["device"],
+  1: ["devices"],
   2: ["name"],
-  3: ["ageGroup"],
-  4: ["goal"],
-  5: ["skinType"],
-  6: ["experience"],
+  3: ["goal"],
+  4: ["skinType"],
+  5: ["experience"],
+  6: ["ageGroup"],
   7: ["preferredTime", "frequency"],
 };
 
@@ -96,7 +109,7 @@ const STEP_REQUIRED_KEYS: Record<number, ReadonlyArray<keyof QuizAnswers>> = {
 // нельзя проверять через typeof v === typeof defaultAnswers[key] — это бы отбросило
 // все валидные строки и оставило бы только дефолтные null.
 const NULLABLE_STRING_KEYS = [
-  "device",
+  "primaryDevice",
   "ageGroup",
   "goal",
   "skinType",
@@ -114,6 +127,12 @@ function mergeAnswers(stored: unknown): QuizAnswers {
   if (typeof s.isGift === "boolean") out.isGift = s.isGift;
   if (typeof s.wantsBaselinePhoto === "boolean")
     out.wantsBaselinePhoto = s.wantsBaselinePhoto;
+
+  if (Array.isArray(s.devices)) {
+    out.devices = s.devices.filter(
+      (d): d is DeviceId => typeof d === "string",
+    );
+  }
 
   for (const key of NULLABLE_STRING_KEYS) {
     const v = s[key];
@@ -166,6 +185,20 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
     [answers],
   );
 
+  const toggleDevice = useCallback((id: DeviceId) => {
+    setAnswers((prev) => {
+      const isSelected = prev.devices.includes(id);
+      const nextDevices = isSelected
+        ? prev.devices.filter((d) => d !== id)
+        : [...prev.devices, id];
+      return {
+        ...prev,
+        devices: nextDevices,
+        primaryDevice: nextDevices[0] ?? null,
+      };
+    });
+  }, []);
+
   const resetQuiz = useCallback(() => {
     setAnswers(defaultAnswers);
     try {
@@ -196,11 +229,20 @@ export function QuizProvider({ children }: { children: React.ReactNode }) {
       answers,
       setAnswer,
       getAnswer,
+      toggleDevice,
       resetQuiz,
       isStepComplete,
       getCurrentStep,
     }),
-    [answers, setAnswer, getAnswer, resetQuiz, isStepComplete, getCurrentStep],
+    [
+      answers,
+      setAnswer,
+      getAnswer,
+      toggleDevice,
+      resetQuiz,
+      isStepComplete,
+      getCurrentStep,
+    ],
   );
 
   return <QuizContext.Provider value={value}>{children}</QuizContext.Provider>;

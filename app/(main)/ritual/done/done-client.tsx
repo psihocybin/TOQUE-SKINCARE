@@ -18,6 +18,8 @@ type Props = {
   procedureOrdinal: number;
   mode: string;
   durationSeconds: number;
+  isExtra: boolean;
+  nextProcedureDateLabel: string | null;
 };
 
 const OPTIONS: ReadonlyArray<{ value: Feedback; label: string }> = [
@@ -36,6 +38,8 @@ export function DoneClient({
   procedureOrdinal,
   mode,
   durationSeconds,
+  isExtra,
+  nextProcedureDateLabel,
 }: Props) {
   const router = useRouter();
   const [selected, setSelected] = useState<Feedback | null>(null);
@@ -67,6 +71,7 @@ export function DoneClient({
         duration_seconds: durationSeconds,
         feedback: selected,
         note: trimmedNote ? trimmedNote : null,
+        is_extra: isExtra,
       });
 
       if (insertError) {
@@ -100,9 +105,22 @@ export function DoneClient({
         <h1 className="mt-7 text-[18px] leading-snug text-text">
           {greetingName ? `Готово, ${greetingName}.` : "Готово."}
         </h1>
-        <p className="mt-2 text-[11px] text-text-muted">
-          Это была ваша {ordinalRu(procedureOrdinal)} процедура.
-        </p>
+        {isExtra ? (
+          <>
+            <p className="mt-2 text-[11px] text-text-muted">
+              Внеплановая процедура. Так держать.
+            </p>
+            {nextProcedureDateLabel ? (
+              <p className="mt-1 text-[10px] text-text-muted">
+                Следующая по программе — {nextProcedureDateLabel}.
+              </p>
+            ) : null}
+          </>
+        ) : (
+          <p className="mt-2 text-[11px] text-text-muted">
+            Это была ваша {ordinalRu(procedureOrdinal)} процедура.
+          </p>
+        )}
       </FadeIn>
 
       <FadeIn delay={0.2} className="mt-7">

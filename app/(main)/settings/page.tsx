@@ -21,11 +21,21 @@ const FREQUENCY_LABELS: Record<"low" | "medium" | "daily", string> = {
 export default async function SettingsPage() {
   const { profile } = await getProfileWithStats();
 
-  const timeKey = profile.preferred_time ?? "morning";
-  const timeLabel = TIME_LABELS[timeKey];
+  // Показываем правду: если в БД null — значит ничего не сохранено, и это
+  // должно быть видно. Раньше тут был скрытый дефолт "morning", из-за которого
+  // экран показывал "09:00" даже когда ничего не сохранилось.
+  const timeLabel = profile.preferred_time
+    ? TIME_LABELS[profile.preferred_time]
+    : "Не выбрано";
   const frequencyLabel = profile.frequency
     ? FREQUENCY_LABELS[profile.frequency]
-    : "не задано";
+    : "Не выбрано";
+
+  // Для строки "Напоминания" в тогглах нужен грамматически осмысленный текст
+  // ("Каждый день в 09:00"), поэтому там дефолт оставляем.
+  const reminderTimeLabel = profile.preferred_time
+    ? TIME_LABELS[profile.preferred_time]
+    : TIME_LABELS.morning;
 
   const notif = profile.notification_settings ?? DEFAULT_NOTIFICATION_SETTINGS;
 
@@ -45,7 +55,7 @@ export default async function SettingsPage() {
         <div className="mt-3">
           <NotificationToggles
             initial={notif}
-            preferredTimeLabel={timeLabel}
+            preferredTimeLabel={reminderTimeLabel}
           />
         </div>
       </FadeIn>

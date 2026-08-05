@@ -13,18 +13,11 @@ export default async function MainLayout({
     data: { user },
   } = await supabase.auth.getUser();
 
+  // Единственная проверка на уровне layout — авторизация. Не проверяем
+  // заполненность профиля здесь, иначе получаем петлю /home ↔ /quiz/device.
+  // Логика «прошёл ли квиз» живёт только на /home.
   if (!user) {
     redirect("/login");
-  }
-
-  const { data: profile } = await supabase
-    .from("profiles")
-    .select("name")
-    .eq("id", user.id)
-    .maybeSingle();
-
-  if (!profile || !profile.name.trim()) {
-    redirect("/quiz/device");
   }
 
   return (

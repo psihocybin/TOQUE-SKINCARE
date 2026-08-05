@@ -9,6 +9,7 @@ type Props = {
   title: string;
   durationSeconds: number;
   stepLabels: readonly string[];
+  isExtra?: boolean;
 };
 
 function formatTime(seconds: number): string {
@@ -22,11 +23,13 @@ export function VideoPlayerClient({
   title,
   durationSeconds,
   stepLabels,
+  isExtra = false,
 }: Props) {
   const router = useRouter();
   const [elapsed, setElapsed] = useState(0);
   const [playing, setPlaying] = useState(true);
   const finishedRef = useRef(false);
+  const doneHref = isExtra ? "/ritual/done?extra=1" : "/ritual/done";
 
   useEffect(() => {
     if (!playing) return;
@@ -35,13 +38,13 @@ export function VideoPlayerClient({
         const next = prev + 1;
         if (next >= durationSeconds && !finishedRef.current) {
           finishedRef.current = true;
-          window.setTimeout(() => router.push("/ritual/done"), 0);
+          window.setTimeout(() => router.push(doneHref), 0);
         }
         return Math.min(next, durationSeconds);
       });
     }, 1000);
     return () => window.clearInterval(id);
-  }, [playing, durationSeconds, router]);
+  }, [playing, durationSeconds, router, doneHref]);
 
   const totalSteps = Math.max(1, stepLabels.length);
   const fraction = Math.min(1, elapsed / durationSeconds);

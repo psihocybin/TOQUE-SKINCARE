@@ -88,12 +88,17 @@ export async function updateProgramSettings(
     return { ok: true };
   }
 
+  console.log("[settings save] userId:", user.id);
+  console.log("[settings save] updates:", patch);
+
   const { data, error } = await supabase
     .from("profiles")
     .update(patch)
     .eq("id", user.id)
     .select("preferred_time, frequency")
     .single();
+
+  console.log("[settings save] error:", error ?? "none", "result:", data);
 
   if (error) {
     console.error("[updateProgramSettings] update error", error);
