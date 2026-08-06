@@ -21,7 +21,7 @@ const SKIN_LABELS: Record<string, string> = {
 type MenuItem = { href: string; label: string };
 
 const MENU_ITEMS: ReadonlyArray<MenuItem> = [
-  { href: "/my-program", label: "Моя программа" },
+  { href: "/ritual-home?tab=my-program", label: "Моя программа" },
   { href: "/achievements", label: "Достижения" },
   { href: "/my-devices", label: "Мои устройства" },
   { href: "/settings", label: "Настройки" },

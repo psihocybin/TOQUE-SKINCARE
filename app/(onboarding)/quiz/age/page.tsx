@@ -6,7 +6,8 @@ import { QuizShellV2 } from "@/components/quiz/quiz-shell-v2";
 import { useQuiz, type AgeGroup } from "@/lib/quiz/quiz-context";
 import { cn } from "@/lib/utils";
 
-const AGE_OPTIONS: { value: AgeGroup; label: string }[] = [
+const AGE_OPTIONS: { value: AgeGroup; label: string; sublabel?: string }[] = [
+  { value: "18-24", label: "18–24", sublabel: "Профилактика, первый опыт" },
   { value: "25-34", label: "25–34" },
   { value: "35-44", label: "35–44" },
   { value: "45-54", label: "45–54" },
@@ -42,8 +43,15 @@ export default function QuizAgePage() {
                   : "border border-transparent",
               )}
             >
-              <span className="text-[15px] font-semibold text-text">
-                {opt.label}
+              <span className="min-w-0 flex-1">
+                <span className="block text-[15px] font-semibold text-text">
+                  {opt.label}
+                </span>
+                {opt.sublabel ? (
+                  <span className="mt-0.5 block text-xs text-text-muted">
+                    {opt.sublabel}
+                  </span>
+                ) : null}
               </span>
               {isSelected ? (
                 <span

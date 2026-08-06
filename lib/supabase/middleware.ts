@@ -5,6 +5,7 @@ import type { Database } from "./database.types";
 // Префиксы, доступные только авторизованным.
 const PROTECTED_PREFIXES = [
   "/home",
+  "/program-complete",
   "/ritual",
   "/ritual-home",
   "/ritual-builder",
@@ -19,6 +20,7 @@ const PROTECTED_PREFIXES = [
   "/referrals",
   "/warranty",
   "/my-program",
+  "/my-rituals",
   "/my-devices",
   "/about",
 ];

@@ -40,7 +40,7 @@ export type Database = {
             | "LYRA"
             | "SYLVA"
             | null;
-          age_group: "25-34" | "35-44" | "45-54" | "55+" | null;
+          age_group: "18-24" | "25-34" | "35-44" | "45-54" | "55+" | null;
           goal: "cleansing" | "tone" | "glow" | "puffiness" | "all" | null;
           is_gift: boolean;
           skin_type:
@@ -73,6 +73,9 @@ export type Database = {
           // Кэш серии дней подряд — на практике не поддерживается отдельным
           // триггером, streak считается на лету в lib/queries/attendance.ts.
           current_streak: number;
+          // Одноразовый флаг — показан ли уже экран /program-complete после
+          // завершения 30-дневного онбординга (см. миграцию 011).
+          completion_celebrated: boolean;
           referral_code: string | null;
           referred_by: string | null;
           activated_at: string;
@@ -97,6 +100,7 @@ export type Database = {
           devices?: string[] | null;
           custom_schedule?: Json | null;
           current_streak?: number;
+          completion_celebrated?: boolean;
           referral_code?: string | null;
           referred_by?: string | null;
           activated_at?: string;
@@ -215,6 +219,32 @@ export type Database = {
         >;
         Relationships: [];
       };
+
+      rituals: {
+        Row: {
+          id: string;
+          profile_id: string;
+          name: string;
+          is_active: boolean;
+          // RitualSchedule (lib/actions/rituals.ts) — DeviceRitualConfig[].
+          schedule: Json;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          profile_id: string;
+          name?: string;
+          is_active?: boolean;
+          schedule?: Json;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: Partial<
+          Omit<Database["public"]["Tables"]["rituals"]["Insert"], "id">
+        >;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: Record<string, never>;
@@ -241,3 +271,6 @@ export type PushSubscription =
   Database["public"]["Tables"]["push_subscriptions"]["Row"];
 export type PushSubscriptionInsert =
   Database["public"]["Tables"]["push_subscriptions"]["Insert"];
+
+export type Ritual = Database["public"]["Tables"]["rituals"]["Row"];
+export type RitualInsert = Database["public"]["Tables"]["rituals"]["Insert"];

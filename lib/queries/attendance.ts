@@ -61,3 +61,40 @@ export async function getAttendance(profileId: string): Promise<Attendance> {
 
   return { last7Days, streak };
 }
+
+// Максимальная серия за всю историю — для экрана /program-complete
+// («максимальная серия»). Отличается от текущего streak выше: тот считает
+// только НЕПРЕРЫВНУЮ серию назад от сегодня, а тут — самый длинный
+// непрерывный отрезок когда-либо, включая уже прерванные.
+export async function getMaxStreak(profileId: string): Promise<number> {
+  const supabase = createClient();
+  const { data, error } = await supabase
+    .from("procedures")
+    .select("completed_at")
+    .eq("profile_id", profileId);
+  if (error) throw error;
+
+  const sortedDays = Array.from(
+    new Set((data ?? []).map((p) => toDateKey(new Date(p.completed_at)))),
+  ).sort();
+
+  let maxStreak = 0;
+  let current = 0;
+  let prevDate: Date | null = null;
+
+  for (const key of sortedDays) {
+    const date = new Date(key);
+    if (prevDate) {
+      const gapDays = Math.round(
+        (date.getTime() - prevDate.getTime()) / (1000 * 60 * 60 * 24),
+      );
+      current = gapDays === 1 ? current + 1 : 1;
+    } else {
+      current = 1;
+    }
+    maxStreak = Math.max(maxStreak, current);
+    prevDate = date;
+  }
+
+  return maxStreak;
+}

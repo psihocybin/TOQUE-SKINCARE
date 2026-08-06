@@ -1,20 +1,38 @@
 import Link from "next/link";
-import { Camera, ChevronRight } from "lucide-react";
+import { redirect } from "next/navigation";
+import { Camera, ChevronRight, Moon } from "lucide-react";
 import { FadeIn } from "@/components/shared/fade-in";
 import { RingProgress } from "@/components/shared/ring-progress";
 import { HeroTodayCard } from "@/components/home/hero-today-card";
+import { RitualHeroCard } from "@/components/home/ritual-hero-card";
+import { TodaySessionSection } from "@/components/home/today-session-section";
 import { AttendanceCard } from "@/components/home/attendance-card";
 import { TutorialsScroll } from "@/components/home/tutorials-scroll";
 import { RecommendedDevicesScroll } from "@/components/home/recommended-devices-scroll";
 import { PushPermission } from "@/components/pwa/push-permission";
 import { IosInstallHint } from "@/components/pwa/ios-install-hint";
 import { getProfileWithStats } from "@/lib/queries/profile";
+import { getProcedures } from "@/lib/queries/procedures";
 import { getAttendance } from "@/lib/queries/attendance";
-import { getTodayProgramItem, greetingByTime } from "@/lib/program/utils";
+import {
+  getAllTodayProcedures,
+  getProgramStatus,
+  getTodayProgramItem,
+  greetingByTime,
+  type SessionTimeSlot,
+} from "@/lib/program/utils";
 import { DRIP_CAMPAIGN } from "@/lib/content/drip-campaign";
 import { deviceEnumToSlug, getDeviceBySlug } from "@/lib/content/devices";
 import { tutorials } from "@/lib/content/tutorials";
+import { getActiveRitual } from "@/lib/actions/rituals";
+import {
+  asRitualSchedule,
+  getNextScheduledRitualDayLabel,
+  getTodayFromRitual,
+} from "@/lib/ritual-builder/ritual-utils";
 import { QuizSyncOnMount } from "./quiz-sync";
+
+const SLOT_ORDER: SessionTimeSlot[] = ["morning", "day", "evening"];
 
 const TOTAL_PROCEDURE_DAYS = DRIP_CAMPAIGN.filter(
   (d) => d.type === "procedure",
@@ -24,6 +42,13 @@ export default async function HomePage() {
   const { profile, currentDay, completedProcedures } =
     await getProfileWithStats();
 
+  const status = getProgramStatus(profile.activated_at);
+
+  // Показываем экран поздравления один раз, сразу как онбординг завершён.
+  if (status.isCompleted && !profile.completion_celebrated) {
+    redirect("/program-complete");
+  }
+
   // Раньше незаполненный профиль (например, вошли через Google/Apple без
   // прохождения квиза) редиректило на /quiz/device автоматически. Теперь
   // квиз идёт ДО регистрации, поэтому попадание сюда с пустым именем — это
@@ -31,8 +56,8 @@ export default async function HomePage() {
   // (см. QuizSyncOnMount ниже). Вместо петли редиректов — баннер.
   const isSetupIncomplete = !profile.name.trim();
 
-  const today = getTodayProgramItem(profile.activated_at);
   const greeting = greetingByTime();
+  const today = getTodayProgramItem(profile.activated_at);
 
   const primarySlug = profile.device ? deviceEnumToSlug(profile.device) : null;
   const ownedSlugs =
@@ -59,6 +84,30 @@ export default async function HomePage() {
     todaysTutorials.length > 0 ? todaysTutorials : tutorials.slice(0, 5);
 
   const attendance = await getAttendance(profile.id);
+
+  const procedures = await getProcedures(profile.id);
+  const doneToday = procedures.some((p) => p.day_number === currentDay);
+
+  const activeRitual = await getActiveRitual();
+  const ritualSchedule = activeRitual ? asRitualSchedule(activeRitual.schedule) : null;
+  const ritualTodayItems = ritualSchedule ? getTodayFromRitual(ritualSchedule) : [];
+  const ritualNextScheduledLabel = ritualSchedule
+    ? getNextScheduledRitualDayLabel(ritualSchedule)
+    : null;
+
+  // Drip-campaign путь — только когда нет активного ритуала и программа
+  // ещё не завершена. Разные устройства в drip-пути всегда на одном общем
+  // времени суток, поэтому там всегда ровно одна секция.
+  const activeToday =
+    !ritualSchedule && !status.isCompleted
+      ? getAllTodayProcedures(profile).filter((p) => !p.isRestDay)
+      : [];
+  const sessionGroups = SLOT_ORDER.map((slot) => ({
+    slot,
+    procedures: activeToday.filter((p) => p.sessionTime === slot),
+  })).filter((g) => g.procedures.length > 0);
+
+  const dayBadge = `День ${currentDay} из 30`;
 
   const trimmedName = profile.name.trim();
   const initial = (trimmedName[0] ?? "?").toUpperCase();
@@ -103,12 +152,40 @@ export default async function HomePage() {
       ) : null}
 
       <FadeIn delay={0.1} className="mx-4 mt-4">
-        <HeroTodayCard
-          deviceSlug={activeSlug}
-          deviceName={activeDevice?.name ?? activeSlug.toUpperCase()}
-          currentDay={currentDay}
-          todayItem={today}
-        />
+        {ritualSchedule ? (
+          <RitualHeroCard
+            items={ritualTodayItems}
+            nextScheduledLabel={ritualNextScheduledLabel}
+          />
+        ) : status.isCompleted ? (
+          <HeroTodayCard deviceSlug={activeSlug} />
+        ) : activeToday.length === 0 ? (
+          <div className="rounded-2xl bg-white p-4 text-center shadow-sm">
+            <Moon
+              className="mx-auto h-6 w-6 text-text-muted"
+              strokeWidth={1.5}
+              aria-hidden
+            />
+            <p className="mt-2 text-[14px] font-semibold text-text">
+              Сегодня — день отдыха
+            </p>
+            <p className="mt-1 text-[12px] text-text-muted">
+              Кожа работает, пока вы отдыхаете
+            </p>
+          </div>
+        ) : (
+          <div className="flex flex-col gap-4">
+            {sessionGroups.map((g, i) => (
+              <TodaySessionSection
+                key={g.slot}
+                slot={g.slot}
+                procedures={g.procedures}
+                doneToday={doneToday}
+                dayBadge={i === 0 ? dayBadge : undefined}
+              />
+            ))}
+          </div>
+        )}
       </FadeIn>
 
       <FadeIn delay={0.15} className="mx-4 mt-4 grid grid-cols-2 gap-3">
@@ -170,6 +247,17 @@ export default async function HomePage() {
           </div>
         </FadeIn>
       ) : null}
+
+      <FadeIn delay={0.35} className="mx-4 mt-4">
+        <div className="rounded-lg border border-black/8 bg-white px-4 py-4">
+          <p className="text-[9px] uppercase tracking-[1.5px] text-text-muted">
+            Совет дня
+          </p>
+          <p className="mt-2 text-[11px] leading-relaxed text-text">
+            {today.insightText}
+          </p>
+        </div>
+      </FadeIn>
 
       <PushPermission />
       <IosInstallHint />

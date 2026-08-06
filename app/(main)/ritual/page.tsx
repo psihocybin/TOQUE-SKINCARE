@@ -30,7 +30,7 @@ const DEVICES_WITH_OWN_RITUAL = new Set(["aura", "lyra", "sylva"]);
 export default async function RitualPage({
   searchParams,
 }: {
-  searchParams: { device?: string };
+  searchParams: { device?: string; mode?: string };
 }) {
   const { profile } = await getProfileWithStats();
   const currentDay = getCurrentDayNumber(profile.activated_at);
@@ -99,9 +99,14 @@ export default async function RitualPage({
   // устройства (activeDevice), с ротацией режимов по номеру процедуры
   // (item.day — на случай внеплановой сессии, когда день отличается от
   // текущего currentDay).
-  const currentMode = activeDevice
-    ? getModeForDevice(activeDevice, item.day)
-    : null;
+  // ?mode= — явный режим из активного ритуала (кнопка «Начать» на /home),
+  // приоритетнее ротации по номеру дня; если такого режима не нашли —
+  // откатываемся на обычную ротацию.
+  const explicitMode = searchParams.mode
+    ? getProtocolBySlug(activeDevice ?? "")?.modes.find((m) => m.name === searchParams.mode)
+    : undefined;
+  const currentMode =
+    explicitMode ?? (activeDevice ? getModeForDevice(activeDevice, item.day) : null);
   const modeTitle = currentMode
     ? (currentMode.displayName ?? currentMode.name)
     : proc.title;

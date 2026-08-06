@@ -1,48 +1,12 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { Check } from "lucide-react";
 import { QuizShellV2 } from "@/components/quiz/quiz-shell-v2";
-import { useQuiz, type SkinType } from "@/lib/quiz/quiz-context";
+import { useQuiz } from "@/lib/quiz/quiz-context";
+import { SKIN_TYPE_OPTIONS } from "@/lib/content/skin-types";
 import { cn } from "@/lib/utils";
-
-const SKIN_OPTIONS: {
-  value: SkinType;
-  label: string;
-  description: string;
-  swatch: string;
-}[] = [
-  {
-    value: "normal",
-    label: "Нормальная",
-    description: "Без выраженных проблем",
-    swatch: "#E8D5C4",
-  },
-  {
-    value: "dry",
-    label: "Сухая",
-    description: "Стянутость, шелушение",
-    swatch: "#D4B5A0",
-  },
-  {
-    value: "oily",
-    label: "Жирная",
-    description: "Расширенные поры, блеск",
-    swatch: "#C4D4A8",
-  },
-  {
-    value: "combo",
-    label: "Комбинированная",
-    description: "Жирная T-зона, нормальные щёки",
-    swatch: "linear-gradient(90deg, #D4B5A0 50%, #C4D4A8 50%)",
-  },
-  {
-    value: "sensitive",
-    label: "Чувствительная",
-    description: "Покраснения, реакции",
-    swatch: "#F0C4C4",
-  },
-];
 
 export default function QuizSkinPage() {
   const router = useRouter();
@@ -58,7 +22,7 @@ export default function QuizSkinPage() {
       onNext={() => router.push("/quiz/experience")}
     >
       <div className="flex flex-col gap-[10px]">
-        {SKIN_OPTIONS.map((opt) => {
+        {SKIN_TYPE_OPTIONS.map((opt) => {
           const isSelected = answers.skinType === opt.value;
           return (
             <button
@@ -100,12 +64,12 @@ export default function QuizSkinPage() {
       </div>
 
       <div className="mt-4 text-center">
-        <button
-          type="button"
+        <Link
+          href="/quiz/skin-help"
           className="text-[13px] text-text-muted underline underline-offset-4"
         >
           Не знаю свой тип кожи
-        </button>
+        </Link>
       </div>
     </QuizShellV2>
   );

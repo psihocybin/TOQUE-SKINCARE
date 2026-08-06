@@ -1,36 +1,31 @@
 import Link from "next/link";
 import { Check } from "lucide-react";
 import { DeviceImage } from "@/components/shared/device-image";
-import type { ProcedureMode } from "@/lib/content/protocols";
+import type { TodayProcedure } from "@/lib/program/utils";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  deviceSlug: string;
-  mode: ProcedureMode | null;
-  fallbackTitle: string;
-  fallbackDuration: number;
+  procedure: TodayProcedure;
   isDone: boolean;
 };
 
-export function TaskCard({
-  deviceSlug,
-  mode,
-  fallbackTitle,
-  fallbackDuration,
-  isDone,
-}: Props) {
-  const title = mode ? (mode.displayName ?? mode.name) : fallbackTitle;
-  const duration = mode?.durationMinutes ?? fallbackDuration;
-
+export function DeviceProcedureCard({ procedure, isDone }: Props) {
   return (
     <Link
-      href={`/ritual?device=${deviceSlug}`}
+      href={`/ritual?device=${procedure.deviceSlug}`}
       className="flex items-center gap-3 rounded-2xl bg-white p-3 shadow-sm"
     >
-      <DeviceImage slug={deviceSlug} size={44} />
+      <DeviceImage slug={procedure.deviceSlug} size={32} />
       <div className="min-w-0 flex-1">
-        <p className="truncate text-[13px] text-text">{title}</p>
-        <p className="mt-0.5 text-[11px] text-text-muted">{duration} мин</p>
+        <p className="truncate text-[12px] font-semibold text-text">
+          {procedure.modeName}
+          {procedure.isRestDay ? (
+            <span className="font-normal text-text-muted"> (день отдыха)</span>
+          ) : null}
+        </p>
+        <p className="mt-0.5 text-[11px] text-text-muted">
+          {procedure.deviceSlug.toUpperCase()} · {procedure.durationMinutes} мин
+        </p>
       </div>
       <span
         className={cn(

@@ -24,7 +24,7 @@ export type DeviceId =
   | "LYRA"
   | "SYLVA";
 
-export type AgeGroup = "25-34" | "35-44" | "45-54" | "55+";
+export type AgeGroup = "18-24" | "25-34" | "35-44" | "45-54" | "55+";
 export type Goal = "cleansing" | "tone" | "glow" | "puffiness" | "all";
 export type SkinType = "normal" | "dry" | "oily" | "combo" | "sensitive";
 export type Experience = "beginner" | "familiar" | "experienced" | "expert";

@@ -1,39 +1,27 @@
 import Link from "next/link";
-import type { ProgramDay } from "@/lib/content/drip-campaign";
 import { WEEKDAYS, WEEKDAY_LABELS, type Weekday } from "@/lib/ritual-builder/types";
+import { todayWeekday } from "@/lib/ritual-builder/ritual-utils";
+import { getDeviceColor } from "@/lib/content/device-colors";
 import { cn } from "@/lib/utils";
+
+export type WeekTag = { label: string; deviceSlug: string };
 
 export type WeekCell = {
   weekday: Weekday;
-  isToday: boolean;
-  entry: ProgramDay | undefined;
+  // Несколько устройств могут быть запланированы на один день — поэтому
+  // тегов может быть несколько за ячейку, не один. Пусто = день отдыха.
+  tags: WeekTag[];
 };
 
 type Props = { cells: WeekCell[] };
 
-function tagFor(entry: ProgramDay | undefined): { label: string; className: string } {
-  if (!entry) return { label: "—", className: "bg-black/[0.03] text-text-muted" };
-  if (entry.type !== "procedure" || !entry.procedure) {
-    return { label: "ОТДЫХ", className: "bg-black/6 text-text-muted" };
-  }
-  switch (entry.procedure.mode) {
-    case "Cleaning":
-      return { label: "CLEAN", className: "bg-blue-500/15 text-blue-600" };
-    case "Lifting":
-      return { label: "LIFT", className: "bg-olive/15 text-olive" };
-    case "Ion-":
-      return { label: "ION-", className: "bg-amber-500/15 text-amber-600" };
-    case "Ion+":
-      return { label: "ION+", className: "bg-rose/15 text-rose" };
-    default:
-      return {
-        label: entry.procedure.mode.toUpperCase(),
-        className: "bg-black/6 text-text-muted",
-      };
-  }
-}
-
+// "Сегодня" вычисляется здесь, а не приходит полем в WeekCell — так один и
+// тот же тип ячейки подходит и для drip-campaign недели, и для недели
+// активного ритуала (lib/ritual-builder/ritual-utils.ts buildRitualWeekCells),
+// без дублирования подсчёта текущего дня в каждом билдере отдельно.
 export function WeeklyCalendar({ cells }: Props) {
+  const today = todayWeekday();
+
   return (
     <div className="rounded-2xl bg-white p-4 shadow-sm">
       <div className="flex items-center justify-between">
@@ -48,27 +36,40 @@ export function WeeklyCalendar({ cells }: Props) {
       <div className="mt-3 grid grid-cols-7 gap-1">
         {WEEKDAYS.map((wd) => {
           const cell = cells.find((c) => c.weekday === wd);
-          const tag = tagFor(cell?.entry);
+          const tags = cell?.tags ?? [];
           return (
             <div key={wd} className="flex flex-col items-center gap-1.5">
               <span
                 className={cn(
                   "flex h-6 w-6 items-center justify-center rounded-full text-[10px]",
-                  cell?.isToday
-                    ? "border-2 border-olive text-text"
-                    : "text-text-muted",
+                  wd === today ? "border-2 border-olive text-text" : "text-text-muted",
                 )}
               >
                 {WEEKDAY_LABELS[wd]}
               </span>
-              <span
-                className={cn(
-                  "flex h-8 w-full items-center justify-center rounded-lg px-0.5 text-center text-[8px] leading-tight",
-                  tag.className,
+              <div className="flex w-full flex-col gap-1">
+                {tags.length > 0 ? (
+                  tags.map((tag, i) => {
+                    const color = getDeviceColor(tag.deviceSlug);
+                    return (
+                      <span
+                        key={i}
+                        className={cn(
+                          "flex h-6 w-full items-center justify-center rounded-lg px-0.5 text-center text-[7px] leading-tight",
+                          color.bg,
+                          color.text,
+                        )}
+                      >
+                        {tag.label}
+                      </span>
+                    );
+                  })
+                ) : (
+                  <span className="flex h-6 w-full items-center justify-center rounded-lg bg-black/6 px-0.5 text-center text-[7px] text-text-muted">
+                    ОТДЫХ
+                  </span>
                 )}
-              >
-                {tag.label}
-              </span>
+              </div>
             </div>
           );
         })}
