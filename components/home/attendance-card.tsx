@@ -8,7 +8,20 @@ type Props = {
   streak: number;
 };
 
-const WEEKDAY_LETTERS = ["П", "В", "С", "Ч", "П", "С", "В"];
+// Индекс = Date.getDay() (0=вс...6=сб), НЕ позиция в last7Days — окно
+// last7Days скользящее и может начинаться с любого дня недели в зависимости
+// от того, какой сегодня день, поэтому подпись обязана считаться из
+// реальной day.date, а не из индекса в массиве (это и было багом раньше).
+const WEEKDAY_LETTERS = ["В", "П", "В", "С", "Ч", "П", "С"];
+
+// day.date — "YYYY-MM-DD" (см. toDateKey в lib/queries/attendance.ts).
+// Парсим с явным local-midnight ("T00:00:00"), а не голую дату: без этого
+// new Date("YYYY-MM-DD") трактуется как UTC-полночь, и getDay() в часовом
+// поясе восточнее UTC может съехать на день назад.
+function weekdayLetter(dateKey: string): string {
+  const dow = new Date(`${dateKey}T00:00:00`).getDay();
+  return WEEKDAY_LETTERS[dow] ?? "";
+}
 
 export function AttendanceCard({ last7Days, streak }: Props) {
   return (
@@ -18,7 +31,7 @@ export function AttendanceCard({ last7Days, streak }: Props) {
       </p>
 
       <div className="mt-3 flex justify-between">
-        {last7Days.map((day, i) => (
+        {last7Days.map((day) => (
           <div key={day.date} className="flex flex-col items-center gap-1">
             <span
               className={cn(
@@ -35,7 +48,7 @@ export function AttendanceCard({ last7Days, streak }: Props) {
               ) : null}
             </span>
             <span className="text-[9px] text-text-muted">
-              {WEEKDAY_LETTERS[i]}
+              {weekdayLetter(day.date)}
             </span>
           </div>
         ))}
