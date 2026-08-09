@@ -10,6 +10,8 @@ import { STORAGE_KEY, type QuizAnswers } from "@/lib/quiz/quiz-context";
 import { isQuizStarted, syncQuizToProfile } from "@/lib/quiz/sync";
 
 type Status = "idle" | "sending" | "sent" | "error";
+type PasswordMode = "signin" | "signup";
+type SentReason = "magiclink" | "signup";
 
 function isIOS(): boolean {
   if (typeof navigator === "undefined") return false;
@@ -57,6 +59,12 @@ export default function LoginPage() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showIOS, setShowIOS] = useState(false);
+  const [sentReason, setSentReason] = useState<SentReason>("magiclink");
+
+  const [passwordExpanded, setPasswordExpanded] = useState(false);
+  const [passwordMode, setPasswordMode] = useState<PasswordMode>("signin");
+  const [pwEmail, setPwEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     setShowIOS(isIOS());
@@ -128,6 +136,71 @@ export default function LoginPage() {
     }
   }
 
+  async function handlePasswordSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const trimmed = pwEmail.trim();
+    if (!trimmed || password.length < 6) return;
+
+    setStatus("sending");
+    setErrorMessage(null);
+
+    try {
+      const supabase = createClient();
+
+      if (passwordMode === "signin") {
+        const { error } = await supabase.auth.signInWithPassword({
+          email: trimmed,
+          password,
+        });
+        if (error) {
+          setStatus("error");
+          setErrorMessage(
+            /invalid login credentials/i.test(error.message)
+              ? "Неверный email или пароль."
+              : `Не удалось войти: ${error.message}`,
+          );
+          return;
+        }
+        window.location.href = "/home";
+        return;
+      }
+
+      const origin = window.location.origin;
+      const { data, error } = await supabase.auth.signUp({
+        email: trimmed,
+        password,
+        options: { emailRedirectTo: `${origin}/auth/callback?next=/home` },
+      });
+
+      if (error) {
+        setStatus("error");
+        setErrorMessage(
+          /already registered/i.test(error.message)
+            ? "Этот email уже зарегистрирован. Попробуйте войти."
+            : `Не удалось создать аккаунт: ${error.message}`,
+        );
+        return;
+      }
+
+      if (data.session) {
+        window.location.href = "/home";
+        return;
+      }
+
+      // Email-подтверждение включено в Supabase — сессии ещё нет.
+      setEmail(trimmed);
+      setSentReason("signup");
+      setStatus("sent");
+    } catch (e) {
+      const message =
+        e instanceof Error && e.message.includes("URL and API key")
+          ? "Supabase не настроен: добавьте ключи в .env.local и перезапустите сервер. См. docs/AUTH_SETUP.md"
+          : "Что-то пошло не так. Попробуйте ещё раз.";
+      setStatus("error");
+      setErrorMessage(message);
+    }
+  }
+
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const trimmed = email.trim();
@@ -160,6 +233,7 @@ export default function LoginPage() {
         return;
       }
 
+      setSentReason("magiclink");
       setStatus("sent");
     } catch (e) {
       const message =
@@ -184,13 +258,16 @@ export default function LoginPage() {
         </div>
 
         <h1 className="mt-8 text-[16px] leading-snug text-text">
-          Письмо отправлено
+          {sentReason === "signup" ? "Подтвердите email" : "Письмо отправлено"}
         </h1>
 
         <p className="mt-6 text-[12px] leading-relaxed text-text-muted">
           Откройте письмо на&nbsp;
           <span className="text-text">{email.trim()}</span>
-          <br />и перейдите по ссылке, чтобы войти.
+          <br />
+          {sentReason === "signup"
+            ? "и перейдите по ссылке, чтобы подтвердить аккаунт."
+            : "и перейдите по ссылке, чтобы войти."}
         </p>
 
         <p className="mt-10 text-[10px] text-text-muted">
@@ -261,6 +338,88 @@ export default function LoginPage() {
               >
                 {status === "sending" ? "Отправляем…" : "Отправить ссылку"}
               </Button>
+            </form>
+          )}
+
+          {!passwordExpanded ? (
+            <button
+              type="button"
+              onClick={() => {
+                setPasswordExpanded(true);
+                setErrorMessage(null);
+              }}
+              className="text-center text-[12px] text-text-muted underline underline-offset-4"
+            >
+              Войти по паролю
+            </button>
+          ) : (
+            <form
+              onSubmit={handlePasswordSubmit}
+              className="flex flex-col gap-3 rounded-md border border-black/8 p-3"
+            >
+              <p className="text-[12px] text-text-muted">
+                {passwordMode === "signin"
+                  ? "Вход по паролю"
+                  : "Создайте пароль для аккаунта"}
+              </p>
+              <Input
+                type="email"
+                inputMode="email"
+                autoComplete="email"
+                required
+                value={pwEmail}
+                onChange={(e) => {
+                  setPwEmail(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                placeholder="вы@example.com"
+                className="h-12 rounded-md border-text/15 bg-white text-[14px] text-text placeholder:text-text-muted/60 focus-visible:border-olive focus-visible:ring-0"
+                disabled={status === "sending"}
+              />
+              <Input
+                type="password"
+                autoComplete={
+                  passwordMode === "signin" ? "current-password" : "new-password"
+                }
+                required
+                minLength={6}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                  if (status === "error") setStatus("idle");
+                }}
+                placeholder="Пароль (минимум 6 символов)"
+                className="h-12 rounded-md border-text/15 bg-white text-[14px] text-text placeholder:text-text-muted/60 focus-visible:border-olive focus-visible:ring-0"
+                disabled={status === "sending"}
+              />
+              <Button
+                type="submit"
+                disabled={
+                  status === "sending" ||
+                  pwEmail.trim() === "" ||
+                  password.length < 6
+                }
+                className="h-[52px] rounded-full text-[15px]"
+              >
+                {status === "sending"
+                  ? "Подождите…"
+                  : passwordMode === "signin"
+                    ? "Войти"
+                    : "Создать аккаунт"}
+              </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  setPasswordMode(passwordMode === "signin" ? "signup" : "signin");
+                  setErrorMessage(null);
+                  if (status === "error") setStatus("idle");
+                }}
+                className="text-center text-[11px] text-text-muted underline underline-offset-4"
+              >
+                {passwordMode === "signin"
+                  ? "Нет аккаунта? Создать пароль"
+                  : "Уже есть аккаунт? Войти"}
+              </button>
             </form>
           )}
 
