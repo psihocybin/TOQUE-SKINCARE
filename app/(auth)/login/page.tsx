@@ -10,8 +10,7 @@ import { STORAGE_KEY, type QuizAnswers } from "@/lib/quiz/quiz-context";
 import { isQuizStarted, syncQuizToProfile } from "@/lib/quiz/sync";
 
 type Status = "idle" | "sending" | "sent" | "error";
-type AuthMode = "signup" | "signin" | "magiclink";
-type SentReason = "magiclink" | "signup";
+type AuthMode = "signup" | "signin";
 
 function isIOS(): boolean {
   if (typeof navigator === "undefined") return false;
@@ -61,7 +60,6 @@ export default function LoginPage() {
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showIOS, setShowIOS] = useState(false);
-  const [sentReason, setSentReason] = useState<SentReason>("magiclink");
 
   useEffect(() => {
     setShowIOS(isIOS());
@@ -186,51 +184,6 @@ export default function LoginPage() {
 
       // Email-подтверждение включено в Supabase — сессии ещё нет.
       setEmail(trimmed);
-      setSentReason("signup");
-      setStatus("sent");
-    } catch (e) {
-      const message =
-        e instanceof Error && e.message.includes("URL and API key")
-          ? "Supabase не настроен: добавьте ключи в .env.local и перезапустите сервер. См. docs/AUTH_SETUP.md"
-          : "Что-то пошло не так. Попробуйте ещё раз.";
-      setStatus("error");
-      setErrorMessage(message);
-    }
-  }
-
-  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const trimmed = email.trim();
-    if (!trimmed) return;
-
-    setStatus("sending");
-    setErrorMessage(null);
-
-    try {
-      const supabase = createClient();
-      const origin = window.location.origin;
-
-      const { error } = await supabase.auth.signInWithOtp({
-        email: trimmed,
-        options: {
-          emailRedirectTo: `${origin}/auth/callback?next=/home`,
-        },
-      });
-
-      if (error) {
-        setStatus("error");
-        const isRateLimit = /rate limit|only request this after/i.test(
-          error.message,
-        );
-        setErrorMessage(
-          isRateLimit
-            ? `Слишком много попыток. Подождите и попробуйте снова. (${error.message})`
-            : `Не удалось отправить письмо: ${error.message}`,
-        );
-        return;
-      }
-
-      setSentReason("magiclink");
       setStatus("sent");
     } catch (e) {
       const message =
@@ -255,16 +208,13 @@ export default function LoginPage() {
         </div>
 
         <h1 className="mt-8 text-[16px] leading-snug text-text">
-          {sentReason === "signup" ? "Подтвердите email" : "Письмо отправлено"}
+          Подтвердите email
         </h1>
 
         <p className="mt-6 text-[12px] leading-relaxed text-text-muted">
           Откройте письмо на&nbsp;
           <span className="text-text">{email.trim()}</span>
-          <br />
-          {sentReason === "signup"
-            ? "и перейдите по ссылке, чтобы подтвердить аккаунт."
-            : "и перейдите по ссылке, чтобы войти."}
+          <br />и перейдите по ссылке, чтобы подтвердить аккаунт.
         </p>
 
         <p className="mt-10 text-[10px] text-text-muted">
@@ -314,42 +264,6 @@ export default function LoginPage() {
               <Mail className="h-[18px] w-[18px]" strokeWidth={1.75} />
               Продолжить с email
             </button>
-          ) : authMode === "magiclink" ? (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <Input
-                type="email"
-                inputMode="email"
-                autoComplete="email"
-                autoFocus
-                required
-                value={email}
-                onChange={(e) => {
-                  setEmail(e.target.value);
-                  if (status === "error") setStatus("idle");
-                }}
-                placeholder="вы@example.com"
-                className="h-12 rounded-md border-text/15 bg-white text-[14px] text-text placeholder:text-text-muted/60 focus-visible:border-olive focus-visible:ring-0"
-                disabled={status === "sending"}
-              />
-              <Button
-                type="submit"
-                disabled={status === "sending" || email.trim() === ""}
-                className="h-[52px] rounded-full text-[15px]"
-              >
-                {status === "sending" ? "Отправляем…" : "Отправить ссылку"}
-              </Button>
-              <button
-                type="button"
-                onClick={() => {
-                  setAuthMode("signup");
-                  setErrorMessage(null);
-                  if (status === "error") setStatus("idle");
-                }}
-                className="text-center text-[11px] text-text-muted underline underline-offset-4"
-              >
-                Войти по паролю
-              </button>
-            </form>
           ) : (
             <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-3">
               <Input
@@ -398,33 +312,19 @@ export default function LoginPage() {
                     ? "Войти"
                     : "Создать аккаунт"}
               </Button>
-              <div className="flex items-center justify-center gap-4">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode(authMode === "signin" ? "signup" : "signin");
-                    setErrorMessage(null);
-                    if (status === "error") setStatus("idle");
-                  }}
-                  className="text-center text-[11px] text-text-muted underline underline-offset-4"
-                >
-                  {authMode === "signin"
-                    ? "Нет аккаунта? Создать"
-                    : "Уже есть аккаунт? Войти"}
-                </button>
-                <span className="text-[11px] text-text-muted/50">·</span>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setAuthMode("magiclink");
-                    setErrorMessage(null);
-                    if (status === "error") setStatus("idle");
-                  }}
-                  className="text-center text-[11px] text-text-muted underline underline-offset-4"
-                >
-                  Войти по ссылке
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode(authMode === "signin" ? "signup" : "signin");
+                  setErrorMessage(null);
+                  if (status === "error") setStatus("idle");
+                }}
+                className="text-center text-[11px] text-text-muted underline underline-offset-4"
+              >
+                {authMode === "signin"
+                  ? "Нет аккаунта? Создать"
+                  : "Уже есть аккаунт? Войти"}
+              </button>
             </form>
           )}
 
