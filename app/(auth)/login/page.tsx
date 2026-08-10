@@ -10,7 +10,7 @@ import { STORAGE_KEY, type QuizAnswers } from "@/lib/quiz/quiz-context";
 import { isQuizStarted, syncQuizToProfile } from "@/lib/quiz/sync";
 
 type Status = "idle" | "sending" | "sent" | "error";
-type PasswordMode = "signin" | "signup";
+type AuthMode = "signup" | "signin" | "magiclink";
 type SentReason = "magiclink" | "signup";
 
 function isIOS(): boolean {
@@ -54,17 +54,14 @@ function GoogleIcon({ className }: { className?: string }) {
 export default function LoginPage() {
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
-  const [emailExpanded, setEmailExpanded] = useState(false);
+  const [authExpanded, setAuthExpanded] = useState(false);
+  const [authMode, setAuthMode] = useState<AuthMode>("signup");
   const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [showIOS, setShowIOS] = useState(false);
   const [sentReason, setSentReason] = useState<SentReason>("magiclink");
-
-  const [passwordExpanded, setPasswordExpanded] = useState(false);
-  const [passwordMode, setPasswordMode] = useState<PasswordMode>("signin");
-  const [pwEmail, setPwEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   useEffect(() => {
     setShowIOS(isIOS());
@@ -138,7 +135,7 @@ export default function LoginPage() {
 
   async function handlePasswordSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const trimmed = pwEmail.trim();
+    const trimmed = email.trim();
     if (!trimmed || password.length < 6) return;
 
     setStatus("sending");
@@ -147,7 +144,7 @@ export default function LoginPage() {
     try {
       const supabase = createClient();
 
-      if (passwordMode === "signin") {
+      if (authMode === "signin") {
         const { error } = await supabase.auth.signInWithPassword({
           email: trimmed,
           password,
@@ -305,16 +302,19 @@ export default function LoginPage() {
         </p>
 
         <div className="mt-7 flex flex-col gap-3">
-          {!emailExpanded ? (
+          {!authExpanded ? (
             <button
               type="button"
-              onClick={() => setEmailExpanded(true)}
+              onClick={() => {
+                setAuthExpanded(true);
+                setAuthMode("signup");
+              }}
               className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-olive text-[15px] text-cream"
             >
               <Mail className="h-[18px] w-[18px]" strokeWidth={1.75} />
               Продолжить с email
             </button>
-          ) : (
+          ) : authMode === "magiclink" ? (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <Input
                 type="email"
@@ -338,38 +338,29 @@ export default function LoginPage() {
               >
                 {status === "sending" ? "Отправляем…" : "Отправить ссылку"}
               </Button>
+              <button
+                type="button"
+                onClick={() => {
+                  setAuthMode("signup");
+                  setErrorMessage(null);
+                  if (status === "error") setStatus("idle");
+                }}
+                className="text-center text-[11px] text-text-muted underline underline-offset-4"
+              >
+                Войти по паролю
+              </button>
             </form>
-          )}
-
-          {!passwordExpanded ? (
-            <button
-              type="button"
-              onClick={() => {
-                setPasswordExpanded(true);
-                setErrorMessage(null);
-              }}
-              className="text-center text-[12px] text-text-muted underline underline-offset-4"
-            >
-              Войти по паролю
-            </button>
           ) : (
-            <form
-              onSubmit={handlePasswordSubmit}
-              className="flex flex-col gap-3 rounded-md border border-black/8 p-3"
-            >
-              <p className="text-[12px] text-text-muted">
-                {passwordMode === "signin"
-                  ? "Вход по паролю"
-                  : "Создайте пароль для аккаунта"}
-              </p>
+            <form onSubmit={handlePasswordSubmit} className="flex flex-col gap-3">
               <Input
                 type="email"
                 inputMode="email"
                 autoComplete="email"
+                autoFocus
                 required
-                value={pwEmail}
+                value={email}
                 onChange={(e) => {
-                  setPwEmail(e.target.value);
+                  setEmail(e.target.value);
                   if (status === "error") setStatus("idle");
                 }}
                 placeholder="вы@example.com"
@@ -379,7 +370,7 @@ export default function LoginPage() {
               <Input
                 type="password"
                 autoComplete={
-                  passwordMode === "signin" ? "current-password" : "new-password"
+                  authMode === "signin" ? "current-password" : "new-password"
                 }
                 required
                 minLength={6}
@@ -396,30 +387,44 @@ export default function LoginPage() {
                 type="submit"
                 disabled={
                   status === "sending" ||
-                  pwEmail.trim() === "" ||
+                  email.trim() === "" ||
                   password.length < 6
                 }
                 className="h-[52px] rounded-full text-[15px]"
               >
                 {status === "sending"
                   ? "Подождите…"
-                  : passwordMode === "signin"
+                  : authMode === "signin"
                     ? "Войти"
                     : "Создать аккаунт"}
               </Button>
-              <button
-                type="button"
-                onClick={() => {
-                  setPasswordMode(passwordMode === "signin" ? "signup" : "signin");
-                  setErrorMessage(null);
-                  if (status === "error") setStatus("idle");
-                }}
-                className="text-center text-[11px] text-text-muted underline underline-offset-4"
-              >
-                {passwordMode === "signin"
-                  ? "Нет аккаунта? Создать пароль"
-                  : "Уже есть аккаунт? Войти"}
-              </button>
+              <div className="flex items-center justify-center gap-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode(authMode === "signin" ? "signup" : "signin");
+                    setErrorMessage(null);
+                    if (status === "error") setStatus("idle");
+                  }}
+                  className="text-center text-[11px] text-text-muted underline underline-offset-4"
+                >
+                  {authMode === "signin"
+                    ? "Нет аккаунта? Создать"
+                    : "Уже есть аккаунт? Войти"}
+                </button>
+                <span className="text-[11px] text-text-muted/50">·</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setAuthMode("magiclink");
+                    setErrorMessage(null);
+                    if (status === "error") setStatus("idle");
+                  }}
+                  className="text-center text-[11px] text-text-muted underline underline-offset-4"
+                >
+                  Войти по ссылке
+                </button>
+              </div>
             </form>
           )}
 
