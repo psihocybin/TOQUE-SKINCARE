@@ -8,6 +8,7 @@ import { RitualHeroCard } from "@/components/home/ritual-hero-card";
 import { TodaySessionSection } from "@/components/home/today-session-section";
 import { AttendanceCard } from "@/components/home/attendance-card";
 import { TutorialsScroll } from "@/components/home/tutorials-scroll";
+import { ArticlesScroll } from "@/components/home/articles-scroll";
 import { RecommendedDevicesScroll } from "@/components/home/recommended-devices-scroll";
 import { PushPermission } from "@/components/pwa/push-permission";
 import { IosInstallHint } from "@/components/pwa/ios-install-hint";
@@ -17,13 +18,14 @@ import { getAttendance } from "@/lib/queries/attendance";
 import {
   getAllTodayProcedures,
   getProgramStatus,
-  getTodayProgramItem,
   greetingByTime,
   type SessionTimeSlot,
 } from "@/lib/program/utils";
 import { DRIP_CAMPAIGN } from "@/lib/content/drip-campaign";
+import { getDailyTip } from "@/lib/content/daily-tips";
 import { deviceEnumToSlug, getDeviceBySlug } from "@/lib/content/devices";
 import { tutorials } from "@/lib/content/tutorials";
+import { articles } from "@/lib/content/articles";
 import { getActiveRitual } from "@/lib/actions/rituals";
 import {
   asRitualSchedule,
@@ -57,7 +59,12 @@ export default async function HomePage() {
   const isSetupIncomplete = !profile.name.trim();
 
   const greeting = greetingByTime();
-  const today = getTodayProgramItem(profile.activated_at);
+  // Совет дня продолжает ротацию и после завершения 30-дневной программы —
+  // currentDay капается на 30, поэтому берём "сырой" день из daysPastCompletion.
+  const rawDayForTip = status.isCompleted
+    ? 30 + status.daysPastCompletion
+    : currentDay;
+  const dailyTip = getDailyTip(rawDayForTip);
 
   const primarySlug = profile.device ? deviceEnumToSlug(profile.device) : null;
   const ownedSlugs =
@@ -254,10 +261,24 @@ export default async function HomePage() {
             Совет дня
           </p>
           <p className="mt-2 text-[11px] leading-relaxed text-text">
-            {today.insightText}
+            {dailyTip}
           </p>
         </div>
       </FadeIn>
+
+      {articles.length > 0 ? (
+        <FadeIn delay={0.4} className="mt-4">
+          <div className="mb-3 flex items-center justify-between px-4">
+            <p className="text-[16px] font-bold text-text">Статьи</p>
+            <Link href="/articles" className="text-[12px] text-olive">
+              Все →
+            </Link>
+          </div>
+          <div className="px-4">
+            <ArticlesScroll items={articles} />
+          </div>
+        </FadeIn>
+      ) : null}
 
       <PushPermission />
       <IosInstallHint />

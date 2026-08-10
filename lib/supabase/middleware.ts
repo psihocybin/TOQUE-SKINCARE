@@ -10,6 +10,7 @@ const PROTECTED_PREFIXES = [
   "/ritual-home",
   "/ritual-builder",
   "/tutorials",
+  "/articles",
   "/achievements",
   "/journal",
   "/progress",
