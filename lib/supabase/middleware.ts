@@ -13,6 +13,7 @@ const PROTECTED_PREFIXES = [
   "/achievements",
   "/journal",
   "/progress",
+  "/photo",
   "/profile",
   "/settings",
   "/support",
