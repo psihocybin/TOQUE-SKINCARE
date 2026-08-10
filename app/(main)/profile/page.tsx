@@ -30,6 +30,8 @@ const MENU_ITEMS: ReadonlyArray<MenuItem> = [
   { href: "/ecosystem", label: "Экосистема TOQUE" },
   { href: "/about", label: "О TOQUE" },
   { href: "/referrals", label: "Пригласить подругу" },
+  { href: "/privacy", label: "Политика конфиденциальности" },
+  { href: "/terms", label: "Условия использования" },
 ];
 
 export default async function ProfilePage() {

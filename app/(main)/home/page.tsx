@@ -233,7 +233,7 @@ export default async function HomePage() {
       {tutorialsToShow.length > 0 ? (
         <FadeIn delay={0.25} className="mt-4">
           <div className="mb-3 flex items-center justify-between px-4">
-            <p className="text-[16px] font-bold text-text">Туториалы</p>
+            <p className="text-[16px] font-bold text-text">Уроки</p>
             <Link href="/tutorials" className="text-[12px] text-olive">
               Все →
             </Link>

@@ -112,7 +112,7 @@ export default function TutorialDetailPage({
       {otherTutorials.length > 0 ? (
         <section className="mt-6">
           <p className="px-4 text-[9px] uppercase tracking-[2px] text-text-muted">
-            Другие туториалы {deviceLabel}
+            Другие уроки {deviceLabel}
           </p>
           <div className="mt-3 flex flex-col gap-2 px-4">
             {otherTutorials.map((t) => (

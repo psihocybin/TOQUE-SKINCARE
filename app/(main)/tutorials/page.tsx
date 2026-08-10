@@ -58,7 +58,7 @@ export default function TutorialsPage() {
 
   return (
     <main className="flex min-h-screen flex-col px-4 pb-24 pt-6">
-      <h1 className="text-[22px] font-bold text-text">Туториалы</h1>
+      <h1 className="text-[22px] font-bold text-text">Уроки</h1>
 
       <div className="relative mt-4">
         <Search
