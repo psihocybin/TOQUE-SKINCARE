@@ -24,7 +24,6 @@ export function mapQuizToProfileUpsert(
 ): ProfileInsert {
   const insert: ProfileInsert = {
     id: userId,
-    is_gift: answers.isGift,
   };
 
   const name = answers.name.trim();

@@ -10,7 +10,7 @@ type OptionalToggleProps = {
   onChange: (next: boolean) => void;
 };
 
-// Rose-tinted переключатель для опциональных полей квиза (isGift, baseline-photo).
+// Rose-tinted переключатель для опциональных полей квиза (baseline-photo).
 // Визуально мягче чем основной OptionTile — пыльно-розовая обводка из палитры.
 export function OptionalToggle({
   label,

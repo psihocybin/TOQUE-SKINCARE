@@ -105,33 +105,6 @@ export default function QuizGoalPage() {
           );
         })}
       </div>
-
-      <div className="mt-5 border-t border-black/8 pt-5">
-        <button
-          type="button"
-          role="checkbox"
-          aria-checked={answers.isGift}
-          onClick={() => setAnswer("isGift", !answers.isGift)}
-          className="flex w-full items-center gap-2.5 text-left"
-        >
-          <span
-            className={cn(
-              "flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-[4px] border",
-              answers.isGift
-                ? "border-olive bg-olive"
-                : "border-black/25 bg-white",
-            )}
-            aria-hidden
-          >
-            {answers.isGift ? (
-              <Check className="h-3 w-3 text-white" strokeWidth={3} />
-            ) : null}
-          </span>
-          <span className="text-[13px] text-text-muted">
-            Устройство получила в подарок
-          </span>
-        </button>
-      </div>
     </QuizShellV2>
   );
 }

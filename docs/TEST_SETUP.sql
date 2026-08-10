@@ -40,7 +40,6 @@ update profiles set
   experience = 'beginner',
   preferred_time = 'evening',
   frequency = 'low',
-  is_gift = false,
   activated_at = now() - interval '6 days',
   completion_celebrated = false,
   warranty_serial = null,

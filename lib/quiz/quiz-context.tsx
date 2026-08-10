@@ -40,7 +40,6 @@ export type QuizAnswers = {
   name: string;
   ageGroup: AgeGroup | null;
   goal: Goal | null;
-  isGift: boolean;
   skinType: SkinType | null;
   experience: Experience | null;
   preferredTime: PreferredTime | null;
@@ -57,7 +56,6 @@ const defaultAnswers: QuizAnswers = {
   name: "",
   ageGroup: null,
   goal: null,
-  isGift: false,
   skinType: null,
   experience: null,
   preferredTime: null,
@@ -86,15 +84,15 @@ function isAnswered<K extends keyof QuizAnswers>(
   if (value === null || value === undefined) return false;
   if (typeof value === "string") return value.trim().length > 0;
   if (Array.isArray(value)) return value.length > 0;
-  // booleans (isGift, wantsBaselinePhoto) — заполнены по факту значения
+  // booleans (wantsBaselinePhoto) — заполнены по факту значения
   return true;
 }
 
 // Сопоставление шагов 1–7 с ключами, по которым шаг считается заполненным.
 // Порядок шагов (редизайн квиза): устройство → имя → цель → тип кожи →
 // опыт → возраст → время и ритм. Шаг 1 — devices (мультиселект, минимум
-// одно устройство). Шаг 3 — goal (+ isGift — опциональный чекбокс), шаг 7 —
-// preferredTime+frequency (baseline-фото опционально).
+// одно устройство). Шаг 7 — preferredTime+frequency (baseline-фото
+// опционально).
 const STEP_REQUIRED_KEYS: Record<number, ReadonlyArray<keyof QuizAnswers>> = {
   1: ["devices"],
   2: ["name"],
@@ -124,7 +122,6 @@ function mergeAnswers(stored: unknown): QuizAnswers {
   const out: QuizAnswers = { ...defaultAnswers };
 
   if (typeof s.name === "string") out.name = s.name;
-  if (typeof s.isGift === "boolean") out.isGift = s.isGift;
   if (typeof s.wantsBaselinePhoto === "boolean")
     out.wantsBaselinePhoto = s.wantsBaselinePhoto;
 

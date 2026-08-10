@@ -129,7 +129,7 @@ scripts/              # gen-icons.mjs (placeholder-иконки)
 ## База данных — главные таблицы
 
 ```sql
-profiles (id, name, age_group, goal, is_gift, skin_type, experience,
+profiles (id, name, age_group, goal, skin_type, experience,
   preferred_time, frequency, device, warranty_serial, referral_code,
   referred_by, activated_at, created_at)
 
@@ -175,7 +175,7 @@ push_subscriptions (id, profile_id, endpoint, p256dh, auth, created_at)
 - `03_onboarding_part_2.svg` — Квиз 4-6 (9, 10, 11), Финал (12)
 - `04_internal_screens.svg` — Видеоплеер (13), Журнал (14), Профиль (15), Настройки (16)
 - `05_states_and_events.svg` — Завершение (17), Empty journal (18), Съёмка фото (19), Push (20)
-- `06_alt_branches_and_services.svg` — Подарок-Welcome (21), Поддержка (22), Моя программа (23), Выбор времени (24)
+- `06_alt_branches_and_services.svg` — Поддержка (22), Моя программа (23), Выбор времени (24)
 - `07_surveys_and_service.svg` — Гарантия (25), NPS (26), JCS (27), Экосистема (28)
 - `08_upsell_referrals_ugc.svg` — Карточка устройства (29), Рефералы (30), Истории (31), Отзыв на МП (32)
 
