@@ -58,22 +58,21 @@ export default function WelcomePage() {
           Пройдите квиз — получите 30-дневную программу под ваше устройство и
           тип кожи.
         </p>
-        <Button
-          onClick={() => router.push("/quiz/device")}
-          className="mt-8 h-[52px] w-[200px] rounded-full text-[15px]"
-        >
-          Начать
-        </Button>
-      </FadeIn>
-
-      <FadeIn delay={0.3} className="sticky bottom-0 bg-cream pb-[max(env(safe-area-inset-bottom),16px)] pt-2 text-center">
-        <button
-          type="button"
-          onClick={() => router.push("/login")}
-          className="text-[13px] text-text-muted"
-        >
-          Не сейчас
-        </button>
+        <div className="mt-8 flex w-full max-w-[280px] flex-col gap-3">
+          <Button
+            onClick={() => router.push("/quiz/device")}
+            className="h-[52px] w-full rounded-full text-[15px]"
+          >
+            Пройти квиз
+          </Button>
+          <Button
+            onClick={() => router.push("/login")}
+            variant="outline"
+            className="h-[52px] w-full rounded-full text-[15px]"
+          >
+            У меня уже есть аккаунт
+          </Button>
+        </div>
       </FadeIn>
     </div>
   );
