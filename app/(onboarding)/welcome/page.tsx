@@ -69,7 +69,7 @@ export default function WelcomePage() {
       <FadeIn delay={0.3} className="sticky bottom-0 bg-cream pb-[max(env(safe-area-inset-bottom),16px)] pt-2 text-center">
         <button
           type="button"
-          onClick={() => {}}
+          onClick={() => router.push("/login")}
           className="text-[13px] text-text-muted"
         >
           Не сейчас
