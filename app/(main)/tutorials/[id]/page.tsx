@@ -5,7 +5,11 @@ import { BackButton } from "@/components/shared/back-button";
 import { DeviceImage } from "@/components/shared/device-image";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { getDeviceBySlug } from "@/lib/content/devices";
-import { getTutorialById, getTutorialsByDevice } from "@/lib/content/tutorials";
+import {
+  getTutorialById,
+  getTutorialsByDevice,
+  tutorialDeviceLabel,
+} from "@/lib/content/tutorials";
 import { cn } from "@/lib/utils";
 
 export default function TutorialDetailPage({
@@ -17,6 +21,10 @@ export default function TutorialDetailPage({
   if (!tutorial) notFound();
 
   const device = getDeviceBySlug(tutorial.deviceSlug);
+  const deviceLabel = tutorialDeviceLabel(
+    tutorial.deviceSlug,
+    device?.name ?? tutorial.deviceSlug.toUpperCase(),
+  );
   const otherTutorials = getTutorialsByDevice(tutorial.deviceSlug).filter(
     (t) => t.id !== tutorial.id,
   );
@@ -55,7 +63,7 @@ export default function TutorialDetailPage({
       <div className="mt-5 flex items-center gap-2 px-4">
         <DeviceImage slug={tutorial.deviceSlug} size={28} />
         <div className="min-w-0 flex-1">
-          <p className="text-[13px] text-text">{device?.name ?? tutorial.deviceSlug.toUpperCase()}</p>
+          <p className="text-[13px] text-text">{deviceLabel}</p>
           <p className="text-[10px] text-text-muted">{tutorial.durationMinutes} мин</p>
         </div>
         <FavoriteHeart tutorialId={tutorial.id} size={20} />
@@ -104,7 +112,7 @@ export default function TutorialDetailPage({
       {otherTutorials.length > 0 ? (
         <section className="mt-6">
           <p className="px-4 text-[9px] uppercase tracking-[2px] text-text-muted">
-            Другие туториалы {device?.name ?? ""}
+            Другие туториалы {deviceLabel}
           </p>
           <div className="mt-3 flex flex-col gap-2 px-4">
             {otherTutorials.map((t) => (

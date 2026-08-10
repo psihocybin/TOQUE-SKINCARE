@@ -3,7 +3,7 @@ import { Clock } from "lucide-react";
 import { DeviceImage } from "@/components/shared/device-image";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { getDeviceBySlug } from "@/lib/content/devices";
-import type { Tutorial } from "@/lib/content/tutorials";
+import { tutorialDeviceLabel, type Tutorial } from "@/lib/content/tutorials";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -31,7 +31,10 @@ export function TutorialCard({ tutorial, onFavoriteToggle }: Props) {
         <div className="flex items-center gap-1.5">
           <DeviceImage slug={tutorial.deviceSlug} size={20} />
           <span className="text-[10px] text-text-muted">
-            {device?.name ?? tutorial.deviceSlug.toUpperCase()}
+            {tutorialDeviceLabel(
+              tutorial.deviceSlug,
+              device?.name ?? tutorial.deviceSlug.toUpperCase(),
+            )}
           </span>
         </div>
         <p className="mt-1 text-[14px] font-semibold text-text">

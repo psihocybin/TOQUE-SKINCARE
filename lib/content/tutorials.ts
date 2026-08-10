@@ -204,3 +204,11 @@ export function getTutorialById(id: string): Tutorial | undefined {
 export function getTutorialsByDevice(deviceSlug: string): Tutorial[] {
   return tutorials.filter((t) => t.deviceSlug === deviceSlug);
 }
+
+// NUO PRO использует тот же УЗ-протокол, что и NUO — отдельных туториалов
+// для него нет, поэтому в UI туториалы NUO помечаются как общие для обеих
+// версий устройства, а не заводится дублирующий набор карточек.
+export function tutorialDeviceLabel(deviceSlug: string, fallback: string): string {
+  if (deviceSlug === "nuo") return "NUO/NUO PRO";
+  return fallback;
+}
