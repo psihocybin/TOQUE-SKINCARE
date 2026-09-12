@@ -120,7 +120,28 @@ export default async function HomePage() {
   const initial = (trimmedName[0] ?? "?").toUpperCase();
 
   return (
-    <main className="flex min-h-screen flex-col pb-24 pt-6">
+    <main className="relative flex min-h-screen flex-col overflow-hidden bg-cream pb-24 pt-6">
+      {/* Приглушённое фото листа — только верхние 420px, дальше сплошной
+          cream, чтобы не растягивать/повторять картинку на всю длинную
+          страницу. Три отдельных слоя вместо одного составного
+          background-image: смешивание gradient+url в одном свойстве с общим
+          background-size давало артефакты (чёрная область на стыке слоёв). */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-cover bg-top"
+        style={{ backgroundImage: "url(/backgrounds/home-leaf.jpg)" }}
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        style={{
+          background:
+            "linear-gradient(to bottom, rgba(250,250,247,0.55), rgba(250,250,247,0.93) 65%, #FAFAF7 100%)",
+        }}
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[420px] bottom-0 bg-cream" />
+
+      <div className="relative z-10 flex flex-1 flex-col">
       <QuizSyncOnMount profileFilled={Boolean(profile.device)} />
 
       <FadeIn className="flex items-center justify-between px-4">
@@ -282,6 +303,7 @@ export default async function HomePage() {
 
       <PushPermission />
       <IosInstallHint />
+      </div>
     </main>
   );
 }
