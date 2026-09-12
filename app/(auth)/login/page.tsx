@@ -238,14 +238,15 @@ export default function LoginPage() {
   return (
     <div className="flex min-h-screen flex-col">
       <div
-        className="flex h-[45vh] items-center justify-center bg-cream-dark"
+        className="flex h-[45vh] items-center justify-center"
         aria-hidden
       >
-        {/* Плейсхолдер — в будущем lifestyle-фото клиентки с устройством */}
-        <span className="text-[28px] tracking-[4px] text-olive">TOQUE</span>
+        {/* Прозрачно — здесь виден общий фон приложения (фото листа из
+            PhoneFrame). Раньше был плейсхолдер-заглушка сплошным цветом. */}
+        <span className="text-[28px] tracking-[4px] text-olive-dark">TOQUE</span>
       </div>
 
-      <div className="-mt-6 flex-1 rounded-t-[28px] bg-cream px-6 pb-8 pt-7">
+      <div className="-mt-6 flex-1 rounded-t-[28px] border border-white/40 bg-cream/90 px-6 pb-8 pt-7 backdrop-blur-md">
         <h1 className="text-[22px] font-bold text-text">Создайте аккаунт</h1>
         <p className="mt-1.5 text-[13px] text-text-muted">
           Программа сохранится и будет доступна с любого устройства

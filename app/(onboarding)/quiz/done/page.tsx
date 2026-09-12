@@ -52,7 +52,7 @@ export default function QuizDonePage() {
       className="flex min-h-screen flex-col px-6 pb-10 pt-14 text-center"
       style={{
         background:
-          "radial-gradient(circle at 50% 30%, #F1EFE8 0%, #FAFAF7 100%)",
+          "radial-gradient(circle at 50% 30%, rgba(241,239,232,0.45) 0%, rgba(250,250,247,0.7) 100%)",
       }}
     >
       <div className="relative mx-auto flex h-[72px] w-[72px] items-center justify-center">

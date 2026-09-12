@@ -36,13 +36,13 @@ export default function WelcomePage() {
         className="flex flex-1 items-center justify-center"
         style={{
           background:
-            "radial-gradient(circle at 50% 30%, #F1EFE8 0%, #FAFAF7 100%)",
+            "radial-gradient(circle at 50% 30%, rgba(241,239,232,0.45) 0%, rgba(250,250,247,0.7) 100%)",
         }}
       >
         <FadeIn duration={0.5}>
-          <div className="flex h-[240px] w-[240px] items-center justify-center rounded-full bg-cream-dark/60">
+          <div className="flex h-[240px] w-[240px] items-center justify-center rounded-full border border-white/50 bg-white/40 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.08)] backdrop-blur-md">
             {/* Плейсхолдер — в будущем <Image src="/devices/nuo.jpg" .../> */}
-            <span className="text-[32px] font-bold text-olive">TOQUE</span>
+            <span className="text-[32px] font-bold text-olive-dark">TOQUE</span>
           </div>
         </FadeIn>
       </div>

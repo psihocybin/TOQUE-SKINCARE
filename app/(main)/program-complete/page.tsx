@@ -37,7 +37,8 @@ export default async function ProgramCompletePage() {
     <div
       className="flex min-h-screen flex-col items-center px-6 pb-10 pt-16 text-center"
       style={{
-        background: "radial-gradient(circle at 50% 30%, #F1EFE8 0%, #FAFAF7 100%)",
+        background:
+          "radial-gradient(circle at 50% 30%, rgba(241,239,232,0.45) 0%, rgba(250,250,247,0.7) 100%)",
       }}
     >
       <div className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-olive/15">
