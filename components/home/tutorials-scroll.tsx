@@ -17,9 +17,9 @@ export function TutorialsScroll({ items }: Props) {
         <Link
           key={t.id}
           href={`/tutorials/${t.id}`}
-          className="flex h-[200px] w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
+          className="flex w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
-          <div className="relative flex-1">
+          <div className="relative h-[130px] shrink-0">
             <DeviceImage slug={t.deviceSlug} fill className="rounded-none" />
             <FavoriteHeart
               tutorialId={t.id}
@@ -28,10 +28,10 @@ export function TutorialsScroll({ items }: Props) {
             />
           </div>
           <div className="px-3 py-2">
-            <p className="truncate text-[12px] font-semibold text-text">
+            <p className="line-clamp-2 text-[12px] font-semibold leading-snug text-text">
               {t.title}
             </p>
-            <p className="mt-0.5 text-[10px] text-text-muted">
+            <p className="mt-1 text-[10px] text-text-muted">
               {t.durationMinutes} мин
             </p>
           </div>

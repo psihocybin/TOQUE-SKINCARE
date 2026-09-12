@@ -17,7 +17,7 @@ import { BackButton } from "@/components/shared/back-button";
 import { DeviceImage } from "@/components/shared/device-image";
 import { MiniWeekCalendar } from "@/components/ritual-builder/mini-week-calendar";
 import { getProtocolBySlug } from "@/lib/content/protocols";
-import { abbreviateMode, deviceGlassStyle, getDeviceColor } from "@/lib/content/device-colors";
+import { abbreviateMode, getDeviceColor } from "@/lib/content/device-colors";
 import {
   activateRitual,
   saveRitual,
@@ -100,7 +100,6 @@ export function RitualConstructor({
   const activeModeObj =
     activeProtocol?.modes.find((m) => m.name === activeModeName) ?? activeProtocol?.modes[0];
   const activeModeSchedule = activeConfig?.modes.find((m) => m.modeName === activeModeObj?.name);
-  const activeColor = getDeviceColor(activeDeviceSlug);
 
   // Находит запись активного режима в деталях устройства и применяет к ней
   // mutate — создаёт запись с дефолтами, если режим ещё ни разу не трогали.
@@ -347,15 +346,16 @@ export function RitualConstructor({
                   aria-pressed={isActive}
                   className={cn(
                     "relative flex h-[76px] w-16 shrink-0 flex-col items-center justify-center gap-1.5 rounded-[10px] border backdrop-blur-md transition-colors",
-                    !isActive && "border-black/8 bg-white",
+                    isActive
+                      ? "border-olive/50 bg-olive/30"
+                      : "border-black/8 bg-white",
                   )}
-                  style={isActive ? deviceGlassStyle(color.hex) : undefined}
                 >
                   <DeviceImage slug={d.slug} size={36} />
                   <span
                     className={cn(
                       "text-[8px] font-semibold",
-                      isActive ? color.text : "text-text-muted",
+                      isActive ? "text-olive-dark" : "text-text-muted",
                     )}
                   >
                     {d.name}
@@ -392,10 +392,9 @@ export function RitualConstructor({
                       className={cn(
                         "rounded-full border px-3 py-1.5 text-[11px] backdrop-blur-md transition-colors",
                         isSelected
-                          ? cn(activeColor.text, "font-semibold")
+                          ? "border-olive/50 bg-olive/30 font-semibold text-olive-dark"
                           : "border-black/10 bg-white text-text-muted",
                       )}
-                      style={isSelected ? deviceGlassStyle(activeColor.hex) : undefined}
                     >
                       {mode.displayName ?? mode.name}
                     </button>
@@ -405,23 +404,20 @@ export function RitualConstructor({
             </div>
 
             {/* Частота — подсказка из протокола */}
-            <div
-              className="rounded-lg border p-3 backdrop-blur-md"
-              style={deviceGlassStyle(activeColor.hex)}
-            >
+            <div className="rounded-lg border border-olive/50 bg-olive/30 p-3 backdrop-blur-md">
               <div className="flex items-start gap-1.5">
-                <Info className={cn("mt-0.5 h-3.5 w-3.5 shrink-0", activeColor.text)} strokeWidth={1.75} aria-hidden />
+                <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-olive-dark" strokeWidth={1.75} aria-hidden />
                 <div className="min-w-0">
-                  <p className={cn("text-[11px]", activeColor.text)}>
+                  <p className="text-[11px] text-olive-dark">
                     {activeProtocol.frequency.label}
                     {activeModeObj ? ` для «${activeModeObj.displayName ?? activeModeObj.name}»` : ""}
                   </p>
                   {activeModeObj?.hasElectricCurrent ? (
-                    <p className={cn("mt-0.5 text-[10px] opacity-80", activeColor.text)}>
+                    <p className="mt-0.5 text-[10px] text-olive-dark opacity-80">
                       Используйте только водную основу (гель)
                     </p>
                   ) : activeProtocol.frequency.note ? (
-                    <p className={cn("mt-0.5 text-[10px] opacity-80", activeColor.text)}>
+                    <p className="mt-0.5 text-[10px] text-olive-dark opacity-80">
                       {activeProtocol.frequency.note}
                     </p>
                   ) : null}
@@ -444,16 +440,17 @@ export function RitualConstructor({
                       onClick={() => setSessionTime(t.value)}
                       className={cn(
                         "flex h-11 flex-col items-center justify-center gap-0.5 rounded-lg border backdrop-blur-md transition-colors",
-                        !isSelected && "border-black/10 bg-white",
+                        isSelected
+                          ? "border-olive/50 bg-olive/30"
+                          : "border-black/10 bg-white",
                       )}
-                      style={isSelected ? deviceGlassStyle(activeColor.hex) : undefined}
                     >
                       <Icon
-                        className={cn("h-3.5 w-3.5", isSelected ? activeColor.text : "text-text-muted")}
+                        className={cn("h-3.5 w-3.5", isSelected ? "text-olive-dark" : "text-text-muted")}
                         strokeWidth={1.75}
                         aria-hidden
                       />
-                      <span className={cn("text-[9px]", isSelected ? cn(activeColor.text, "font-semibold") : "text-text-muted")}>
+                      <span className={cn("text-[9px]", isSelected ? "font-semibold text-olive-dark" : "text-text-muted")}>
                         {t.label}
                       </span>
                     </button>
@@ -489,10 +486,9 @@ export function RitualConstructor({
                         className={cn(
                           "flex h-8 w-full items-center justify-center rounded-lg border text-[10px] backdrop-blur-md transition-colors",
                           isSelected
-                            ? cn(activeColor.text, "font-semibold")
+                            ? "border-olive/50 bg-olive/30 font-semibold text-olive-dark"
                             : "border-black/10 bg-white text-text-muted",
                         )}
-                        style={isSelected ? deviceGlassStyle(activeColor.hex) : undefined}
                       >
                         {WEEKDAY_LABELS[day]}
                       </button>

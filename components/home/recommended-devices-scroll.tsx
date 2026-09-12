@@ -13,9 +13,9 @@ export function RecommendedDevicesScroll({ devices }: Props) {
         <Link
           key={d.slug}
           href={`/ecosystem/${d.slug}`}
-          className="flex h-[210px] w-[150px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
+          className="flex w-[150px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
-          <div className="relative flex-1">
+          <div className="relative h-[140px] shrink-0">
             <DeviceImage slug={d.slug} fill className="rounded-none" />
           </div>
           <div className="px-3 py-2.5">
