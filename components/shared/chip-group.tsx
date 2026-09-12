@@ -30,7 +30,7 @@ export function ChipGroup({
             className={cn(
               "flex h-8 items-center rounded-pill border px-4 text-sm backdrop-blur-md transition-colors duration-150",
               isSelected
-                ? "border-olive/50 bg-olive/30 text-olive-dark"
+                ? "border-2 border-olive bg-white/70 shadow-[0_2px_10px_rgba(122,138,79,0.3)] text-olive-dark"
                 : "border-black/15 bg-white text-text-muted hover:text-text",
             )}
           >

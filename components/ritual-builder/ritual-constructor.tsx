@@ -347,7 +347,7 @@ export function RitualConstructor({
                   className={cn(
                     "relative flex h-[76px] w-16 shrink-0 flex-col items-center justify-center gap-1.5 rounded-[10px] border backdrop-blur-md transition-colors",
                     isActive
-                      ? "border-olive/50 bg-olive/30"
+                      ? "border-2 border-olive bg-white/70 shadow-[0_2px_10px_rgba(122,138,79,0.3)]"
                       : "border-black/8 bg-white",
                   )}
                 >
@@ -392,7 +392,7 @@ export function RitualConstructor({
                       className={cn(
                         "rounded-full border px-3 py-1.5 text-[11px] backdrop-blur-md transition-colors",
                         isSelected
-                          ? "border-olive/50 bg-olive/30 font-semibold text-olive-dark"
+                          ? "border-2 border-olive bg-white/70 shadow-[0_2px_10px_rgba(122,138,79,0.3)] font-semibold text-olive-dark"
                           : "border-black/10 bg-white text-text-muted",
                       )}
                     >
@@ -404,7 +404,7 @@ export function RitualConstructor({
             </div>
 
             {/* Частота — подсказка из протокола */}
-            <div className="rounded-lg border border-olive/50 bg-olive/30 p-3 backdrop-blur-md">
+            <div className="rounded-lg border-2 border-olive bg-white/70 p-3 shadow-[0_2px_10px_rgba(122,138,79,0.3)] backdrop-blur-md">
               <div className="flex items-start gap-1.5">
                 <Info className="mt-0.5 h-3.5 w-3.5 shrink-0 text-olive-dark" strokeWidth={1.75} aria-hidden />
                 <div className="min-w-0">
@@ -441,7 +441,7 @@ export function RitualConstructor({
                       className={cn(
                         "flex h-11 flex-col items-center justify-center gap-0.5 rounded-lg border backdrop-blur-md transition-colors",
                         isSelected
-                          ? "border-olive/50 bg-olive/30"
+                          ? "border-2 border-olive bg-white/70 shadow-[0_2px_10px_rgba(122,138,79,0.3)]"
                           : "border-black/10 bg-white",
                       )}
                     >
@@ -486,7 +486,7 @@ export function RitualConstructor({
                         className={cn(
                           "flex h-8 w-full items-center justify-center rounded-lg border text-[10px] backdrop-blur-md transition-colors",
                           isSelected
-                            ? "border-olive/50 bg-olive/30 font-semibold text-olive-dark"
+                            ? "border-2 border-olive bg-white/70 shadow-[0_2px_10px_rgba(122,138,79,0.3)] font-semibold text-olive-dark"
                             : "border-black/10 bg-white text-text-muted",
                         )}
                       >
