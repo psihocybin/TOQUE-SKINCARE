@@ -49,19 +49,29 @@ export default async function ProfilePage() {
   return (
     <main className="flex min-h-screen flex-col px-5 pb-24 pt-8">
       <FadeIn className="flex flex-col items-center text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-pill border border-olive/20 bg-white/60 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] backdrop-blur-md">
+        <div className="flex h-16 w-16 items-center justify-center rounded-pill border border-olive/20 bg-white/85 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
           <span className="text-[20px] tracking-[2px] text-olive-dark">
             {initial}
           </span>
         </div>
-        <h1 className="mt-4 text-[16px] text-text">{trimmedName}</h1>
+        <h1
+          className="mt-4 text-[16px] text-text"
+          style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+        >
+          {trimmedName}
+        </h1>
         {subLine ? (
-          <p className="mt-1 text-[10px] text-text-muted">{subLine}</p>
+          <p
+            className="mt-1 text-[10px] text-text-muted"
+            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+          >
+            {subLine}
+          </p>
         ) : null}
       </FadeIn>
 
       <FadeIn delay={0.2} className="mt-7">
-        <div className="flex items-center rounded-lg border border-olive/20 bg-white/60 px-4 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] backdrop-blur-md">
+        <div className="flex items-center rounded-lg border border-olive/20 bg-white/85 px-4 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
           <div className="flex-1 text-center">
             <p className="text-[20px] leading-none text-text">{currentDay}</p>
             <p className="mt-1 text-[9px] text-text-muted">
@@ -81,10 +91,13 @@ export default async function ProfilePage() {
       </FadeIn>
 
       <FadeIn delay={0.35} className="mt-8">
-        <p className="text-[9px] uppercase tracking-[1px] text-text-muted">
+        <p
+          className="text-[9px] uppercase tracking-[1px] text-text-muted"
+          style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+        >
           Меню
         </p>
-        <ul className="mt-2 overflow-hidden rounded-lg border border-black/[0.06] bg-white/60 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] backdrop-blur-md">
+        <ul className="mt-2 overflow-hidden rounded-lg border border-black/10 bg-white/85 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
           {MENU_ITEMS.map((item, i) => (
             <li
               key={item.href}
