@@ -4,7 +4,6 @@ import { DeviceImage } from "@/components/shared/device-image";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { getDeviceBySlug } from "@/lib/content/devices";
 import { tutorialDeviceLabel, type Tutorial } from "@/lib/content/tutorials";
-import { cn } from "@/lib/utils";
 
 type Props = {
   tutorial: Tutorial;
@@ -17,15 +16,10 @@ export function TutorialCard({ tutorial, onFavoriteToggle }: Props) {
   return (
     <Link
       href={`/tutorials/${tutorial.id}`}
-      className="flex overflow-hidden rounded-2xl bg-white shadow-sm"
+      className="flex overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
     >
-      <div
-        className={cn(
-          "flex w-[120px] shrink-0 items-center justify-center rounded-l-2xl",
-          tutorial.thumbnailPlaceholder,
-        )}
-      >
-        <DeviceImage slug={tutorial.deviceSlug} size={48} />
+      <div className="w-[120px] shrink-0">
+        <DeviceImage slug={tutorial.deviceSlug} fill className="rounded-none" />
       </div>
       <div className="min-w-0 flex-1 p-3">
         <div className="flex items-center gap-1.5">

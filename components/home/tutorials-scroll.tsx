@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { DeviceImage } from "@/components/shared/device-image";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
-import { cn } from "@/lib/utils";
 import type { Tutorial } from "@/lib/content/tutorials";
 
 type Props = { items: Tutorial[] };
@@ -20,13 +19,8 @@ export function TutorialsScroll({ items }: Props) {
           href={`/tutorials/${t.id}`}
           className="flex h-[200px] w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
-          <div
-            className={cn(
-              "flex h-[120px] shrink-0 items-center justify-center",
-              t.thumbnailPlaceholder,
-            )}
-          >
-            <DeviceImage slug={t.deviceSlug} size={40} />
+          <div className="h-[120px] shrink-0">
+            <DeviceImage slug={t.deviceSlug} fill className="rounded-none" />
           </div>
           <div className="relative flex-1 p-3">
             <div className="flex items-center gap-1.5 pr-5">

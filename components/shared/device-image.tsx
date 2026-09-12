@@ -8,6 +8,10 @@ type DeviceImageProps = {
   slug: string;
   size?: number;
   className?: string;
+  // Заполнить весь родительский контейнер (для больших фото-миниатюр
+  // уроков) вместо фиксированного пиксельного квадрата (для мелких иконок
+  // в бейджах/списках). Родитель сам задаёт размер и rounded-*.
+  fill?: boolean;
 };
 
 // Фото устройства из public/devices/, с плейсхолдером (первая буква slug),
@@ -26,12 +30,17 @@ type DeviceImageProps = {
 // Размер задаём через style, а не Tailwind-классы вида w-[${size}px]:
 // произвольная arbitrary-value строка, собранная из переменной, не
 // попадает в JIT-скан Tailwind и в сборке не будет сгенерирован CSS-класс.
-export function DeviceImage({ slug, size = 52, className }: DeviceImageProps) {
+export function DeviceImage({
+  slug,
+  size = 52,
+  className,
+  fill = false,
+}: DeviceImageProps) {
   const device = getDeviceBySlug(slug);
   const [errored, setErrored] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const imgSrc = device?.imageUrl;
-  const dimension = { width: size, height: size };
+  const dimension = fill ? undefined : { width: size, height: size };
   const showPlaceholder = !imgSrc || errored;
 
   useEffect(() => {
@@ -46,10 +55,16 @@ export function DeviceImage({ slug, size = 52, className }: DeviceImageProps) {
         style={dimension}
         className={cn(
           "flex shrink-0 items-center justify-center rounded-xl bg-cream-dark",
+          fill && "h-full w-full",
           className,
         )}
       >
-        <span className="text-xl font-bold text-olive">
+        <span
+          className={cn(
+            "font-bold text-olive",
+            fill ? "text-4xl" : "text-xl",
+          )}
+        >
           {slug[0]?.toUpperCase()}
         </span>
       </div>
@@ -61,6 +76,7 @@ export function DeviceImage({ slug, size = 52, className }: DeviceImageProps) {
       style={dimension}
       className={cn(
         "shrink-0 overflow-hidden rounded-xl bg-cream-dark",
+        fill && "h-full w-full",
         className,
       )}
     >

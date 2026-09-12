@@ -9,7 +9,6 @@ import { TutorialCard } from "@/components/tutorials/tutorial-card";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { readFavorites } from "@/lib/tutorials/favorites";
 import { tutorials } from "@/lib/content/tutorials";
-import { cn } from "@/lib/utils";
 
 const FILTER_OPTIONS = [
   { value: "all", label: "Все" },
@@ -89,15 +88,14 @@ export default function TutorialsPage() {
               <Link
                 key={t.id}
                 href={`/tutorials/${t.id}`}
-                className="flex h-[150px] w-[120px] shrink-0 flex-col overflow-hidden rounded-2xl bg-white shadow-sm"
+                className="flex h-[150px] w-[120px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
               >
-                <div
-                  className={cn(
-                    "flex h-[90px] shrink-0 items-center justify-center",
-                    t.thumbnailPlaceholder,
-                  )}
-                >
-                  <DeviceImage slug={t.deviceSlug} size={32} />
+                <div className="h-[90px] shrink-0">
+                  <DeviceImage
+                    slug={t.deviceSlug}
+                    fill
+                    className="rounded-none"
+                  />
                 </div>
                 <div className="relative flex-1 p-2">
                   <p className="line-clamp-2 pr-4 text-[11px] font-semibold text-text">

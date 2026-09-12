@@ -17,7 +17,6 @@ export type Tutorial = {
   title: string;
   description: string;
   durationMinutes: number;
-  thumbnailPlaceholder: string;
   steps: TutorialStep[];
   tags: string[];
 };
@@ -42,11 +41,6 @@ function stepsFromModes(deviceSlug: string, modeNames: string[]): TutorialStep[]
   );
 }
 
-const PLACEHOLDER_TONES = ["bg-cream-dark", "bg-olive/8", "bg-rose/8"] as const;
-function toneFor(index: number): string {
-  return PLACEHOLDER_TONES[index % PLACEHOLDER_TONES.length] ?? PLACEHOLDER_TONES[0];
-}
-
 export const tutorials: Tutorial[] = [
   {
     id: "nuo-cleaning",
@@ -54,7 +48,6 @@ export const tutorials: Tutorial[] = [
     title: "Ультразвуковое очищение",
     description: "Мягкое УЗ-очищение пор на влажной коже, гель-проводник.",
     durationMinutes: 5,
-    thumbnailPlaceholder: toneFor(0),
     steps: stepsFromModes("nuo", ["Cleaning (УЗ-очищение)"]),
     tags: ["nuo"],
   },
@@ -64,7 +57,6 @@ export const tutorials: Tutorial[] = [
     title: "Дезинкрустация пор",
     description: "Глубокая чистка расширенных пор гальваническим током.",
     durationMinutes: 5,
-    thumbnailPlaceholder: toneFor(1),
     steps: stepsFromModes("nuo", ["Ion- (дезинкрустация)"]),
     tags: ["nuo"],
   },
@@ -74,7 +66,6 @@ export const tutorials: Tutorial[] = [
     title: "Ионофорез: доставка активов",
     description: "Усиленное проникновение сыворотки с активными компонентами.",
     durationMinutes: 8,
-    thumbnailPlaceholder: toneFor(2),
     steps: stepsFromModes("nuo", ["Ion+ (ионофорез)"]),
     tags: ["nuo"],
   },
@@ -84,7 +75,6 @@ export const tutorials: Tutorial[] = [
     title: "Микротоковый лифтинг",
     description: "Проработка овала лица микротоками, водная основа.",
     durationMinutes: 8,
-    thumbnailPlaceholder: toneFor(0),
     steps: stepsFromModes("nuo", ["Lifting (микротоки)"]),
     tags: ["nuo"],
   },
@@ -94,7 +84,6 @@ export const tutorials: Tutorial[] = [
     title: "RED-режим: лифтинг и тонус",
     description: "Протокол уточняется — появится после проверки у специалиста.",
     durationMinutes: 10,
-    thumbnailPlaceholder: toneFor(1),
     steps: [],
     tags: ["elara"],
   },
@@ -104,7 +93,6 @@ export const tutorials: Tutorial[] = [
     title: "BLUE-режим: баланс и поры",
     description: "Протокол уточняется — появится после проверки у специалиста.",
     durationMinutes: 7,
-    thumbnailPlaceholder: toneFor(2),
     steps: [],
     tags: ["elara"],
   },
@@ -114,7 +102,6 @@ export const tutorials: Tutorial[] = [
     title: "ActiveTone: утренний тонус",
     description: "Микротоки 0,7 мА + LED — тонус и чёткость контура с утра.",
     durationMinutes: 10,
-    thumbnailPlaceholder: toneFor(0),
     steps: stepsFromModes("lyra", ["ActiveTone (микротоки + LED)"]),
     tags: ["lyra"],
   },
@@ -124,7 +111,6 @@ export const tutorials: Tutorial[] = [
     title: "DeepCalm: вечернее расслабление",
     description: "Тепло, вибрация и LED — расслабление без тока перед сном.",
     durationMinutes: 10,
-    thumbnailPlaceholder: toneFor(1),
     steps: stepsFromModes("lyra", ["DeepCalm (тепло + вибрация + LED)"]),
     tags: ["lyra"],
   },
@@ -134,7 +120,6 @@ export const tutorials: Tutorial[] = [
     title: "R-Wave + T-Wave: базовый протокол",
     description: "Деликатный уход вокруг глаз и тонизирование контура лица.",
     durationMinutes: 10,
-    thumbnailPlaceholder: toneFor(2),
     steps: stepsFromModes("sylva", [
       "R-Wave (Relaxation Wave)",
       "T-Wave (Toning Wave)",
@@ -147,7 +132,6 @@ export const tutorials: Tutorial[] = [
     title: "Полный вечерний протокол",
     description: "R-Wave, T-Wave и S-Wave — расслабление, тонус, скульптурирование.",
     durationMinutes: 20,
-    thumbnailPlaceholder: toneFor(0),
     steps: stepsFromModes("sylva", [
       "R-Wave (Relaxation Wave)",
       "T-Wave (Toning Wave)",
@@ -161,7 +145,6 @@ export const tutorials: Tutorial[] = [
     title: "Световая терапия: выбор спектра",
     description: "8 спектров LED — как подобрать под задачу кожи сегодня.",
     durationMinutes: 15,
-    thumbnailPlaceholder: toneFor(1),
     steps: stepsFromModes("anima", ["LED-сессия"]),
     tags: ["anima"],
   },
@@ -171,7 +154,6 @@ export const tutorials: Tutorial[] = [
     title: "Гуаша: техника движений",
     description: "Базовая техника массажных линий для лица, шеи и декольте.",
     durationMinutes: 10,
-    thumbnailPlaceholder: toneFor(2),
     steps: stepsFromModes("aura", ["Микромассаж + красный LED"]),
     tags: ["aura"],
   },
@@ -181,7 +163,6 @@ export const tutorials: Tutorial[] = [
     title: "Массаж глаз",
     description: "Массажные очки с подогревом и вибрацией — снятие напряжения.",
     durationMinutes: 15,
-    thumbnailPlaceholder: toneFor(0),
     steps: stepsFromModes("nova", ["Массаж вокруг глаз"]),
     tags: ["nova"],
   },
@@ -191,7 +172,6 @@ export const tutorials: Tutorial[] = [
     title: "Массаж глаз",
     description: "Воздушно-компрессионный массаж 8 зон — работа с отёчностью.",
     durationMinutes: 15,
-    thumbnailPlaceholder: toneFor(1),
     steps: stepsFromModes("aeris", ["Массаж вокруг глаз"]),
     tags: ["aeris"],
   },

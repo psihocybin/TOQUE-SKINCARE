@@ -119,15 +119,14 @@ export default function TutorialDetailPage({
               <Link
                 key={t.id}
                 href={`/tutorials/${t.id}`}
-                className="flex items-center gap-3 rounded-xl bg-white p-2 shadow-sm"
+                className="flex items-center gap-3 rounded-xl border border-black/[0.06] bg-white p-2 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
               >
-                <div
-                  className={cn(
-                    "flex h-[64px] w-[80px] shrink-0 items-center justify-center rounded-lg",
-                    t.thumbnailPlaceholder,
-                  )}
-                >
-                  <DeviceImage slug={t.deviceSlug} size={28} />
+                <div className="h-[64px] w-[80px] shrink-0 overflow-hidden rounded-lg">
+                  <DeviceImage
+                    slug={t.deviceSlug}
+                    fill
+                    className="rounded-none"
+                  />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[13px] text-text">{t.title}</p>
