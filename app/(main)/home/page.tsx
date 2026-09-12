@@ -120,28 +120,9 @@ export default async function HomePage() {
   const initial = (trimmedName[0] ?? "?").toUpperCase();
 
   return (
-    <main className="relative flex min-h-screen flex-col overflow-hidden bg-cream pb-24 pt-6">
-      {/* Приглушённое фото листа — только верхние 620px, дальше сплошной
-          cream, чтобы не растягивать/повторять картинку на всю длинную
-          страницу. Три отдельных слоя вместо одного составного
-          background-image: смешивание gradient+url в одном свойстве с общим
-          background-size давало артефакты (чёрная область на стыке слоёв). */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-cover bg-top"
-        style={{ backgroundImage: "url(/backgrounds/home-leaf.jpg)" }}
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[620px]"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(250,250,247,0.4) 0%, rgba(250,250,247,0.6) 35%, rgba(250,250,247,0.85) 65%, rgba(250,250,247,0.97) 88%, #FAFAF7 100%)",
-        }}
-      />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[620px] bottom-0 bg-cream" />
-
-      <div className="relative z-10 flex flex-1 flex-col">
+    <main className="flex min-h-screen flex-col pb-24 pt-6">
+      {/* Фоновая заставка (фото листа) теперь общая для всего приложения —
+          см. components/shared/phone-frame.tsx. */}
       <QuizSyncOnMount profileFilled={Boolean(profile.device)} />
 
       <FadeIn className="flex items-center justify-between px-4">
@@ -154,7 +135,7 @@ export default async function HomePage() {
         <Link
           href="/profile"
           aria-label="Профиль"
-          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-olive/15"
+          className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-olive/20 bg-white/60 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_4px_10px_rgba(0,0,0,0.06)] backdrop-blur-md"
         >
           <span className="text-[14px] text-olive">{initial}</span>
         </Link>
@@ -164,7 +145,7 @@ export default async function HomePage() {
         <FadeIn delay={0.1} className="mx-4 mt-4">
           <Link
             href="/quiz/device"
-            className="flex items-center justify-between rounded-lg border border-olive/30 bg-olive/[0.06] px-4 py-4 transition-colors hover:bg-olive/[0.1]"
+            className="flex items-center justify-between rounded-lg border border-olive/20 bg-white/60 px-4 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-md transition-colors hover:bg-white/75"
           >
             <div>
               <p className="text-[9px] uppercase tracking-[1.5px] text-olive">
@@ -303,7 +284,6 @@ export default async function HomePage() {
 
       <PushPermission />
       <IosInstallHint />
-      </div>
     </main>
   );
 }
