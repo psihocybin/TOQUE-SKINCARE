@@ -219,7 +219,7 @@ export default async function HomePage() {
       <FadeIn delay={0.15} className="mx-4 mt-4 grid grid-cols-2 gap-3">
         <Link
           href="/ritual-home"
-          className="flex aspect-[1.3] flex-col rounded-2xl border border-olive/15 bg-olive/8 p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
+          className="flex aspect-[1.3] flex-col rounded-2xl border border-olive/20 bg-white/60 p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-md"
         >
           <p className="text-[11px] text-text-muted">Персональный уход</p>
           <p className="mt-1 text-[16px] font-bold text-text">Мой ритуал</p>
@@ -234,7 +234,7 @@ export default async function HomePage() {
         </Link>
         <Link
           href="/progress"
-          className="flex aspect-[1.3] flex-col rounded-2xl border border-rose/15 bg-rose/8 p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
+          className="flex aspect-[1.3] flex-col rounded-2xl border border-rose/20 bg-white/60 p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-md"
         >
           <p className="text-[11px] text-text-muted">До и после</p>
           <p className="mt-1 text-[16px] font-bold text-text">Фото прогресс</p>
