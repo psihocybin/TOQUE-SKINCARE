@@ -80,10 +80,7 @@ export default function TutorialsPage() {
 
       {favoriteTutorials.length > 0 ? (
         <div className="mt-6">
-          <p
-            className="text-[9px] uppercase tracking-[2px] text-olive-dark"
-            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-          >
+          <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[9px] uppercase tracking-[2px] text-olive-dark backdrop-blur-sm">
             Избранное
           </p>
           <div className="mt-3 flex gap-3 overflow-x-auto pb-1">

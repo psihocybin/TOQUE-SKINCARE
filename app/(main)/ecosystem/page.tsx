@@ -50,19 +50,15 @@ export default async function EcosystemPage() {
         <p className="text-[14px] text-text">Экосистема TOQUE</p>
       </header>
 
-      <p
-        className="mt-1 text-center text-[10px] text-text-muted"
-        style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-      >
-        {devices.length} устройств для системного ухода
-      </p>
+      <div className="mt-2 text-center">
+        <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[10px] text-text-muted backdrop-blur-sm">
+          {devices.length} устройств для системного ухода
+        </p>
+      </div>
 
       {current ? (
         <FadeIn className="mt-7">
-          <p
-            className="text-[9px] uppercase tracking-[1px] text-olive-dark"
-            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-          >
+          <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[9px] uppercase tracking-[1px] text-olive-dark backdrop-blur-sm">
             У вас уже есть
           </p>
           <div className="mt-3 flex items-center gap-3 rounded-lg border-2 border-olive bg-white/85 px-3 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
@@ -83,10 +79,7 @@ export default async function EcosystemPage() {
 
       {recommended.length > 0 ? (
         <FadeIn delay={0.15} className="mt-7">
-          <p
-            className="text-[9px] uppercase tracking-[1px] text-text-muted"
-            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-          >
+          <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[9px] uppercase tracking-[1px] text-text-muted backdrop-blur-sm">
             Логично продолжить
           </p>
           <div className="mt-3 flex flex-col gap-2">
@@ -98,10 +91,7 @@ export default async function EcosystemPage() {
       ) : null}
 
       <FadeIn delay={0.3} className="mt-7">
-        <p
-          className="text-[9px] uppercase tracking-[1px] text-text-muted"
-          style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-        >
+        <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[9px] uppercase tracking-[1px] text-text-muted backdrop-blur-sm">
           Другие категории
         </p>
         <div className="mt-3 overflow-hidden rounded-lg border border-black/10 bg-white/85 px-3 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">

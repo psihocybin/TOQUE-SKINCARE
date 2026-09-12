@@ -54,17 +54,11 @@ export default async function ProfilePage() {
             {initial}
           </span>
         </div>
-        <h1
-          className="mt-4 text-[16px] text-text"
-          style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-        >
+        <h1 className="mt-4 text-[16px] font-semibold text-text">
           {trimmedName}
         </h1>
         {subLine ? (
-          <p
-            className="mt-1 text-[10px] text-text-muted"
-            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-          >
+          <p className="mt-1.5 inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[10px] text-text-muted backdrop-blur-sm">
             {subLine}
           </p>
         ) : null}
@@ -91,10 +85,7 @@ export default async function ProfilePage() {
       </FadeIn>
 
       <FadeIn delay={0.35} className="mt-8">
-        <p
-          className="text-[9px] uppercase tracking-[1px] text-text-muted"
-          style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
-        >
+        <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[9px] uppercase tracking-[1px] text-text-muted backdrop-blur-sm">
           Меню
         </p>
         <ul className="mt-2 overflow-hidden rounded-lg border border-black/10 bg-white/85 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">

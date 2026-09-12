@@ -33,7 +33,7 @@ export default function TutorialDetailPage({
     .filter((d): d is NonNullable<typeof d> => Boolean(d));
 
   return (
-    <main className="flex min-h-screen flex-col pb-24 pt-4">
+    <main className="flex min-h-screen w-full flex-col overflow-x-hidden pb-24 pt-4">
       <header className="relative flex items-center justify-center px-4">
         <div className="absolute left-2 top-0">
           <BackButton href="/tutorials" />
