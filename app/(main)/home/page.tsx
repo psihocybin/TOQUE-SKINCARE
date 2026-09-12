@@ -121,25 +121,25 @@ export default async function HomePage() {
 
   return (
     <main className="relative flex min-h-screen flex-col overflow-hidden bg-cream pb-24 pt-6">
-      {/* Приглушённое фото листа — только верхние 420px, дальше сплошной
+      {/* Приглушённое фото листа — только верхние 620px, дальше сплошной
           cream, чтобы не растягивать/повторять картинку на всю длинную
           страницу. Три отдельных слоя вместо одного составного
           background-image: смешивание gradient+url в одном свойстве с общим
           background-size давало артефакты (чёрная область на стыке слоёв). */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px] bg-cover bg-top"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[620px] bg-cover bg-top"
         style={{ backgroundImage: "url(/backgrounds/home-leaf.jpg)" }}
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-[420px]"
+        className="pointer-events-none absolute inset-x-0 top-0 h-[620px]"
         style={{
           background:
-            "linear-gradient(to bottom, rgba(250,250,247,0.55), rgba(250,250,247,0.93) 65%, #FAFAF7 100%)",
+            "linear-gradient(to bottom, rgba(250,250,247,0.4) 0%, rgba(250,250,247,0.6) 35%, rgba(250,250,247,0.85) 65%, rgba(250,250,247,0.97) 88%, #FAFAF7 100%)",
         }}
       />
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[420px] bottom-0 bg-cream" />
+      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-[620px] bottom-0 bg-cream" />
 
       <div className="relative z-10 flex flex-1 flex-col">
       <QuizSyncOnMount profileFilled={Boolean(profile.device)} />
