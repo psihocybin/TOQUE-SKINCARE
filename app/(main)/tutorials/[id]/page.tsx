@@ -81,7 +81,7 @@ export default function TutorialDetailPage({
             {tutorial.steps.map((step, i) => (
               <div
                 key={i}
-                className="relative flex aspect-[4/3] w-[240px] shrink-0 snap-center flex-col justify-end rounded-xl bg-cream-dark p-4"
+                className="relative flex aspect-[4/3] w-[88%] max-w-[280px] shrink-0 snap-center flex-col justify-end rounded-xl bg-cream-dark p-4"
               >
                 <span className="absolute left-3 top-3 rounded-full bg-white/80 px-2 py-0.5 text-[9px] text-text">
                   Шаг {i + 1}
