@@ -19,24 +19,21 @@ export function TutorialsScroll({ items }: Props) {
           href={`/tutorials/${t.id}`}
           className="flex h-[200px] w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
-          <div className="h-[120px] shrink-0">
+          <div className="relative flex-1">
             <DeviceImage slug={t.deviceSlug} fill className="rounded-none" />
-          </div>
-          <div className="relative flex-1 p-3">
-            <div className="flex items-center gap-1.5 pr-5">
-              <DeviceImage slug={t.deviceSlug} size={20} className="shrink-0" />
-              <p className="min-w-0 truncate text-[12px] font-semibold text-text">
-                {t.title}
-              </p>
-            </div>
-            <p className="mt-1.5 text-[10px] text-text-muted">
-              {t.durationMinutes} мин
-            </p>
             <FavoriteHeart
               tutorialId={t.id}
-              size={16}
-              className="absolute bottom-3 right-3"
+              size={14}
+              className="absolute bottom-2 right-2 h-7 w-7 rounded-full bg-white/80 shadow-sm backdrop-blur-sm"
             />
+          </div>
+          <div className="px-3 py-2">
+            <p className="truncate text-[12px] font-semibold text-text">
+              {t.title}
+            </p>
+            <p className="mt-0.5 text-[10px] text-text-muted">
+              {t.durationMinutes} мин
+            </p>
           </div>
         </Link>
       ))}

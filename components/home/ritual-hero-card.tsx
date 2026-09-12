@@ -15,6 +15,21 @@ const SLOT_ICON: Record<SessionTimeSlot, LucideIcon> = {
   evening: Moon,
 };
 
+// Фоновые фото для карточки дня отдыха — см. docs/ADDING_DEVICE_PHOTOS.md
+// для той же логики применительно к устройствам. Файлы кладутся в
+// public/backgrounds/rest-day-day.jpg и rest-day-evening.jpg; отсутствующий
+// файл просто не подгружается (CSS background-image, не <img>), карточка
+// остаётся на сплошном тёмном фоне без ошибок.
+const REST_DAY_BACKGROUND: Record<"day" | "evening", string> = {
+  day: "/backgrounds/rest-day-day.jpg",
+  evening: "/backgrounds/rest-day-evening.jpg",
+};
+
+function currentRestDayBackgroundSlot(): "day" | "evening" {
+  const hour = new Date().getHours();
+  return hour >= 18 || hour < 6 ? "evening" : "day";
+}
+
 type Props = {
   items: RitualTodayItem[];
   nextScheduledLabel: string | null;
@@ -27,12 +42,18 @@ type Props = {
 // ключ режима, нужный для /ritual?mode=, а не отображаемое имя.
 export function RitualHeroCard({ items, nextScheduledLabel }: Props) {
   if (items.length === 0) {
+    const bgSlot = currentRestDayBackgroundSlot();
     return (
-      <div className="rounded-2xl bg-white p-4 text-center shadow-sm">
-        <Moon className="mx-auto h-6 w-6 text-text-muted" strokeWidth={1.5} aria-hidden />
-        <p className="mt-2 text-[14px] font-semibold text-text">Сегодня отдых</p>
+      <div
+        className="relative flex min-h-[150px] flex-col items-center justify-center overflow-hidden rounded-2xl border border-black/[0.06] bg-[#2C2C2A] bg-cover bg-center p-4 text-center shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.1)]"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.45)), url(${REST_DAY_BACKGROUND[bgSlot]})`,
+        }}
+      >
+        <Moon className="mx-auto h-6 w-6 text-cream" strokeWidth={1.5} aria-hidden />
+        <p className="mt-2 text-[14px] font-semibold text-cream">Сегодня отдых</p>
         {nextScheduledLabel ? (
-          <p className="mt-1 text-[12px] text-text-muted">
+          <p className="mt-1 text-[12px] text-cream/80">
             Следующая процедура: {nextScheduledLabel}
           </p>
         ) : null}

@@ -90,23 +90,23 @@ export default function TutorialsPage() {
                 href={`/tutorials/${t.id}`}
                 className="flex h-[150px] w-[120px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
               >
-                <div className="h-[90px] shrink-0">
+                <div className="relative flex-1">
                   <DeviceImage
                     slug={t.deviceSlug}
                     fill
                     className="rounded-none"
                   />
-                </div>
-                <div className="relative flex-1 p-2">
-                  <p className="line-clamp-2 pr-4 text-[11px] font-semibold text-text">
-                    {t.title}
-                  </p>
                   <FavoriteHeart
                     tutorialId={t.id}
-                    size={14}
-                    className="absolute bottom-2 right-2"
+                    size={13}
+                    className="absolute bottom-1.5 right-1.5 h-6 w-6 rounded-full bg-white/80 shadow-sm backdrop-blur-sm"
                     onToggle={handleFavoriteToggle}
                   />
+                </div>
+                <div className="px-2 py-1.5">
+                  <p className="line-clamp-2 text-[11px] font-semibold text-text">
+                    {t.title}
+                  </p>
                 </div>
               </Link>
             ))}
