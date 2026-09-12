@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Check, ChevronRight } from "lucide-react";
 import { BackButton } from "@/components/shared/back-button";
 import { FadeIn } from "@/components/shared/fade-in";
+import { DeviceImage } from "@/components/shared/device-image";
 import { getProfileWithStats } from "@/lib/queries/profile";
 import {
   devices,
@@ -49,17 +50,23 @@ export default async function EcosystemPage() {
         <p className="text-[14px] text-text">Экосистема TOQUE</p>
       </header>
 
-      <p className="mt-1 text-center text-[10px] text-text-muted">
+      <p
+        className="mt-1 text-center text-[10px] text-text-muted"
+        style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+      >
         {devices.length} устройств для системного ухода
       </p>
 
       {current ? (
         <FadeIn className="mt-7">
-          <p className="text-[9px] uppercase tracking-[1px] text-olive">
+          <p
+            className="text-[9px] uppercase tracking-[1px] text-olive-dark"
+            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+          >
             У вас уже есть
           </p>
-          <div className="mt-3 flex items-center gap-3 rounded-lg border border-olive/30 bg-olive/[0.06] px-3 py-3">
-            <DeviceAvatar device={current} accent />
+          <div className="mt-3 flex items-center gap-3 rounded-lg border-2 border-olive bg-white/85 px-3 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
+            <DeviceImage slug={current.slug} size={40} />
             <div className="min-w-0 flex-1">
               <p className="text-[13px] text-text">{current.name}</p>
               <p className="text-[10px] text-text-muted">{current.subtitle}</p>
@@ -76,7 +83,10 @@ export default async function EcosystemPage() {
 
       {recommended.length > 0 ? (
         <FadeIn delay={0.15} className="mt-7">
-          <p className="text-[9px] uppercase tracking-[1px] text-text-muted">
+          <p
+            className="text-[9px] uppercase tracking-[1px] text-text-muted"
+            style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+          >
             Логично продолжить
           </p>
           <div className="mt-3 flex flex-col gap-2">
@@ -88,43 +98,19 @@ export default async function EcosystemPage() {
       ) : null}
 
       <FadeIn delay={0.3} className="mt-7">
-        <p className="text-[9px] uppercase tracking-[1px] text-text-muted">
+        <p
+          className="text-[9px] uppercase tracking-[1px] text-text-muted"
+          style={{ textShadow: "0 1px 4px rgba(250,250,247,0.9)" }}
+        >
           Другие категории
         </p>
-        <div className="mt-3 flex flex-col">
+        <div className="mt-3 overflow-hidden rounded-lg border border-black/10 bg-white/85 px-3 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
           {others.map((d) => (
             <DeviceRow key={d.slug} device={d} variant="list" />
           ))}
         </div>
       </FadeIn>
     </main>
-  );
-}
-
-function DeviceAvatar({
-  device,
-  accent = false,
-}: {
-  device: Device;
-  accent?: boolean;
-}) {
-  const initial = device.name[0] ?? "?";
-  return (
-    <div
-      className={
-        "flex h-9 w-9 shrink-0 items-center justify-center rounded-pill " +
-        (accent ? "bg-olive/20" : "bg-black/[0.04]")
-      }
-      aria-hidden
-    >
-      <span
-        className={
-          "text-[13px] " + (accent ? "text-olive" : "text-text-muted")
-        }
-      >
-        {initial}
-      </span>
-    </div>
   );
 }
 
@@ -140,11 +126,11 @@ function DeviceRow({
       href={`/ecosystem/${device.slug}`}
       className={
         variant === "card"
-          ? "flex items-center gap-3 rounded-lg border border-black/8 bg-white px-3 py-3 transition-colors hover:bg-black/[0.02]"
+          ? "flex items-center gap-3 rounded-lg border border-black/10 bg-white/85 px-3 py-3 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg transition-colors hover:bg-white"
           : "flex items-center gap-3 border-b border-black/8 py-3 last:border-b-0"
       }
     >
-      <DeviceAvatar device={device} />
+      <DeviceImage slug={device.slug} size={36} />
       <div className="min-w-0 flex-1">
         <p className="text-[12px] text-text">{device.name}</p>
         <p className="text-[10px] text-text-muted">{device.subtitle}</p>
