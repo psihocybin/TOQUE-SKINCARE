@@ -13,7 +13,7 @@ export function RecommendedDevicesScroll({ devices }: Props) {
         <Link
           key={d.slug}
           href={`/ecosystem/${d.slug}`}
-          className="flex h-[180px] w-[140px] shrink-0 flex-col items-center rounded-2xl bg-white p-3 text-center shadow-sm"
+          className="flex h-[180px] w-[140px] shrink-0 flex-col items-center rounded-2xl border border-black/[0.06] bg-white p-3 text-center shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
           <div className="mt-2">
             <DeviceImage slug={d.slug} size={60} />

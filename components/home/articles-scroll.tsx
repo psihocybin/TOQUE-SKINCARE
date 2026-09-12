@@ -14,7 +14,7 @@ export function ArticlesScroll({ items }: Props) {
           href={a.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex h-[140px] w-[220px] shrink-0 flex-col justify-between rounded-2xl bg-cream-dark p-4"
+          className="flex h-[140px] w-[220px] shrink-0 flex-col justify-between rounded-2xl border border-black/[0.06] bg-cream-dark p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
           <div>
             <p className="text-[9px] uppercase tracking-[1.5px] text-olive">

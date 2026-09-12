@@ -198,26 +198,26 @@ export default async function HomePage() {
       <FadeIn delay={0.15} className="mx-4 mt-4 grid grid-cols-2 gap-3">
         <Link
           href="/ritual-home"
-          className="flex aspect-[1.3] flex-col rounded-2xl bg-olive/8 p-4"
+          className="flex aspect-[1.3] flex-col rounded-2xl border border-olive/15 bg-olive/8 p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
           <p className="text-[11px] text-text-muted">Персональный уход</p>
           <p className="mt-1 text-[16px] font-bold text-text">Мой ритуал</p>
-          <div className="mt-auto flex justify-end">
+          <div className="flex flex-1 items-center justify-center">
             <RingProgress
               value={completedProcedures}
               max={TOTAL_PROCEDURE_DAYS}
-              size={40}
+              size={44}
               strokeWidth={4}
             />
           </div>
         </Link>
         <Link
           href="/progress"
-          className="flex aspect-[1.3] flex-col rounded-2xl bg-rose/8 p-4"
+          className="flex aspect-[1.3] flex-col rounded-2xl border border-rose/15 bg-rose/8 p-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
           <p className="text-[11px] text-text-muted">До и после</p>
           <p className="mt-1 text-[16px] font-bold text-text">Фото прогресс</p>
-          <div className="mt-auto flex justify-end">
+          <div className="flex flex-1 items-center justify-center">
             <Camera className="h-7 w-7 text-rose" strokeWidth={1.5} aria-hidden />
           </div>
         </Link>
@@ -256,7 +256,7 @@ export default async function HomePage() {
       ) : null}
 
       <FadeIn delay={0.35} className="mx-4 mt-4">
-        <div className="rounded-lg border border-black/8 bg-white px-4 py-4">
+        <div className="rounded-2xl border border-black/[0.06] bg-white px-4 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]">
           <p className="text-[9px] uppercase tracking-[1.5px] text-text-muted">
             Совет дня
           </p>

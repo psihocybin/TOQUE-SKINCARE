@@ -18,7 +18,7 @@ export function TutorialsScroll({ items }: Props) {
         <Link
           key={t.id}
           href={`/tutorials/${t.id}`}
-          className="flex h-[200px] w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl bg-white shadow-sm"
+          className="flex h-[200px] w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
           <div
             className={cn(
