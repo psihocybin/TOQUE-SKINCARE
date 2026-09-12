@@ -11,8 +11,12 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // DEFAULT — Pantone 5773 C (наш фирменный оливковый), #899064.
+        // Светлее прежнего #7A8A4F — dark/light оставлены как есть, это
+        // отдельные тона для заголовков/лёгких акцентов, не завязанные
+        // напрямую на Pantone-спеку.
         olive: {
-          DEFAULT: "#7A8A4F",
+          DEFAULT: "#899064",
           dark: "#4A5530",
           light: "#A4B176",
         },

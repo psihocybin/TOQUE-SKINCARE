@@ -13,16 +13,22 @@ export function RecommendedDevicesScroll({ devices }: Props) {
         <Link
           key={d.slug}
           href={`/ecosystem/${d.slug}`}
-          className="flex h-[180px] w-[140px] shrink-0 flex-col items-center rounded-2xl border border-black/[0.06] bg-white p-3 text-center shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
+          className="flex h-[210px] w-[150px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
-          <div className="mt-2">
-            <DeviceImage slug={d.slug} size={60} />
+          <div className="relative flex-1">
+            <DeviceImage slug={d.slug} fill className="rounded-none" />
           </div>
-          <p className="mt-2 text-[13px] font-semibold text-text">{d.name}</p>
-          <p className="mt-0.5 line-clamp-2 text-[11px] text-text-muted">
-            {d.subtitle}
-          </p>
-          <span className="mt-auto pt-1 text-[11px] text-olive">Узнать →</span>
+          <div className="px-3 py-2.5">
+            <p className="truncate text-[13px] font-semibold text-text">
+              {d.name}
+            </p>
+            <p className="mt-0.5 line-clamp-1 text-[11px] text-text-muted">
+              {d.subtitle}
+            </p>
+            <span className="mt-1 inline-block text-[11px] text-olive">
+              Узнать →
+            </span>
+          </div>
         </Link>
       ))}
     </div>
