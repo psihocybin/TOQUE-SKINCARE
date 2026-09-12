@@ -1,3 +1,5 @@
+import type { CSSProperties } from "react";
+
 // Раскраска по устройству — для конструктора ритуала, мини-календарей и
 // недельного календаря /ritual-home. Отдельная от общей палитры TOQUE
 // (olive/cream/rose) осознанно: нужно одновременно отличать на глаз до 13
@@ -35,6 +37,21 @@ const DEFAULT_DEVICE_COLOR: DeviceColor = {
 
 export function getDeviceColor(deviceSlug: string): DeviceColor {
   return DEVICE_COLORS[deviceSlug] ?? DEFAULT_DEVICE_COLOR;
+}
+
+// Плоские пастельные bg/border (DeviceColor.bg/.border) читаются на сплошном
+// cream-фоне, но на фото-подложке (см. PhoneFrame) выглядят почти белыми и
+// теряются. Для выделенных состояний вместо плоского цвета берём настоящее
+// полупрозрачное "стекло" — сам цвет устройства (color.hex) с alpha,
+// поверх которого нужен backdrop-blur на элементе.
+export function deviceGlassStyle(hex: string): CSSProperties {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  return {
+    backgroundColor: `rgba(${r}, ${g}, ${b}, 0.3)`,
+    borderColor: `rgba(${r}, ${g}, ${b}, 0.6)`,
+  };
 }
 
 // Короткие подписи для тегов режимов в мини-календарях — displayName из

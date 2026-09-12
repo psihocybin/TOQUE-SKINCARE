@@ -105,52 +105,54 @@ export default async function RitualHomePage({
 
   return (
     <main className="flex min-h-screen flex-col px-4 pb-24 pt-6">
-      {activeRitual ? (
-        <div className="flex items-center justify-between">
-          <span className="w-4" aria-hidden />
-          <p className="truncate text-[14px] font-bold text-text">{activeRitual.name}</p>
-          <Link href="/my-rituals" aria-label="Мои ритуалы" className="text-text-muted">
-            <Menu className="h-4 w-4" strokeWidth={1.75} aria-hidden />
-          </Link>
-        </div>
-      ) : (
-        <p className="text-center text-[9px] uppercase tracking-[2px] text-text-muted">
-          Моя программа
-        </p>
-      )}
+      <div className="rounded-2xl border border-olive/20 bg-white/60 px-4 pb-5 pt-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_8px_20px_rgba(0,0,0,0.08)] backdrop-blur-md">
+        {activeRitual ? (
+          <div className="flex items-center justify-between">
+            <span className="w-4" aria-hidden />
+            <p className="truncate text-[14px] font-bold text-text">{activeRitual.name}</p>
+            <Link href="/my-rituals" aria-label="Мои ритуалы" className="text-text-muted">
+              <Menu className="h-4 w-4" strokeWidth={1.75} aria-hidden />
+            </Link>
+          </div>
+        ) : (
+          <p className="text-center text-[9px] uppercase tracking-[2px] text-text-muted">
+            Моя программа
+          </p>
+        )}
 
-      <div className="mt-3 flex justify-center">
-        <RingProgress
-          value={status.isCompleted ? 30 : completedDays}
-          max={30}
-          size={80}
-          strokeWidth={6}
-        >
-          {status.isCompleted ? (
-            <CheckCircle className="h-7 w-7 text-olive" strokeWidth={1.75} aria-hidden />
-          ) : (
-            <>
-              <span className="text-[20px] leading-none text-text">{completedDays}</span>
-              <span className="text-[10px] text-text-muted">из 30</span>
-            </>
-          )}
-        </RingProgress>
+        <div className="mt-3 flex justify-center">
+          <RingProgress
+            value={status.isCompleted ? 30 : completedDays}
+            max={30}
+            size={80}
+            strokeWidth={6}
+          >
+            {status.isCompleted ? (
+              <CheckCircle className="h-7 w-7 text-olive" strokeWidth={1.75} aria-hidden />
+            ) : (
+              <>
+                <span className="text-[20px] leading-none text-text">{completedDays}</span>
+                <span className="text-[10px] text-text-muted">из 30</span>
+              </>
+            )}
+          </RingProgress>
+        </div>
+        {status.isCompleted ? (
+          <p className="mt-2 text-center text-[11px] text-text-muted">
+            Программа завершена · день {status.daysPastCompletion + 30}
+          </p>
+        ) : null}
       </div>
-      {status.isCompleted ? (
-        <p className="mt-2 text-center text-[11px] text-text-muted">
-          Программа завершена · день {status.daysPastCompletion + 30}
-        </p>
-      ) : null}
 
       <div className="mt-6 flex flex-col gap-5">
         {searchParams.saved === "1" ? (
-          <p className="rounded-xl bg-olive/8 px-4 py-2.5 text-center text-[12px] text-olive">
+          <p className="rounded-xl border border-olive/20 bg-white/60 px-4 py-2.5 text-center text-[12px] text-olive-dark backdrop-blur-md">
             ✓ Ритуал сохранён
           </p>
         ) : null}
 
         {status.isCompleted && !activeRitual ? (
-          <div className="rounded-xl bg-olive/6 p-4">
+          <div className="rounded-xl border border-olive/20 bg-white/60 p-4 backdrop-blur-md">
             <p className="text-[14px] font-semibold text-text">Онбординг завершён</p>
             <p className="mt-1 text-[12px] text-text-muted">
               Теперь вы работаете в поддерживающем режиме.

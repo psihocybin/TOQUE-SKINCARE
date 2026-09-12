@@ -17,7 +17,7 @@ import { BackButton } from "@/components/shared/back-button";
 import { DeviceImage } from "@/components/shared/device-image";
 import { MiniWeekCalendar } from "@/components/ritual-builder/mini-week-calendar";
 import { getProtocolBySlug } from "@/lib/content/protocols";
-import { abbreviateMode, getDeviceColor } from "@/lib/content/device-colors";
+import { abbreviateMode, deviceGlassStyle, getDeviceColor } from "@/lib/content/device-colors";
 import {
   activateRitual,
   saveRitual,
@@ -346,9 +346,10 @@ export function RitualConstructor({
                   onClick={() => selectDevice(d.slug)}
                   aria-pressed={isActive}
                   className={cn(
-                    "relative flex h-[76px] w-16 shrink-0 flex-col items-center justify-center gap-1.5 rounded-[10px] border transition-colors",
-                    isActive ? cn(color.bg, color.border) : "border-black/8 bg-white",
+                    "relative flex h-[76px] w-16 shrink-0 flex-col items-center justify-center gap-1.5 rounded-[10px] border backdrop-blur-md transition-colors",
+                    !isActive && "border-black/8 bg-white",
                   )}
+                  style={isActive ? deviceGlassStyle(color.hex) : undefined}
                 >
                   <DeviceImage slug={d.slug} size={36} />
                   <span
@@ -389,11 +390,12 @@ export function RitualConstructor({
                       aria-pressed={isSelected}
                       onClick={() => setActiveModeName(mode.name)}
                       className={cn(
-                        "rounded-full border px-3 py-1.5 text-[11px] transition-colors",
+                        "rounded-full border px-3 py-1.5 text-[11px] backdrop-blur-md transition-colors",
                         isSelected
-                          ? cn(activeColor.bg, activeColor.border, activeColor.text, "font-semibold")
+                          ? cn(activeColor.text, "font-semibold")
                           : "border-black/10 bg-white text-text-muted",
                       )}
+                      style={isSelected ? deviceGlassStyle(activeColor.hex) : undefined}
                     >
                       {mode.displayName ?? mode.name}
                     </button>
@@ -403,7 +405,10 @@ export function RitualConstructor({
             </div>
 
             {/* Частота — подсказка из протокола */}
-            <div className={cn("rounded-lg border p-3", activeColor.bg, activeColor.border)}>
+            <div
+              className="rounded-lg border p-3 backdrop-blur-md"
+              style={deviceGlassStyle(activeColor.hex)}
+            >
               <div className="flex items-start gap-1.5">
                 <Info className={cn("mt-0.5 h-3.5 w-3.5 shrink-0", activeColor.text)} strokeWidth={1.75} aria-hidden />
                 <div className="min-w-0">
@@ -438,11 +443,10 @@ export function RitualConstructor({
                       aria-pressed={isSelected}
                       onClick={() => setSessionTime(t.value)}
                       className={cn(
-                        "flex h-11 flex-col items-center justify-center gap-0.5 rounded-lg border transition-colors",
-                        isSelected
-                          ? cn(activeColor.bg, activeColor.border)
-                          : "border-black/10 bg-white",
+                        "flex h-11 flex-col items-center justify-center gap-0.5 rounded-lg border backdrop-blur-md transition-colors",
+                        !isSelected && "border-black/10 bg-white",
                       )}
+                      style={isSelected ? deviceGlassStyle(activeColor.hex) : undefined}
                     >
                       <Icon
                         className={cn("h-3.5 w-3.5", isSelected ? activeColor.text : "text-text-muted")}
@@ -483,11 +487,12 @@ export function RitualConstructor({
                         aria-pressed={isSelected}
                         onClick={() => toggleDay(day)}
                         className={cn(
-                          "flex h-8 w-full items-center justify-center rounded-lg border text-[10px] transition-colors",
+                          "flex h-8 w-full items-center justify-center rounded-lg border text-[10px] backdrop-blur-md transition-colors",
                           isSelected
-                            ? cn(activeColor.bg, activeColor.border, activeColor.text, "font-semibold")
+                            ? cn(activeColor.text, "font-semibold")
                             : "border-black/10 bg-white text-text-muted",
                         )}
+                        style={isSelected ? deviceGlassStyle(activeColor.hex) : undefined}
                       >
                         {WEEKDAY_LABELS[day]}
                       </button>

@@ -49,8 +49,8 @@ export default async function ProfilePage() {
   return (
     <main className="flex min-h-screen flex-col px-5 pb-24 pt-8">
       <FadeIn className="flex flex-col items-center text-center">
-        <div className="flex h-16 w-16 items-center justify-center rounded-pill bg-olive/15">
-          <span className="text-[20px] tracking-[2px] text-olive">
+        <div className="flex h-16 w-16 items-center justify-center rounded-pill border border-olive/20 bg-white/60 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] backdrop-blur-md">
+          <span className="text-[20px] tracking-[2px] text-olive-dark">
             {initial}
           </span>
         </div>
@@ -61,7 +61,7 @@ export default async function ProfilePage() {
       </FadeIn>
 
       <FadeIn delay={0.2} className="mt-7">
-        <div className="flex items-center rounded-lg bg-olive/[0.06] px-4 py-4">
+        <div className="flex items-center rounded-lg border border-olive/20 bg-white/60 px-4 py-4 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] backdrop-blur-md">
           <div className="flex-1 text-center">
             <p className="text-[20px] leading-none text-text">{currentDay}</p>
             <p className="mt-1 text-[9px] text-text-muted">
@@ -84,12 +84,15 @@ export default async function ProfilePage() {
         <p className="text-[9px] uppercase tracking-[1px] text-text-muted">
           Меню
         </p>
-        <ul className="mt-2 border-t border-black/8">
-          {MENU_ITEMS.map((item) => (
-            <li key={item.href} className="border-b border-black/8">
+        <ul className="mt-2 overflow-hidden rounded-lg border border-black/[0.06] bg-white/60 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)] backdrop-blur-md">
+          {MENU_ITEMS.map((item, i) => (
+            <li
+              key={item.href}
+              className={i > 0 ? "border-t border-black/[0.06]" : undefined}
+            >
               <Link
                 href={item.href}
-                className="flex items-center justify-between py-3 text-[13px] text-text transition-colors hover:bg-black/[0.02]"
+                className="flex items-center justify-between px-4 py-3 text-[13px] text-text transition-colors hover:bg-white/40"
               >
                 <span>{item.label}</span>
                 <ChevronRight
