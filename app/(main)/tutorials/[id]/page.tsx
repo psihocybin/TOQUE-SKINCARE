@@ -43,7 +43,7 @@ export default function TutorialDetailPage({
         </p>
       </header>
 
-      <div className="mx-4 mt-4 flex aspect-video items-center justify-center rounded-xl bg-black">
+      <div className="mx-4 mt-4 flex aspect-video w-full min-w-0 items-center justify-center overflow-hidden rounded-xl bg-black">
         <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/15">
           <Play className="h-6 w-6 translate-x-[1px] text-white" fill="currentColor" strokeWidth={0} />
         </span>
