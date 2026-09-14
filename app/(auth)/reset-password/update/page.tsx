@@ -7,9 +7,14 @@ import { createClient } from "@/lib/supabase/client";
 
 type Status = "checking" | "ready" | "no-session" | "saving" | "done" | "error";
 
-// Сюда попадают через /auth/callback?next=/reset-password/update — ссылка
-// из письма обменивается на РЕКАВЕРИ-сессию до захода на эту страницу,
-// поэтому здесь просто проверяем, что сессия есть, и даём задать пароль.
+// Сюда ведёт ссылка из письма восстановления пароля напрямую (не через
+// серверный /auth/callback — recovery-ссылка Supabase обычно несёт токены
+// в hash-фрагменте URL, #access_token=..., который сервер физически не
+// видит). Разбираем сессию на клиенте тремя путями сразу, т.к. точный
+// формат ссылки зависит от настроек проекта (PKCE ?code= vs implicit
+// #access_token=): 1) если есть ?code=, обмениваем вручную; 2) браузерный
+// клиент Supabase сам детектит hash и эмитит событие PASSWORD_RECOVERY;
+// 3) на случай гонки — дополнительно проверяем текущую сессию.
 export default function UpdatePasswordPage() {
   const [status, setStatus] = useState<Status>("checking");
   const [password, setPassword] = useState("");
@@ -18,16 +23,30 @@ export default function UpdatePasswordPage() {
 
   useEffect(() => {
     let cancelled = false;
+    const supabase = createClient();
+
+    const { data: subscription } = supabase.auth.onAuthStateChange(
+      (event) => {
+        if (cancelled) return;
+        if (event === "PASSWORD_RECOVERY") setStatus("ready");
+      },
+    );
+
     (async () => {
-      const supabase = createClient();
+      const code = new URL(window.location.href).searchParams.get("code");
+      if (code) {
+        await supabase.auth.exchangeCodeForSession(code);
+      }
       const {
         data: { user },
       } = await supabase.auth.getUser();
       if (cancelled) return;
-      setStatus(user ? "ready" : "no-session");
+      setStatus((prev) => (prev === "ready" ? prev : user ? "ready" : "no-session"));
     })();
+
     return () => {
       cancelled = true;
+      subscription.subscription.unsubscribe();
     };
   }, []);
 

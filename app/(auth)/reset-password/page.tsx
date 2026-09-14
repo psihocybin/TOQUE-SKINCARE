@@ -25,8 +25,12 @@ export default function ResetPasswordPage() {
     try {
       const supabase = createClient();
       const origin = window.location.origin;
+      // Ссылка восстановления пароля из письма Supabase приходит с токенами в
+      // hash-фрагменте URL (#access_token=...), а не как ?code= — серверный
+      // /auth/callback его не увидит (фрагмент не уходит на сервер). Ведём
+      // сразу на клиентскую страницу, которая сама разбирает сессию.
       const { error } = await supabase.auth.resetPasswordForEmail(trimmed, {
-        redirectTo: `${origin}/auth/callback?next=/reset-password/update`,
+        redirectTo: `${origin}/reset-password/update`,
       });
 
       if (error) {
