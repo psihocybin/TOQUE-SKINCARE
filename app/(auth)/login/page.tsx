@@ -2,7 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Apple, Mail } from "lucide-react";
+import Link from "next/link";
+import { Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { createClient } from "@/lib/supabase/client";
@@ -11,11 +12,6 @@ import { isQuizStarted, syncQuizToProfile } from "@/lib/quiz/sync";
 
 type Status = "idle" | "sending" | "sent" | "error";
 type AuthMode = "signup" | "signin";
-
-function isIOS(): boolean {
-  if (typeof navigator === "undefined") return false;
-  return /iPad|iPhone|iPod/.test(navigator.userAgent);
-}
 
 function readQuizFromStorage(): QuizAnswers | null {
   try {
@@ -27,29 +23,6 @@ function readQuizFromStorage(): QuizAnswers | null {
   }
 }
 
-function GoogleIcon({ className }: { className?: string }) {
-  return (
-    <svg className={className} viewBox="0 0 18 18" aria-hidden>
-      <path
-        fill="#4285F4"
-        d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.9c1.7-1.57 2.68-3.87 2.68-6.62Z"
-      />
-      <path
-        fill="#34A853"
-        d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.9-2.26c-.8.54-1.84.86-3.06.86-2.35 0-4.34-1.59-5.05-3.72H.94v2.33A9 9 0 0 0 9 18Z"
-      />
-      <path
-        fill="#FBBC05"
-        d="M3.95 10.7A5.4 5.4 0 0 1 3.66 9c0-.59.1-1.17.29-1.7V4.97H.94A9 9 0 0 0 0 9c0 1.45.35 2.83.94 4.03l3.01-2.33Z"
-      />
-      <path
-        fill="#EA4335"
-        d="M9 3.58c1.32 0 2.51.45 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .94 4.97l3.01 2.33C4.66 5.17 6.65 3.58 9 3.58Z"
-      />
-    </svg>
-  );
-}
-
 export default function LoginPage() {
   const router = useRouter();
   const [checkingAuth, setCheckingAuth] = useState(true);
@@ -59,11 +32,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const [showIOS, setShowIOS] = useState(false);
-
-  useEffect(() => {
-    setShowIOS(isIOS());
-  }, []);
 
   // Уже авторизован (перепрохождение квиза, повторный визит на /login) —
   // досохраняем ответы квиза из localStorage, если они там есть, и уходим
@@ -96,17 +64,6 @@ export default function LoginPage() {
       cancelled = true;
     };
   }, [router]);
-
-  async function handleOAuth(provider: "google" | "apple") {
-    setErrorMessage(null);
-    const supabase = createClient();
-    const origin = window.location.origin;
-    const { error } = await supabase.auth.signInWithOAuth({
-      provider,
-      options: { redirectTo: `${origin}/auth/callback?next=/home` },
-    });
-    if (error) setErrorMessage(`Не удалось войти: ${error.message}`);
-  }
 
   async function handleDevLogin() {
     setStatus("sending");
@@ -326,28 +283,16 @@ export default function LoginPage() {
                   ? "Нет аккаунта? Создать"
                   : "Уже есть аккаунт? Войти"}
               </button>
+              {authMode === "signin" ? (
+                <Link
+                  href="/reset-password"
+                  className="text-center text-[11px] text-text-muted underline underline-offset-4"
+                >
+                  Забыли пароль?
+                </Link>
+              ) : null}
             </form>
           )}
-
-          {showIOS ? (
-            <button
-              type="button"
-              onClick={() => handleOAuth("apple")}
-              className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full bg-black text-[15px] text-white"
-            >
-              <Apple className="h-[18px] w-[18px]" strokeWidth={1.75} />
-              Войти с Apple
-            </button>
-          ) : null}
-
-          <button
-            type="button"
-            onClick={() => handleOAuth("google")}
-            className="flex h-[52px] w-full items-center justify-center gap-2 rounded-full border border-black/12 bg-white text-[15px] text-text"
-          >
-            <GoogleIcon className="h-[18px] w-[18px]" />
-            Войти с Google
-          </button>
         </div>
 
         {errorMessage ? (
