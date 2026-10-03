@@ -10,7 +10,7 @@ import { createClient } from "@/lib/supabase/client";
 import { STORAGE_KEY, type QuizAnswers } from "@/lib/quiz/quiz-context";
 import { isQuizStarted, syncQuizToProfile } from "@/lib/quiz/sync";
 
-type Status = "idle" | "sending" | "sent" | "error";
+type Status = "idle" | "sending" | "error";
 type AuthMode = "signup" | "signin";
 
 function readQuizFromStorage(): QuizAnswers | null {
@@ -99,49 +99,53 @@ export default function LoginPage() {
     try {
       const supabase = createClient();
 
-      if (authMode === "signin") {
-        const { error } = await supabase.auth.signInWithPassword({
-          email: trimmed,
-          password,
+      // Подтверждение почты не требуем: регистрация идёт через серверный
+      // роут, который создаёт пользователя сразу подтверждённым (а старые
+      // неподтверждённые аккаунты подтверждает при верном пароле).
+      const ensureConfirmedAccount = async () => {
+        const res = await fetch("/api/auth/signup", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: trimmed, password }),
         });
-        if (error) {
+        if (res.ok) return null;
+        const body = (await res.json().catch(() => ({}))) as { error?: string };
+        return body.error ?? "unknown";
+      };
+
+      if (authMode === "signup") {
+        const signupError = await ensureConfirmedAccount();
+        if (signupError) {
           setStatus("error");
           setErrorMessage(
-            /invalid login credentials/i.test(error.message)
-              ? "Неверный email или пароль."
-              : `Не удалось войти: ${error.message}`,
+            signupError === "already_registered"
+              ? "Этот email уже зарегистрирован. Попробуйте войти."
+              : `Не удалось создать аккаунт: ${signupError}`,
           );
           return;
         }
-        window.location.href = "/home";
-        return;
       }
 
-      const origin = window.location.origin;
-      const { data, error } = await supabase.auth.signUp({
+      let { error } = await supabase.auth.signInWithPassword({
         email: trimmed,
         password,
-        options: { emailRedirectTo: `${origin}/auth/callback?next=/home` },
       });
-
+      if (error?.code === "email_not_confirmed" && !(await ensureConfirmedAccount())) {
+        ({ error } = await supabase.auth.signInWithPassword({
+          email: trimmed,
+          password,
+        }));
+      }
       if (error) {
         setStatus("error");
         setErrorMessage(
-          /already registered/i.test(error.message)
-            ? "Этот email уже зарегистрирован. Попробуйте войти."
-            : `Не удалось создать аккаунт: ${error.message}`,
+          /invalid login credentials/i.test(error.message)
+            ? "Неверный email или пароль."
+            : `Не удалось войти: ${error.message}`,
         );
         return;
       }
-
-      if (data.session) {
-        window.location.href = "/home";
-        return;
-      }
-
-      // Email-подтверждение включено в Supabase — сессии ещё нет.
-      setEmail(trimmed);
-      setStatus("sent");
+      window.location.href = "/home";
     } catch (e) {
       const message =
         e instanceof Error && e.message.includes("URL and API key")
@@ -153,44 +157,6 @@ export default function LoginPage() {
   }
 
   if (checkingAuth) return null;
-
-  if (status === "sent") {
-    return (
-      <main className="flex min-h-screen flex-col items-center px-6 pb-12 pt-[20vh] text-center">
-        <div
-          className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border-[1.5px] border-olive"
-          aria-hidden
-        >
-          <Mail className="h-7 w-7 text-olive" strokeWidth={1.5} />
-        </div>
-
-        <h1 className="mt-8 text-[16px] leading-snug text-text">
-          Подтвердите email
-        </h1>
-
-        <p className="mt-6 text-[12px] leading-relaxed text-text-muted">
-          Откройте письмо на&nbsp;
-          <span className="text-text">{email.trim()}</span>
-          <br />и перейдите по ссылке, чтобы подтвердить аккаунт.
-        </p>
-
-        <p className="mt-10 text-[10px] text-text-muted">
-          Не пришло письмо? Проверьте папку «Спам».
-        </p>
-
-        <button
-          type="button"
-          onClick={() => {
-            setStatus("idle");
-            setErrorMessage(null);
-          }}
-          className="mt-auto text-[11px] uppercase tracking-[1.5px] text-text-muted underline-offset-4 hover:underline"
-        >
-          Изменить адрес
-        </button>
-      </main>
-    );
-  }
 
   return (
     <div className="flex min-h-screen flex-col">
