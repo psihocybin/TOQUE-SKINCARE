@@ -1,9 +1,3 @@
-import {
-  getModeByName,
-  getProtocolBySlug,
-  type ProcedureMode,
-} from "@/lib/content/protocols";
-
 export type TutorialStep = {
   title: string;
   description: string;
@@ -21,158 +15,407 @@ export type Tutorial = {
   tags: string[];
 };
 
-// Шаги туториала строятся из реальных ProcedureMode.steps в protocols.ts —
-// не дублируем текст руками, чтобы не разойтись при будущих правках
-// протокола. Заголовок карточки шага — сам текст инструкции (это и есть
-// содержательная часть), описание под ней — note режима (если есть),
-// isImportant — если в режиме работает ток (нужна вода, не масло).
-function stepsFromModes(deviceSlug: string, modeNames: string[]): TutorialStep[] {
-  const protocol = getProtocolBySlug(deviceSlug);
-  if (!protocol) return [];
-  const modes = modeNames
-    .map((name) => getModeByName(protocol, name))
-    .filter((m): m is ProcedureMode => Boolean(m));
-  return modes.flatMap((mode) =>
-    mode.steps.map((step) => ({
-      title: step.text,
-      description: mode.note ?? "",
-      isImportant: mode.hasElectricCurrent,
-    })),
-  );
-}
-
+// Список уроков = реально снятые видео (скрипты озвучки ElevenLabs,
+// docs/TOQUE_мануалы_для_озвучки). Шаги — сжатый текст озвучки, чтобы
+// карточки под плеером совпадали с тем, что говорится в ролике. Для
+// УЗ-лопаток (NUO/NUO PRO, LUMERA) — одно видео на все режимы.
+// Длительность — время процедуры из мануала, не длина ролика.
 export const tutorials: Tutorial[] = [
   {
-    id: "nuo-cleaning",
+    id: "nuo-full",
     deviceSlug: "nuo",
-    title: "Ультразвуковое очищение",
-    description: "Мягкое УЗ-очищение пор на влажной коже, гель-проводник.",
-    durationMinutes: 5,
-    steps: stepsFromModes("nuo", ["Cleaning (УЗ-очищение)"]),
+    title: "Полный протокол: очищение, ION−, ION+, лифтинг",
+    description:
+      "Все четыре шага ухода с УЗ-лопаткой в одном уроке — от очищения до микротокового лифтинга.",
+    durationMinutes: 30,
+    steps: [
+      {
+        title: "Подготовка",
+        description:
+          "Очистите кожу от макияжа. Включите прибор коротким нажатием кнопки.",
+      },
+      {
+        title: "Шаг 1 — очищение",
+        description:
+          "Режим Cleaning (NUO) / Peeling (NUO PRO). Гель под плёнку на 10–15 минут, лопатка 45° выпуклой стороной вверх, от периферии к центру.",
+      },
+      {
+        title: "Шаг 2 — ION−, дезинкрустация",
+        description:
+          "Гель, лопатка выпуклой стороной вверх, против роста волос. Касайтесь боковых электродов. Смойте гель, нанесите тоник.",
+      },
+      {
+        title: "Шаг 3 — ION+, ионофорез",
+        description:
+          "Сыворотка позонно, лопатка выпуклой стороной вниз, от центра к периферии. Остатки не смывайте.",
+      },
+      {
+        title: "Шаг 4 — лифтинг",
+        description:
+          "Lifting (NUO) / EMS (NUO PRO). Снизу вверх и от центра к периферии, пальцы на боковых электродах.",
+      },
+      {
+        title: "Таймер и средства",
+        description:
+          "Прибор отключается через 5 минут — включайте повторно. Только водная основа, масло не использовать.",
+        isImportant: true,
+      },
+    ],
     tags: ["nuo"],
   },
   {
-    id: "nuo-ion-minus",
-    deviceSlug: "nuo",
-    title: "Дезинкрустация пор",
-    description: "Глубокая чистка расширенных пор гальваническим током.",
-    durationMinutes: 5,
-    steps: stepsFromModes("nuo", ["Ion- (дезинкрустация)"]),
-    tags: ["nuo"],
+    id: "lumera-full",
+    deviceSlug: "lumera",
+    title: "Все режимы: Sonic, ION−, ION+, EMS",
+    description:
+      "Ультразвуковое очищение, дезинкрустация, доставка активов и микротоковый массаж — по 10 минут на режим.",
+    durationMinutes: 40,
+    steps: [
+      {
+        title: "Sonic — ультразвуковое очищение",
+        description:
+          "Гель под плёнку на 10–15 минут. Лопатка 45° выпуклой стороной вверх, против роста волос, 3–4 прохода на зону.",
+      },
+      {
+        title: "ION− — дезинкрустация пор",
+        description:
+          "Гель-дезинкрустант, лопатка выпуклой стороной вверх, от периферии к центру. Смойте, нанесите тоник.",
+      },
+      {
+        title: "ION+ — доставка активов",
+        description:
+          "Сыворотка или крем, лопатка выпуклой стороной вниз, от центра к периферии. Остатки вбейте в кожу.",
+      },
+      {
+        title: "EMS — микротоковый массаж",
+        description:
+          "Сыворотка на водной основе. По массажным линиям, акцент на скулы, овал лица и шею.",
+      },
+      {
+        title: "Ионный электрод",
+        description:
+          "В режимах ION−, ION+ и EMS касайтесь заднего электрода пальцем всю процедуру.",
+        isImportant: true,
+      },
+    ],
+    tags: ["lumera"],
   },
   {
-    id: "nuo-ion-plus",
-    deviceSlug: "nuo",
-    title: "Ионофорез: доставка активов",
-    description: "Усиленное проникновение сыворотки с активными компонентами.",
-    durationMinutes: 8,
-    steps: stepsFromModes("nuo", ["Ion+ (ионофорез)"]),
-    tags: ["nuo"],
-  },
-  {
-    id: "nuo-lifting",
-    deviceSlug: "nuo",
-    title: "Микротоковый лифтинг",
-    description: "Проработка овала лица микротоками, водная основа.",
-    durationMinutes: 8,
-    steps: stepsFromModes("nuo", ["Lifting (микротоки)"]),
-    tags: ["nuo"],
-  },
-  {
-    id: "elara-red",
+    id: "elara-ems-lifting",
     deviceSlug: "elara",
-    title: "RED-режим: лифтинг и тонус",
-    description: "Протокол уточняется — появится после проверки у специалиста.",
-    durationMinutes: 10,
-    steps: [],
+    title: "EMS-лифтинг: режимы RED и BLUE",
+    description:
+      "RED — EMS с красным LED и RF-прогревом для лифтинга, BLUE — синий LED для тона и пор.",
+    durationMinutes: 14,
+    steps: [
+      {
+        title: "Подготовка",
+        description:
+          "Чистая сухая кожа. Проводящий гель или сыворотка на водной основе на первую зону.",
+      },
+      {
+        title: "Включение — режим RED",
+        description:
+          "Удерживайте кнопку питания 2 секунды. RED — EMS, красный LED и RF-прогрев.",
+      },
+      {
+        title: "Режим BLUE",
+        description:
+          "Короткое нажатие кнопки выбора режима. Синий LED — тон кожи и расширенные поры.",
+      },
+      {
+        title: "Интенсивность",
+        description:
+          "Деликатный, сбалансированный или интенсивный. Начинайте с первого уровня.",
+      },
+      {
+        title: "Техника",
+        description:
+          "Средство позонно. Снизу вверх и от центра к периферии, 5–7 минут на режим.",
+      },
+      {
+        title: "Только водная основа",
+        description:
+          "Никаких масел, плотных кремов и спирта. При работе с LED закрывайте глаза.",
+        isImportant: true,
+      },
+    ],
     tags: ["elara"],
   },
   {
-    id: "elara-blue",
-    deviceSlug: "elara",
-    title: "BLUE-режим: баланс и поры",
-    description: "Протокол уточняется — появится после проверки у специалиста.",
-    durationMinutes: 7,
-    steps: [],
-    tags: ["elara"],
-  },
-  {
-    id: "lyra-activetone",
-    deviceSlug: "lyra",
-    title: "ActiveTone: утренний тонус",
-    description: "Микротоки 0,7 мА + LED — тонус и чёткость контура с утра.",
-    durationMinutes: 10,
-    steps: stepsFromModes("lyra", ["ActiveTone (микротоки + LED)"]),
-    tags: ["lyra"],
-  },
-  {
-    id: "lyra-deepcalm",
-    deviceSlug: "lyra",
-    title: "DeepCalm: вечернее расслабление",
-    description: "Тепло, вибрация и LED — расслабление без тока перед сном.",
-    durationMinutes: 10,
-    steps: stepsFromModes("lyra", ["DeepCalm (тепло + вибрация + LED)"]),
-    tags: ["lyra"],
-  },
-  {
-    id: "sylva-basic",
-    deviceSlug: "sylva",
-    title: "R-Wave + T-Wave: базовый протокол",
-    description: "Деликатный уход вокруг глаз и тонизирование контура лица.",
-    durationMinutes: 10,
-    steps: stepsFromModes("sylva", [
-      "R-Wave (Relaxation Wave)",
-      "T-Wave (Toning Wave)",
-    ]),
-    tags: ["sylva"],
-  },
-  {
-    id: "sylva-full-evening",
-    deviceSlug: "sylva",
-    title: "Полный вечерний протокол",
-    description: "R-Wave, T-Wave и S-Wave — расслабление, тонус, скульптурирование.",
+    id: "pulsar-full",
+    deviceSlug: "pulsar",
+    title: "Полный протокол: EMS, RH, UP, COLD",
+    description:
+      "Лифтинг, тепло и электропорация с завершением холодом. Вибрацию VR можно добавить к любому режиму.",
     durationMinutes: 20,
-    steps: stepsFromModes("sylva", [
-      "R-Wave (Relaxation Wave)",
-      "T-Wave (Toning Wave)",
-      "S-Wave (Sculpting Wave)",
-    ]),
-    tags: ["sylva"],
+    steps: [
+      {
+        title: "Выбор режима",
+        description:
+          "Очистите кожу. EMS — лифтинг, RH — тепло, UP — электропорация. Начните с минимальной интенсивности.",
+      },
+      {
+        title: "Вибрация VR",
+        description:
+          "Нажмите VR после включения основного режима. При смене режима включите её заново.",
+      },
+      {
+        title: "Техника",
+        description:
+          "Гель или сыворотка позонно. Снизу вверх и от центра к периферии.",
+      },
+      {
+        title: "Смена режимов",
+        description:
+          "Через 5 минут устройство отключится — переключитесь на следующий режим.",
+      },
+      {
+        title: "Финал — COLD",
+        description: "Лёгкие плавные движения по всему лицу, 1–2 минуты.",
+      },
+    ],
+    tags: ["pulsar"],
   },
   {
     id: "anima-light-therapy",
     deviceSlug: "anima",
-    title: "Световая терапия: выбор спектра",
-    description: "8 спектров LED — как подобрать под задачу кожи сегодня.",
+    title: "Световая терапия",
+    description:
+      "Семь спектров, пять уровней яркости и таймер — как настроить LED-маску.",
     durationMinutes: 15,
-    steps: stepsFromModes("anima", ["LED-сессия"]),
+    steps: [
+      {
+        title: "Подготовка",
+        description:
+          "Очистите кожу. Подключите пульт кабелем Type-C, отрегулируйте ремешок.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Удерживайте верхнюю кнопку 3 секунды — включится красный спектр.",
+      },
+      {
+        title: "Спектр и яркость",
+        description:
+          "Верхняя кнопка — 7 спектров. Нижняя — 5 уровней яркости.",
+      },
+      {
+        title: "Таймер",
+        description:
+          "Двойное нажатие нижней кнопки — +5 минут, от 5 до 30. Рекомендуем 10–20 минут.",
+      },
+      {
+        title: "Завершение",
+        description:
+          "Удерживайте верхнюю кнопку 2–3 секунды. Нанесите увлажняющий крем или сыворотку.",
+      },
+      {
+        title: "Не смотрите на диоды",
+        description:
+          "NIR включается автоматически на максимальной яркости красного спектра.",
+        isImportant: true,
+      },
+    ],
     tags: ["anima"],
   },
   {
-    id: "aura-technique",
+    id: "aura-gua-sha",
     deviceSlug: "aura",
-    title: "Гуаша: техника движений",
-    description: "Базовая техника массажных линий для лица, шеи и декольте.",
-    durationMinutes: 10,
-    steps: stepsFromModes("aura", ["Микромассаж + красный LED"]),
+    title: "Гуа-ша массаж лица, шеи и декольте",
+    description:
+      "Техника движений по массажным линиям и выбор средства под режим.",
+    durationMinutes: 15,
+    steps: [
+      {
+        title: "Средство под режим",
+        description:
+          "Микромассаж и нагрев — масло или питательный крем. Микротоки — сыворотка или гель позонно.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Удерживайте кнопку 2 секунды. Режим — коротким нажатием. Пластина под углом 15–30°.",
+      },
+      {
+        title: "Лицо",
+        description:
+          "Щёки и овал — снизу вверх, от центра к периферии. Носогубные — по дуге к скулам. Лоб — к вискам и вверх.",
+      },
+      {
+        title: "Шея и декольте",
+        description:
+          "Шея — снизу вверх по боковым поверхностям. Декольте — от центра к плечам и к ключицам.",
+      },
+      {
+        title: "Безопасность",
+        description:
+          "В режиме микротоков не работайте по сухой коже. Избегайте щитовидной железы и повреждённой кожи.",
+        isImportant: true,
+      },
+    ],
     tags: ["aura"],
+  },
+  {
+    id: "quantum-scalp",
+    deviceSlug: "quantum",
+    title: "Уход за кожей головы",
+    description:
+      "Насадка-гребень с резервуаром: EMS, вибрация и нагрев по линиям роста волос.",
+    durationMinutes: 10,
+    steps: [
+      {
+        title: "Насадка-гребень",
+        description:
+          "Совместите верхний паз с площадкой и нажмите до магнитной фиксации.",
+      },
+      {
+        title: "Средство в резервуар",
+        description:
+          "Для EMS — сыворотка на водной основе. Для вибрации и нагрева — касторовое, репейное или аргановое масло.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Удерживайте кнопку питания — включится EMS «Умный тонус». Зубцы плотно к коже.",
+      },
+      {
+        title: "Техника",
+        description:
+          "Медленно по линиям роста волос: лоб — виски — затылок. 5–10 минут.",
+      },
+      {
+        title: "Вибрация и нагрев",
+        description:
+          "Короткие нажатия соответствующих кнопок. Начинайте с первого уровня.",
+      },
+    ],
+    tags: ["quantum"],
+  },
+  {
+    id: "quantum-face",
+    deviceSlug: "quantum",
+    title: "Уход за лицом и шеей",
+    description:
+      "EMS-лифтинг с контактными насадками — для лица, шеи и тела.",
+    durationMinutes: 15,
+    steps: [
+      {
+        title: "Выбор насадки",
+        description:
+          "Круглая — для точечной проработки, с контактными площадками — для лифтинга и ежедневного ухода.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Гель или сыворотка на водной основе на первую зону. Удерживайте кнопку питания — включится EMS.",
+      },
+      {
+        title: "Техника",
+        description:
+          "Снизу вверх и от центра к периферии: подбородок — щёки — овал — шея. Средство позонно.",
+      },
+      {
+        title: "Время",
+        description:
+          "Начинайте с минимальной интенсивности. Лицо — 10–15 минут, тело — 15–20.",
+      },
+      {
+        title: "Избегайте глаз и губ",
+        description: "Плотно прикладывайте площадки, обходя область глаз и губ.",
+        isImportant: true,
+      },
+    ],
+    tags: ["quantum"],
+  },
+  {
+    id: "vibe-massage",
+    deviceSlug: "vibe",
+    title: "Перкуссионный массаж",
+    description: "Выбор насадки под зону и уровни мощности для лица и тела.",
+    durationMinutes: 5,
+    steps: [
+      {
+        title: "Выбор насадки",
+        description:
+          "Лицо — плоская базовая или щёточная. Тело — округлая, пальцеобразная, U-образная или клиновидная.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Удерживайте кнопку питания — первый уровень. Скорость — короткое нажатие.",
+      },
+      {
+        title: "Техника",
+        description:
+          "Без давления, прибор работает сам. 10–15 секунд на каждую зону.",
+      },
+      {
+        title: "Лицо — уровень 1–2",
+        description:
+          "Сеанс завершится через 5 минут. Выключить раньше — удерживайте кнопку.",
+        isImportant: true,
+      },
+    ],
+    tags: ["vibe"],
   },
   {
     id: "nova-eye-massage",
     deviceSlug: "nova",
-    title: "Массаж глаз",
-    description: "Массажные очки с подогревом и вибрацией — снятие напряжения.",
+    title: "Массаж глаз и головы",
+    description:
+      "Пять режимов — от комплексного массажа до подготовки ко сну.",
     durationMinutes: 15,
-    steps: stepsFromModes("nova", ["Массаж вокруг глаз"]),
+    steps: [
+      {
+        title: "Посадка",
+        description:
+          "Отрегулируйте ремень, наденьте очки. Плотно, но без давления на переносицу и виски.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Удерживайте кнопку питания — голосовое приветствие и синий индикатор.",
+      },
+      {
+        title: "Режимы",
+        description:
+          "Функциональная кнопка: комплексный, интеллектуальный, массаж глаз, массаж головы, подготовка ко сну.",
+      },
+      {
+        title: "Расслабьтесь",
+        description: "Сеанс завершится автоматически через 15 минут.",
+      },
+    ],
     tags: ["nova"],
   },
   {
     id: "aeris-eye-massage",
     deviceSlug: "aeris",
     title: "Массаж глаз",
-    description: "Воздушно-компрессионный массаж 8 зон — работа с отёчностью.",
+    description: "Три режима — тонизирующий, релакс и сон.",
     durationMinutes: 15,
-    steps: stepsFromModes("aeris", ["Массаж вокруг глаз"]),
+    steps: [
+      {
+        title: "Посадка",
+        description:
+          "Наденьте очки, отрегулируйте телескопический ремень — без давления на переносицу и виски.",
+      },
+      {
+        title: "Включение",
+        description:
+          "Удерживайте кнопку около 2 секунд — прозвучит голосовое приветствие.",
+      },
+      {
+        title: "Режимы",
+        description:
+          "По умолчанию «Тонизирующий». Короткое нажатие — «Релакс» и «Сон».",
+      },
+      {
+        title: "Расслабьтесь",
+        description: "Сеанс завершится автоматически через 15 минут.",
+      },
+    ],
     tags: ["aeris"],
   },
 ];
@@ -181,13 +424,13 @@ export function getTutorialById(id: string): Tutorial | undefined {
   return tutorials.find((t) => t.id === id);
 }
 
+// NUO PRO использует то же видео, что и NUO — отдельных уроков для него нет,
+// поэтому nuo-pro сводится к nuo при поиске уроков устройства.
 export function getTutorialsByDevice(deviceSlug: string): Tutorial[] {
-  return tutorials.filter((t) => t.deviceSlug === deviceSlug);
+  const slug = deviceSlug === "nuo-pro" ? "nuo" : deviceSlug;
+  return tutorials.filter((t) => t.deviceSlug === slug);
 }
 
-// NUO PRO использует тот же УЗ-протокол, что и NUO — отдельных туториалов
-// для него нет, поэтому в UI туториалы NUO помечаются как общие для обеих
-// версий устройства, а не заводится дублирующий набор карточек.
 export function tutorialDeviceLabel(deviceSlug: string, fallback: string): string {
   if (deviceSlug === "nuo") return "NUO/NUO PRO";
   return fallback;

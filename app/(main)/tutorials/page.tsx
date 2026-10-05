@@ -13,14 +13,15 @@ import { tutorials } from "@/lib/content/tutorials";
 const FILTER_OPTIONS = [
   { value: "all", label: "Все" },
   { value: "nuo", label: "NUO/NUO PRO" },
-  { value: "elara", label: "ELARA" },
   { value: "lumera", label: "LUMERA" },
+  { value: "elara", label: "ELARA" },
+  { value: "pulsar", label: "PULSAR" },
   { value: "anima", label: "ANIMA" },
   { value: "aura", label: "AURA" },
+  { value: "quantum", label: "QUANTUM" },
+  { value: "vibe", label: "VIBE" },
   { value: "nova", label: "NOVA" },
   { value: "aeris", label: "AERIS" },
-  { value: "lyra", label: "LYRA" },
-  { value: "sylva", label: "SYLVA" },
 ];
 
 export default function TutorialsPage() {

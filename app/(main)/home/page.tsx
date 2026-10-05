@@ -24,7 +24,7 @@ import {
 import { DRIP_CAMPAIGN } from "@/lib/content/drip-campaign";
 import { getDailyTip } from "@/lib/content/daily-tips";
 import { deviceEnumToSlug, getDeviceBySlug } from "@/lib/content/devices";
-import { tutorials } from "@/lib/content/tutorials";
+import { getTutorialsByDevice, tutorials } from "@/lib/content/tutorials";
 import { articles } from "@/lib/content/articles";
 import { getActiveRitual } from "@/lib/actions/rituals";
 import {
@@ -84,9 +84,7 @@ export default async function HomePage() {
     .map((slug) => getDeviceBySlug(slug))
     .filter((d): d is NonNullable<typeof d> => Boolean(d));
 
-  const todaysTutorials = activeSlug
-    ? tutorials.filter((t) => t.deviceSlug === activeSlug)
-    : [];
+  const todaysTutorials = activeSlug ? getTutorialsByDevice(activeSlug) : [];
   const tutorialsToShow =
     todaysTutorials.length > 0 ? todaysTutorials : tutorials.slice(0, 5);
 

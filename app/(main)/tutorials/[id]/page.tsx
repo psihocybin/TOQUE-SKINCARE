@@ -1,9 +1,9 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Play } from "lucide-react";
 import { BackButton } from "@/components/shared/back-button";
 import { DeviceImage } from "@/components/shared/device-image";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
+import { TutorialVideo } from "@/components/tutorials/tutorial-video";
 import { getDeviceBySlug } from "@/lib/content/devices";
 import {
   getTutorialById,
@@ -43,11 +43,7 @@ export default function TutorialDetailPage({
         </p>
       </header>
 
-      <div className="mx-4 mt-4 flex aspect-video w-full min-w-0 items-center justify-center overflow-hidden rounded-xl bg-black">
-        <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white/15">
-          <Play className="h-6 w-6 translate-x-[1px] text-white" fill="currentColor" strokeWidth={0} />
-        </span>
-      </div>
+      <TutorialVideo tutorialId={tutorial.id} />
 
       {tutorial.steps.length > 1 ? (
         <div className="mt-3 flex justify-center gap-1.5" aria-hidden>
