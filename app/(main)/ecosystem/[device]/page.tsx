@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { Heart } from "lucide-react";
 import { BackButton } from "@/components/shared/back-button";
 import { FadeIn } from "@/components/shared/fade-in";
-import { DevicePhoto } from "@/components/shared/device-photo";
+import { DeviceImage } from "@/components/shared/device-image";
 import {
   Tabs,
   TabsContent,
@@ -72,8 +72,8 @@ export default async function DevicePage({
       </header>
 
       <FadeIn className="mt-4">
-        <div className="aspect-[4/3] w-full overflow-hidden rounded-xl">
-          <DevicePhoto slug={device.slug} folder="devices-hero" />
+        <div className="aspect-square w-full overflow-hidden rounded-xl">
+          <DeviceImage slug={device.slug} fill className="rounded-none" />
         </div>
       </FadeIn>
 

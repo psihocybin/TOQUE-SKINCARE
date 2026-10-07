@@ -6,8 +6,8 @@ import { DeviceImage } from "@/components/shared/device-image";
 type Props = {
   slug: string;
   // Папка в public/ с отдельным набором фото под конкретное место:
-  // tutorials — обложки уроков, devices-hero — фото 4:3 на странице устройства.
-  folder: "tutorials" | "devices-hero";
+  // tutorials — обложки уроков.
+  folder: "tutorials";
 };
 
 // Фото устройства из своей папки (public/<folder>/<slug>.jpg). Каталог
