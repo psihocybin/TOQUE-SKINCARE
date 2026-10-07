@@ -10,7 +10,6 @@ import {
   getTutorialsByDevice,
   tutorialDeviceLabel,
 } from "@/lib/content/tutorials";
-import { cn } from "@/lib/utils";
 
 export default function TutorialDetailPage({
   params,
@@ -44,17 +43,6 @@ export default function TutorialDetailPage({
       </header>
 
       <TutorialVideo tutorialId={tutorial.id} />
-
-      {tutorial.steps.length > 1 ? (
-        <div className="mt-3 flex justify-center gap-1.5" aria-hidden>
-          {tutorial.steps.map((_, i) => (
-            <span
-              key={i}
-              className={cn("h-1.5 w-1.5 rounded-full", i === 0 ? "bg-olive" : "bg-black/15")}
-            />
-          ))}
-        </div>
-      ) : null}
 
       <div className="mt-5 flex items-center gap-2 px-4">
         <DeviceImage slug={tutorial.deviceSlug} size={28} />
