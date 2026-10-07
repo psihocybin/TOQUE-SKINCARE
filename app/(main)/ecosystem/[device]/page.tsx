@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { Heart } from "lucide-react";
 import { BackButton } from "@/components/shared/back-button";
 import { FadeIn } from "@/components/shared/fade-in";
+import { DeviceImage } from "@/components/shared/device-image";
 import {
   Tabs,
   TabsContent,
@@ -54,8 +55,6 @@ export default async function DevicePage({
       ? device.comboProtocol
       : "Эти устройства можно использовать в разные дни как самостоятельные протоколы.";
 
-  const heroInitial = device.name[0] ?? "?";
-
   return (
     <main className="flex min-h-screen flex-col px-4 pb-32 pt-4">
       <header className="relative flex items-center justify-center">
@@ -73,13 +72,8 @@ export default async function DevicePage({
       </header>
 
       <FadeIn className="mt-4">
-        <div className="flex aspect-video w-full flex-col items-center justify-center rounded-xl border border-olive/15 bg-olive/[0.05]">
-          <span className="text-[48px] leading-none text-olive">
-            {heroInitial}
-          </span>
-          <span className="mt-3 text-[8px] uppercase tracking-[1px] text-text-muted">
-            Фото устройства
-          </span>
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-xl">
+          <DeviceImage slug={device.slug} fill className="rounded-none" />
         </div>
       </FadeIn>
 
