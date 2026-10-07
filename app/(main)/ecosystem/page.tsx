@@ -9,6 +9,7 @@ import {
   devices,
   deviceEnumToSlug,
   getDeviceBySlug,
+  withPhotoVersion,
   type Device,
 } from "@/lib/content/devices";
 
@@ -157,7 +158,7 @@ function CareProductRow({ product }: { product: CareProduct }) {
       <div className="h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-cream-dark">
         {/* eslint-disable-next-line @next/next/no-img-element -- локальное статическое фото, как в DeviceImage */}
         <img
-          src={product.imageUrl}
+          src={withPhotoVersion(product.imageUrl)}
           alt={product.name}
           className="h-full w-full object-cover object-center"
         />

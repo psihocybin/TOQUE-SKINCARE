@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { DeviceImage } from "@/components/shared/device-image";
+import { withPhotoVersion } from "@/lib/content/devices";
 
 type Props = {
   slug: string;
@@ -33,7 +34,7 @@ export function DevicePhoto({ slug, folder }: Props) {
     // eslint-disable-next-line @next/next/no-img-element -- локальные статические фото, как в DeviceImage
     <img
       ref={imgRef}
-      src={`/${folder}/${slug}.jpg`}
+      src={withPhotoVersion(`/${folder}/${slug}.jpg`)}
       alt=""
       onError={() => setErrored(true)}
       className="h-full w-full object-cover object-center"

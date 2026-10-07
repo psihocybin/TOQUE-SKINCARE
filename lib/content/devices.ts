@@ -199,6 +199,14 @@ export const devices: Device[] = [
   },
 ];
 
+// Фото кэшируются браузером и PWA по URL, поэтому при замене файлов с теми же
+// именами клиенты продолжают видеть старые. Поднимите версию после замены фото.
+export const PHOTO_VERSION = "2";
+
+export function withPhotoVersion(url: string): string {
+  return `${url}?v=${PHOTO_VERSION}`;
+}
+
 export function getDeviceBySlug(slug: string): Device | undefined {
   return devices.find((d) => d.slug === slug);
 }

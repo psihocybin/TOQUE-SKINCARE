@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { getDeviceBySlug } from "@/lib/content/devices";
+import { getDeviceBySlug, withPhotoVersion } from "@/lib/content/devices";
 import { cn } from "@/lib/utils";
 
 type DeviceImageProps = {
@@ -39,7 +39,7 @@ export function DeviceImage({
   const device = getDeviceBySlug(slug);
   const [errored, setErrored] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
-  const imgSrc = device?.imageUrl;
+  const imgSrc = device?.imageUrl ? withPhotoVersion(device.imageUrl) : undefined;
   const dimension = fill ? undefined : { width: size, height: size };
   const showPlaceholder = !imgSrc || errored;
 
