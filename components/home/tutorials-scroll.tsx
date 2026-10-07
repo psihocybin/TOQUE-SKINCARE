@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { TutorialCover } from "@/components/tutorials/tutorial-cover";
+import { DevicePhoto } from "@/components/shared/device-photo";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import type { Tutorial } from "@/lib/content/tutorials";
 
@@ -20,7 +20,7 @@ export function TutorialsScroll({ items }: Props) {
           className="flex w-[160px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
         >
           <div className="relative h-[130px] shrink-0">
-            <TutorialCover deviceSlug={t.deviceSlug} />
+            <DevicePhoto slug={t.deviceSlug} folder="tutorials" />
             <FavoriteHeart
               tutorialId={t.id}
               size={14}

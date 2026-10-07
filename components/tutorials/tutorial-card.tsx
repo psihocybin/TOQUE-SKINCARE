@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Clock } from "lucide-react";
 import { DeviceImage } from "@/components/shared/device-image";
-import { TutorialCover } from "@/components/tutorials/tutorial-cover";
+import { DevicePhoto } from "@/components/shared/device-photo";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { getDeviceBySlug } from "@/lib/content/devices";
 import { tutorialDeviceLabel, type Tutorial } from "@/lib/content/tutorials";
@@ -20,7 +20,7 @@ export function TutorialCard({ tutorial, onFavoriteToggle }: Props) {
       className="flex overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
     >
       <div className="w-[120px] shrink-0">
-        <TutorialCover deviceSlug={tutorial.deviceSlug} />
+        <DevicePhoto slug={tutorial.deviceSlug} folder="tutorials" />
       </div>
       <div className="min-w-0 flex-1 p-3">
         <div className="flex items-center gap-1.5">
