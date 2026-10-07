@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { Check, ChevronRight } from "lucide-react";
+import { Check, ChevronRight, ExternalLink } from "lucide-react";
 import { BackButton } from "@/components/shared/back-button";
 import { FadeIn } from "@/components/shared/fade-in";
 import { DeviceImage } from "@/components/shared/device-image";
 import { getProfileWithStats } from "@/lib/queries/profile";
+import { careProducts, type CareProduct } from "@/lib/content/care-products";
 import {
   devices,
   deviceEnumToSlug,
@@ -100,6 +101,17 @@ export default async function EcosystemPage() {
           ))}
         </div>
       </FadeIn>
+
+      <FadeIn delay={0.45} className="mt-7">
+        <p className="inline-block rounded-full bg-white/75 px-2.5 py-0.5 text-[9px] uppercase tracking-[1px] text-text-muted backdrop-blur-sm">
+          Средства для процедур
+        </p>
+        <div className="mt-3 overflow-hidden rounded-lg border border-black/10 bg-white/85 px-3 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.08)] backdrop-blur-lg">
+          {careProducts.map((p) => (
+            <CareProductRow key={p.slug} product={p} />
+          ))}
+        </div>
+      </FadeIn>
     </main>
   );
 }
@@ -131,5 +143,34 @@ function DeviceRow({
         aria-hidden
       />
     </Link>
+  );
+}
+
+function CareProductRow({ product }: { product: CareProduct }) {
+  return (
+    <a
+      href={product.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="flex items-center gap-3 border-b border-black/8 py-3 last:border-b-0"
+    >
+      <div className="h-9 w-9 shrink-0 overflow-hidden rounded-xl bg-cream-dark">
+        {/* eslint-disable-next-line @next/next/no-img-element -- локальное статическое фото, как в DeviceImage */}
+        <img
+          src={product.imageUrl}
+          alt={product.name}
+          className="h-full w-full object-cover object-center"
+        />
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="text-[12px] text-text">{product.name}</p>
+        <p className="text-[10px] text-text-muted">{product.subtitle}</p>
+      </div>
+      <ExternalLink
+        className="h-3.5 w-3.5 text-text-muted"
+        strokeWidth={1.5}
+        aria-hidden
+      />
+    </a>
   );
 }

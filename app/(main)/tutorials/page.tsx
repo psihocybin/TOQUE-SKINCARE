@@ -4,8 +4,8 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Search } from "lucide-react";
 import { ChipGroup } from "@/components/shared/chip-group";
-import { DeviceImage } from "@/components/shared/device-image";
 import { TutorialCard } from "@/components/tutorials/tutorial-card";
+import { TutorialCover } from "@/components/tutorials/tutorial-cover";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { readFavorites } from "@/lib/tutorials/favorites";
 import { tutorials } from "@/lib/content/tutorials";
@@ -13,7 +13,6 @@ import { tutorials } from "@/lib/content/tutorials";
 const FILTER_OPTIONS = [
   { value: "all", label: "Все" },
   { value: "nuo", label: "NUO/NUO PRO" },
-  { value: "lumera", label: "LUMERA" },
   { value: "elara", label: "ELARA" },
   { value: "pulsar", label: "PULSAR" },
   { value: "anima", label: "ANIMA" },
@@ -92,11 +91,7 @@ export default function TutorialsPage() {
                 className="flex w-[120px] shrink-0 flex-col overflow-hidden rounded-2xl border border-black/[0.06] bg-white shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
               >
                 <div className="relative h-[100px] shrink-0">
-                  <DeviceImage
-                    slug={t.deviceSlug}
-                    fill
-                    className="rounded-none"
-                  />
+                  <TutorialCover deviceSlug={t.deviceSlug} />
                   <FavoriteHeart
                     tutorialId={t.id}
                     size={13}

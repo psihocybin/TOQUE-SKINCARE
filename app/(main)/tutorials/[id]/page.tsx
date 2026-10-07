@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { BackButton } from "@/components/shared/back-button";
 import { DeviceImage } from "@/components/shared/device-image";
+import { TutorialCover } from "@/components/tutorials/tutorial-cover";
 import { FavoriteHeart } from "@/components/tutorials/favorite-heart";
 import { TutorialVideo } from "@/components/tutorials/tutorial-video";
 import { getDeviceBySlug } from "@/lib/content/devices";
@@ -106,11 +107,7 @@ export default function TutorialDetailPage({
                 className="flex items-center gap-3 rounded-xl border border-black/[0.06] bg-white p-2 shadow-[0_1px_2px_rgba(0,0,0,0.04),0_6px_16px_rgba(0,0,0,0.06)]"
               >
                 <div className="h-[64px] w-[80px] shrink-0 overflow-hidden rounded-lg">
-                  <DeviceImage
-                    slug={t.deviceSlug}
-                    fill
-                    className="rounded-none"
-                  />
+                  <TutorialCover deviceSlug={t.deviceSlug} />
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-[13px] text-text">{t.title}</p>
