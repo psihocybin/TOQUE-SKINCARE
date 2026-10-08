@@ -12,7 +12,7 @@ import { tutorials } from "@/lib/content/tutorials";
 
 const FILTER_OPTIONS = [
   { value: "all", label: "Все" },
-  { value: "nuo", label: "NUO/NUO PRO" },
+  { value: "nuo", label: "NUO / NUO PRO / LUMERA" },
   { value: "elara", label: "ELARA" },
   { value: "pulsar", label: "PULSAR" },
   { value: "anima", label: "ANIMA" },

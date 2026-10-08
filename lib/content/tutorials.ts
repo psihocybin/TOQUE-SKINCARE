@@ -17,51 +17,51 @@ export type Tutorial = {
 
 // Список уроков = реально снятые видео (скрипты озвучки ElevenLabs,
 // docs/TOQUE_мануалы_для_озвучки). Шаги — сжатый текст озвучки, чтобы
-// карточки под плеером совпадали с тем, что говорится в ролике. Для
-// NUO/NUO PRO — одно видео на все режимы. LUMERA пока без урока.
+// карточки под плеером совпадали с тем, что говорится в ролике. УЗ-лопатки
+// (NUO, NUO PRO, LUMERA) — одно общее видео на все режимы.
 // Длительность — время процедуры из мануала, не длина ролика.
 export const tutorials: Tutorial[] = [
   {
-    id: "nuo-full",
+    id: "ultrasonic-cleaning",
     deviceSlug: "nuo",
-    title: "Полный протокол: очищение, ION−, ION+, лифтинг",
+    title: "УЗ-чистка: полный протокол",
     description:
-      "Все четыре шага ухода с УЗ-лопаткой в одном уроке — от очищения до микротокового лифтинга.",
+      "Один урок для NUO, NUO PRO и LUMERA — очищение, ION−, ION+ и лифтинг.",
     durationMinutes: 30,
     steps: [
       {
         title: "Подготовка",
         description:
-          "Очистите кожу от макияжа. Включите прибор коротким нажатием кнопки.",
+          "Очистите кожу от макияжа. Включите прибор — первым активируется режим очищения.",
       },
       {
-        title: "Шаг 1 — очищение",
+        title: "Шаг 1 — ультразвуковое очищение",
         description:
-          "Режим Cleaning (NUO) / Peeling (NUO PRO). Гель под плёнку на 10–15 минут, лопатка 45° выпуклой стороной вверх, от периферии к центру.",
+          "Гель под плёнку на 10–15 минут. Лопатка 45° выпуклой стороной вверх, против роста волос, от периферии к центру.",
       },
       {
         title: "Шаг 2 — ION−, дезинкрустация",
         description:
-          "Гель, лопатка выпуклой стороной вверх, против роста волос. Касайтесь боковых электродов. Смойте гель, нанесите тоник.",
+          "Гель, лопатка выпуклой стороной вверх, от периферии к центру. Смойте гель, нанесите тоник.",
       },
       {
-        title: "Шаг 3 — ION+, ионофорез",
+        title: "Шаг 3 — ION+, доставка активов",
         description:
           "Сыворотка позонно, лопатка выпуклой стороной вниз, от центра к периферии. Остатки не смывайте.",
       },
       {
-        title: "Шаг 4 — лифтинг",
+        title: "Шаг 4 — лифтинг (EMS)",
         description:
-          "Lifting (NUO) / EMS (NUO PRO). Снизу вверх и от центра к периферии, пальцы на боковых электродах.",
+          "Снизу вверх и от центра к периферии, акцент на скулы, овал лица и шею.",
       },
       {
-        title: "Таймер и средства",
+        title: "Контакт с электродом",
         description:
-          "Прибор отключается через 5 минут — включайте повторно. Только водная основа, масло не использовать.",
+          "В режимах с током держите палец на электроде прибора. Только водная основа — масло не использовать.",
         isImportant: true,
       },
     ],
-    tags: ["nuo"],
+    tags: ["nuo", "nuo-pro", "lumera"],
   },
   {
     id: "elara-ems-lifting",
@@ -387,14 +387,16 @@ export function getTutorialById(id: string): Tutorial | undefined {
   return tutorials.find((t) => t.id === id);
 }
 
-// NUO PRO использует то же видео, что и NUO — отдельных уроков для него нет,
-// поэтому nuo-pro сводится к nuo при поиске уроков устройства.
+// УЗ-лопатки NUO, NUO PRO и LUMERA делят один урок, заведённый под "nuo" —
+// поэтому nuo-pro и lumera сводятся к nuo при поиске уроков устройства.
+const ULTRASONIC_SLUGS = ["nuo", "nuo-pro", "lumera"];
+
 export function getTutorialsByDevice(deviceSlug: string): Tutorial[] {
-  const slug = deviceSlug === "nuo-pro" ? "nuo" : deviceSlug;
+  const slug = ULTRASONIC_SLUGS.includes(deviceSlug) ? "nuo" : deviceSlug;
   return tutorials.filter((t) => t.deviceSlug === slug);
 }
 
 export function tutorialDeviceLabel(deviceSlug: string, fallback: string): string {
-  if (deviceSlug === "nuo") return "NUO/NUO PRO";
+  if (deviceSlug === "nuo") return "NUO / NUO PRO / LUMERA";
   return fallback;
 }
